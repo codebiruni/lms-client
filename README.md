@@ -13,6 +13,13 @@ pnpm dev
 # or
 bun dev
 ```
+.env
+```
+
+
+NEXT_PUBLIC_API_URL=https://lms-server-theta-lilac.vercel.app/api
+# NEXT_PUBLIC_API_URL=http://localhost:5001/api
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
