@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Download, Sparkles, Star } from 'lucide-react'
+import PwaInstaller from '../default/PwaInstaller'
 
 export default function Banner() {
   return (
@@ -68,7 +69,8 @@ export default function Banner() {
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               
-              <Button 
+              <PwaInstaller>
+                <Button 
                 size="lg" 
                 variant="outline" 
                 className="group px-8  text-base border-2 rounded-full hover:bg-blue-50 dark:hover:bg-blue-950/30"
@@ -76,6 +78,7 @@ export default function Banner() {
                 <Download className="mr-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
                 Install App
               </Button>
+              </PwaInstaller>
             </div>
             
             {/* Trust Badge */}
@@ -105,7 +108,7 @@ export default function Banner() {
                 />
                 
                 {/* Floating Badges */}
-                <div className="absolute -top-6 -right-6 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-3 animate-bounce">
+                <div className="absolute -top-6 -right-6 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-3 animate-in">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
                       <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
@@ -117,7 +120,7 @@ export default function Banner() {
                   </div>
                 </div>
                 
-                <div className="absolute -bottom-6 -left-6 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-3 animate-bounce delay-300">
+                <div className="absolute bottom-0 -left-6 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-3  delay-300">
                   <div className="flex items-center gap-2">
                     <div className="text-2xl">📱</div>
                     <div>
@@ -129,7 +132,7 @@ export default function Banner() {
               </div>
               
               {/* App Store Badges */}
-              <div className="flex items-center justify-center gap-3 mt-6">
+              <PwaInstaller><div className="flex items-center justify-center gap-3 mt-6">
                 <Image
                   src="/playstore.png"
                   alt="Google Play"
@@ -144,7 +147,7 @@ export default function Banner() {
                   height={40}
                   className="h-10 w-auto object-contain"
                 />
-              </div>
+              </div></PwaInstaller>
             </div>
           </div>
         </div>

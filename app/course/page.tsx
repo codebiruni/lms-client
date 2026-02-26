@@ -1,10 +1,10 @@
 import React from 'react'
-import FeaturesBanner from './FeaturesBanner'
+import CoursesBanner from './CoursesBanner'
 
 export default function page() {
   return (
     <div> 
-      <FeaturesBanner />
+      <CoursesBanner />
     </div>
   )
 }

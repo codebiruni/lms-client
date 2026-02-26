@@ -7,6 +7,35 @@
   display: none;
 }
 
+.btn-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.btn {
+  --border-radius: 999px;
+  --padding: 2px;
+  --transition: 0.4s;
+  --button-color: #0f172a;
+  --highlight-color-hue: 210deg;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--border-radius);
+  background: var(--button-color);
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+}
+
+.btn-letter {
+  color: white;
+  font-weight: 600;
+  margin: 0 1px;
+}
+
 
 @theme inline {
   --color-background: var(--background);

@@ -28,6 +28,7 @@ import {
   Moon,
   ChevronUp
 } from "lucide-react"
+import PwaInstaller from "./PwaInstaller"
 
 export default function HomeFooter() {
   const pathname = usePathname()
@@ -120,34 +121,30 @@ export default function HomeFooter() {
               </div>
 
               {/* App Buttons */}
-              <div className="flex flex-wrap gap-3 pt-2">
-                <button className="flex items-center gap-2 bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900 px-4 py-2.5 rounded-xl transition-all hover:scale-105 shadow-md group">
+              <PwaInstaller >
+                <div className="flex flex-wrap gap-3 pt-2">
+                <button className="flex items-center  rounded-xl transition-all hover:scale-105 shadow-md group">
                   <Image
-                    src="/playstore.jpg"
+                    src="/playstore.png"
                     alt="Google Play"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 rounded-md"
+                    width={100}
+                    height={30}
+                    className="h-9 rounded-md"
                   />
-                  <div className="text-left">
-                    <p className="text-[10px] opacity-80">GET IT ON</p>
-                    <p className="text-xs font-semibold group-hover:text-blue-400 dark:group-hover:text-blue-600 transition">Google Play</p>
-                  </div>
+                 
                 </button>
-                <button className="flex items-center gap-2 bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900 px-4 py-2.5 rounded-xl transition-all hover:scale-105 shadow-md group">
+                <button className="flex items-center   rounded-xl transition-all hover:scale-105 shadow-md group">
                   <Image
-                    src="/appstore.jpg"
+                    src="/appstore.png"
                     alt="App Store"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 rounded-md"
+                    width={100}
+                    height={30}
+                    className="h-9 rounded-md"
                   />
-                  <div className="text-left">
-                    <p className="text-[10px] opacity-80">DOWNLOAD ON</p>
-                    <p className="text-xs font-semibold group-hover:text-blue-400 dark:group-hover:text-blue-600 transition">App Store</p>
-                  </div>
+                  
                 </button>
               </div>
+              </PwaInstaller>
             </div>
 
             {/* Quick Links */}

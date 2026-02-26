@@ -1,8 +1,10 @@
 import React from 'react'
+import ScholarsBanner from './ScholarsBanner'
 
 export default function page() {
   return (
-    <div> page
+    <div>
+        <ScholarsBanner />
     </div>
   )
 }
