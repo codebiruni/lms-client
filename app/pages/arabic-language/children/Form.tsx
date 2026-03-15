@@ -55,7 +55,7 @@ export default function Form() {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       autoSubmit(formData)
-    }, 3000) // ৩ সেকেন্ড পজ থাকলে সাবমিট হবে
+    }, 5000) // ৩ সেকেন্ড পজ থাকলে সাবমিট হবে
 
     return () => clearTimeout(delayDebounceFn)
   }, [formData, autoSubmit])
