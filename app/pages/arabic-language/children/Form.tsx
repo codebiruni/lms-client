@@ -15,7 +15,12 @@ import POSTDATA from "@/app/default/functions/Post"
 
 export default function Form() {
   const pathname = usePathname()
-  const lastPath = pathname.split('/').filter(Boolean).pop() || "general"
+  // ১. প্রথমে ? বা # থাকলে সেগুলো বাদ দিয়ে শুধু ক্লিন পাথ নিন
+const cleanPath = pathname.split(/[?#]/)[0];
+
+// ২. এরপর ক্লিন পাথ থেকে শেষ অংশটি বের করুন
+const lastPath = cleanPath.split('/').filter(Boolean).pop() || "general";
+
 
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
