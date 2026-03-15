@@ -1,7 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+*{
+  scroll-behavior: smooth;
+  transition: all 0.2s ease;
+}
+.glass {
+  /* অপাসিটি কমিয়ে ০.১ থেকে ০.২৫ এর মধ্যে রাখুন */
+  background: rgba(255, 255, 255, 0.2); 
+  
+  /* ব্লার বাড়িয়ে দিন যাতে পেছনের কন্টেন্ট সরাসরি দেখা না যায় */
+  backdrop-filter: blur(25px); 
+  -webkit-backdrop-filter: blur(25px); 
+  
+  /* বর্ডারকে আরও চিকন এবং হালকা স্বচ্ছ করুন */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  
+  /* শ্যাডো যোগ করা খুব জরুরি, নাহলে অবজেক্টটি ভেসে উঠবে না */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  
+  /* কোণাগুলো মডার্ন রাখতে rounded-md বা তার বেশি ব্যবহার করুন */
+  border-radius: 8px; 
+}
+        .futuristic-font {
+          font-family: 'Orbitron', sans-serif;
+        }
 
 .scroll-none::-webkit-scrollbar {
   display: none;
@@ -35,6 +61,17 @@
   font-weight: 600;
   margin: 0 1px;
 }
+
+   
+            .serif-font { font-family: 'Noto Serif Bengali', serif; }
+            .glow-button {
+                box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+                transition: all 0.3s ease;
+            }
+            .glow-button:hover {
+                box-shadow: 0 0 25px rgba(74, 222, 128, 0.6);
+                transform: translateY(-2px);
+            }
 
 
 @theme inline {

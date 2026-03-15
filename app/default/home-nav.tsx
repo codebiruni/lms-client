@@ -30,7 +30,7 @@ export default function HomeNav() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  if (pathname === "/dashboard" || pathname === "/profile") return null
+  if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile") || pathname.startsWith("/pages") ) return null
 
 
   const navItems = [

@@ -37,9 +37,8 @@ export default function HomeFooter() {
  
 
   // Return null if on dashboard or profile pages
-  if (pathname === '/dashboard' || pathname === '/profile') {
-    return null
-  }
+  if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile") || pathname.startsWith("/pages") ) return null
+
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
