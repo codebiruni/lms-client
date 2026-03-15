@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
-import { Loader2, Send, MapPin, MessageCircle, Users } from "lucide-react"
+import { Loader2,  MapPin, MessageCircle, Users } from "lucide-react"
 import { toast } from "sonner"
 
 import { Card, CardContent } from "@/components/ui/card"
@@ -67,10 +67,7 @@ export default function Form() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!formData.name || !formData.phone || !formData.whatsapp || !formData.address) {
-      toast.error("সব প্রয়োজনীয় তথ্য প্রদান করুন")
-      return
-    }
+    
 
     try {
       setLoading(true)
