@@ -13,8 +13,8 @@
   background: rgba(255, 255, 255, 0.2); 
   
   /* ব্লার বাড়িয়ে দিন যাতে পেছনের কন্টেন্ট সরাসরি দেখা না যায় */
-  backdrop-filter: blur(25px); 
-  -webkit-backdrop-filter: blur(25px); 
+  backdrop-filter: blur(10px); 
+  /* -webkit-backdrop-filter: blur(25px);  */
   
   /* বর্ডারকে আরও চিকন এবং হালকা স্বচ্ছ করুন */
   border: 1px solid rgba(255, 255, 255, 0.18);
