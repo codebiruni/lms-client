@@ -30,7 +30,11 @@ export default function FeaturesBanner() {
           <div className="flex justify-center mb-6">
             <Badge className="bg-linear-to-r from-purple-500 to-pink-500 dark:from-purple-600 dark:to-pink-600 text-white rounded-full border-0 px-4 py-1 text-sm font-medium shadow-lg dark:shadow-purple-900/30">
               <Sparkles className="w-4 h-4 mr-1" />
+<<<<<<< HEAD
               Discover Bright Path Academy Features
+=======
+              Discover Quranic Verse Academy Features
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
             </Badge>
           </div>
 

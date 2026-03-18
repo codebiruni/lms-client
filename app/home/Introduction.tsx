@@ -44,7 +44,11 @@ export default function IntroductionSection() {
           <div className="text-center mb-12">
             <Badge variant="outline" className="px-4  rounded-full border-blue-200 dark:border-blue-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm mb-4">
               <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2" />
+<<<<<<< HEAD
               <span className="text-blue-600 dark:text-blue-400">Welcome to Bright Path</span>
+=======
+              <span className="text-blue-600 dark:text-blue-400">Welcome to Quranic Verce BD</span>
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
             </Badge>
             
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">

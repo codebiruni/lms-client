@@ -86,8 +86,13 @@ export default function HomeFooter() {
                 <div className="relative">
                   <div className="absolute inset-0 bg-blue-500/20 dark:bg-blue-400/20 blur-xl rounded-full" />
                   <Image
+<<<<<<< HEAD
                     src="/logo.png"
                     alt="Bright Path Academy"
+=======
+                    src="/logo1.png"
+                    alt="Quranic Verse Academy"
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
                     width={50}
                     height={50}
                     className="relative z-10"
@@ -95,7 +100,11 @@ export default function HomeFooter() {
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold  ">
+<<<<<<< HEAD
                     Bright Path Academy
+=======
+                    Quranic Verse Academy
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
                   </h2>
                   <p className="text-gray-600 dark:text-gray-400 text-sm tracking-wide">Empower Your Future</p>
                 </div>
@@ -231,6 +240,7 @@ export default function HomeFooter() {
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
                     <Mail className="w-4 h-4 text-blue-500 mt-0.5" />
+<<<<<<< HEAD
                     <span>hello@brightpathacademy.com</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
@@ -240,6 +250,17 @@ export default function HomeFooter() {
                   <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
                     <MapPin className="w-4 h-4 text-blue-500 mt-0.5" />
                     <span>123 Education Ave, Silicon Valley, CA</span>
+=======
+                    <span>quranicverse21@gmail.com</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
+                    <Phone className="w-4 h-4 text-blue-500 mt-0.5" />
+                    <span>+8801835-411107</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
+                    <MapPin className="w-4 h-4 text-blue-500 mt-0.5" />
+                    <span>Hous-70, Rd-4, DIT Project, middle Badda, Dhaka--01212, Badda, Bangladesh, 1212</span>
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
                   </li>
                 </ul>
               </div>
@@ -323,7 +344,11 @@ export default function HomeFooter() {
 
               {/* Copyright */}
               <p className="text-sm text-gray-500 dark:text-gray-500 text-center">
+<<<<<<< HEAD
                 © {new Date().getFullYear()} Bright Path Academy. All rights reserved.
+=======
+                © {new Date().getFullYear()} Quranic Verse Academy. All rights reserved.
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
                 <br className="sm:hidden" /> 
                 <span className="hidden sm:inline"> | </span>
                 Empowering learners worldwide

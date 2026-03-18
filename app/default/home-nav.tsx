@@ -70,13 +70,22 @@ export default function HomeNav() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
 
 
+<<<<<<< HEAD
           {/* ================= Logo ================= */}
+=======
+          {/* ================= Logo1 ================= */}
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 
           <Link href="/" className="flex items-center gap-3 group">
 
             <Image
+<<<<<<< HEAD
               src="/logo.png"
               alt="Bright Path"
+=======
+              src="/logo1.png"
+              alt="Quranic Verse"
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
               width={40}
               height={40}
               priority
@@ -85,10 +94,17 @@ export default function HomeNav() {
 
             <div className="flex flex-col leading-tight">
               <span className="font-bold text-gray-900 dark:text-white text-lg">
+<<<<<<< HEAD
                 Bright
               </span>
               <span className="text-[10px] text-blue-600 font-semibold uppercase tracking-widest">
                 Path Academy
+=======
+                Quranic
+              </span>
+              <span className="text-[10px] text-blue-600 font-semibold uppercase tracking-widest">
+                Verse Academy
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
               </span>
             </div>
 
@@ -225,9 +241,15 @@ export default function HomeNav() {
 
                   <SheetTitle className="flex items-center gap-3">
 
+<<<<<<< HEAD
                     <Image src="/logo.png" alt="logo" width={30} height={30}/>
 
                     Bright Path
+=======
+                    <Image src="/logo1.png" alt="logo1" width={30} height={30}/>
+
+                    Quranic Verse Academy
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 
                   </SheetTitle>
 

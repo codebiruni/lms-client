@@ -27,7 +27,11 @@ export default function Banner() {
             {/* Main Heading */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400">
+<<<<<<< HEAD
                 Welcome to Bright Path
+=======
+                Welcome to Quranic Verse
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
               </span>
               <span className="text-gray-800 dark:text-white"> Academy</span>
             </h1>

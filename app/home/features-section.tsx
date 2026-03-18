@@ -69,7 +69,11 @@ export default function FeaturesSection() {
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Transform Your Future with
+<<<<<<< HEAD
             <span className="text-blue-600 dark:text-blue-400"> Bright Path</span>
+=======
+            <span className="text-blue-600 dark:text-blue-400">Quranic Verse</span>
+>>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Discover a learning experience that combines expert guidance, community support, and flexible schedules
