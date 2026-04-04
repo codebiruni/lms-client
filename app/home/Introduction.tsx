@@ -24,10 +24,8 @@ export default function IntroductionSection() {
     { icon: <PenTool className="w-8 h-8" />, title: "Writing", color: "from-pink-500 to-rose-500", delay: "1s" }
   ]
 
-
-
   return (
-    <div className='py-8 px-3 lg:px-6 min-h-screen flex items-center justify-center '>
+    <div className='py-8 px-3 lg:px-6 min-h-screen flex items-center justify-center'>
       <Card className='rounded-3xl w-full border-0 bg-white/40 dark:bg-gray-900/40 backdrop-blur-xl shadow-2xl overflow-hidden relative'>
         
         {/* Animated Background Orbs */}
@@ -36,19 +34,15 @@ export default function IntroductionSection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-400/20 dark:bg-pink-600/10 rounded-full blur-3xl animate-pulse delay-500" />
         
         {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-slate-200 dark:bg-grid-slate-800 mask-[radial-linear(ellipse_at_center,white,transparent)] opacity-20" />
+        <div className="absolute inset-0 bg-grid-slate-200 dark:bg-grid-slate-800 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] opacity-20" />
         
         <CardContent className="relative z-10 p-8 lg:p-12">
           
           {/* Minimal Header */}
           <div className="text-center mb-12">
-            <Badge variant="outline" className="px-4  rounded-full border-blue-200 dark:border-blue-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm mb-4">
+            <Badge variant="outline" className="px-4 rounded-full border-blue-200 dark:border-blue-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm mb-4">
               <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2" />
-<<<<<<< HEAD
-              <span className="text-blue-600 dark:text-blue-400">Welcome to Bright Path</span>
-=======
-              <span className="text-blue-600 dark:text-blue-400">Welcome to Quranic Verce BD</span>
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
+              <span className="text-blue-600 dark:text-blue-400">Welcome to Quranic Verse BD</span>
             </Badge>
             
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
@@ -71,16 +65,16 @@ export default function IntroductionSection() {
                 {/* Glass Card */}
                 <div className="relative backdrop-blur-xl bg-white/30 dark:bg-gray-900/30 rounded-2xl p-6 border border-white/20 dark:border-gray-700/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                   
-                  {/* linear Background on Hover */}
-                  <div className={`absolute inset-0 bg-linear-to-br ${feature.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`} />
+                  {/* Gradient Background on Hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`} />
                   
                   {/* Icon Container */}
                   <div className="relative">
                     {/* Glow Effect */}
-                    <div className={`absolute inset-0 bg-linear-to-br ${feature.color} blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
                     
                     {/* Icon */}
-                    <div className={`relative w-16 h-16 mx-auto rounded-2xl bg-linear-to-br ${feature.color} p-3 shadow-2xl group-hover:scale-110 transition-transform duration-500 group-hover:rotate-3`}>
+                    <div className={`relative w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${feature.color} p-3 shadow-2xl group-hover:scale-110 transition-transform duration-500 group-hover:rotate-3`}>
                       <div className="w-full h-full text-white">
                         {feature.icon}
                       </div>
@@ -100,13 +94,11 @@ export default function IntroductionSection() {
             ))}
           </div>
 
-        
-
           {/* Minimal CTA */}
           <div className="flex justify-center gap-4">
             <Button 
               size="lg" 
-              className="group rounded-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8  text-base shadow-2xl shadow-blue-600/25"
+              className="group rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 text-base shadow-2xl shadow-blue-600/25"
             >
               <Rocket className="mr-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
               Start Free
@@ -121,7 +113,6 @@ export default function IntroductionSection() {
               Explore
             </Button>
           </div>
-
       
         </CardContent>
       </Card>

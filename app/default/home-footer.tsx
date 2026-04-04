@@ -34,16 +34,26 @@ export default function HomeFooter() {
   const pathname = usePathname()
   const [showScrollTop, setShowScrollTop] = useState(false)
 
- 
+  // Handle scroll to show/hide scroll to top button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 500) {
+        setShowScrollTop(true)
+      } else {
+        setShowScrollTop(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   // Return null if on dashboard or profile pages
   if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile") || pathname.startsWith("/pages") ) return null
 
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-
 
   return (
     <>
@@ -67,13 +77,13 @@ export default function HomeFooter() {
         <div 
           className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03] pointer-events-none"
           style={{
-            backgroundImage: `radial-linear(circle at 1px 1px, 1px, transparent 0)`,
+            backgroundImage: `radial-linear(circle at 1px 1px, currentColor 1px, transparent 0)`,
             backgroundSize: '40px 40px'
           }}
         />
 
         {/* Top Accent Bar */}
-        <div className={`absolute top-0 left-0 right-0 h-1  from-blue-500 via-purple-500 to-orange-500`} />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 via-purple-500 to-orange-500" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-8 relative z-10">
 
@@ -86,25 +96,16 @@ export default function HomeFooter() {
                 <div className="relative">
                   <div className="absolute inset-0 bg-blue-500/20 dark:bg-blue-400/20 blur-xl rounded-full" />
                   <Image
-<<<<<<< HEAD
-                    src="/logo.png"
-                    alt="Bright Path Academy"
-=======
                     src="/logo1.png"
                     alt="Quranic Verse Academy"
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
                     width={50}
                     height={50}
                     className="relative z-10"
                   />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold  ">
-<<<<<<< HEAD
-                    Bright Path Academy
-=======
+                  <h2 className="text-2xl font-bold">
                     Quranic Verse Academy
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
                   </h2>
                   <p className="text-gray-600 dark:text-gray-400 text-sm tracking-wide">Empower Your Future</p>
                 </div>
@@ -129,29 +130,27 @@ export default function HomeFooter() {
               </div>
 
               {/* App Buttons */}
-              <PwaInstaller >
+              <PwaInstaller>
                 <div className="flex flex-wrap gap-3 pt-2">
-                <button className="flex items-center  rounded-xl transition-all hover:scale-105 shadow-md group">
-                  <Image
-                    src="/playstore.png"
-                    alt="Google Play"
-                    width={100}
-                    height={30}
-                    className="h-9 rounded-md"
-                  />
-                 
-                </button>
-                <button className="flex items-center   rounded-xl transition-all hover:scale-105 shadow-md group">
-                  <Image
-                    src="/appstore.png"
-                    alt="App Store"
-                    width={100}
-                    height={30}
-                    className="h-9 rounded-md"
-                  />
-                  
-                </button>
-              </div>
+                  <button className="flex items-center rounded-xl transition-all hover:scale-105 shadow-md group">
+                    <Image
+                      src="/playstore.png"
+                      alt="Google Play"
+                      width={100}
+                      height={30}
+                      className="h-9 rounded-md"
+                    />
+                  </button>
+                  <button className="flex items-center rounded-xl transition-all hover:scale-105 shadow-md group">
+                    <Image
+                      src="/appstore.png"
+                      alt="App Store"
+                      width={100}
+                      height={30}
+                      className="h-9 rounded-md"
+                    />
+                  </button>
+                </div>
               </PwaInstaller>
             </div>
 
@@ -159,7 +158,7 @@ export default function HomeFooter() {
             <div className="lg:col-span-2">
               <h3 className="text-lg font-semibold mb-6 text-blue-600 dark:text-blue-400 relative inline-block">
                 Quick Links
-                <span className="absolute -bottom-2 left-0 w-12 h-0.5  from-blue-500 to-purple-500 rounded-full"></span>
+                <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 rounded-full"></span>
               </h3>
               <ul className="space-y-3">
                 {[
@@ -198,7 +197,7 @@ export default function HomeFooter() {
             <div className="lg:col-span-3">
               <h3 className="text-lg font-semibold mb-6 text-blue-600 dark:text-blue-400 relative inline-block">
                 Popular Categories
-                <span className="absolute -bottom-2 left-0 w-12 h-0.5  from-blue-500 to-purple-500 rounded-full"></span>
+                <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 rounded-full"></span>
               </h3>
               <div className="space-y-3">
                 {[
@@ -215,7 +214,7 @@ export default function HomeFooter() {
                   >
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-3">
-                        <div className={`w-2 h-2 rounded-full  ${category.color}`} />
+                        <div className={`w-2 h-2 rounded-full bg-linear-to-r ${category.color}`} />
                         <h4 className="font-medium text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
                           {category.title}
                         </h4>
@@ -235,22 +234,11 @@ export default function HomeFooter() {
               <div>
                 <h3 className="text-lg font-semibold mb-6 text-blue-600 dark:text-blue-400 relative inline-block">
                   Get in Touch
-                  <span className="absolute -bottom-2 left-0 w-12 h-0.5  from-blue-500 to-purple-500 rounded-full"></span>
+                  <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 rounded-full"></span>
                 </h3>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
                     <Mail className="w-4 h-4 text-blue-500 mt-0.5" />
-<<<<<<< HEAD
-                    <span>hello@brightpathacademy.com</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
-                    <Phone className="w-4 h-4 text-blue-500 mt-0.5" />
-                    <span>+1 (800) 123-4567</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
-                    <MapPin className="w-4 h-4 text-blue-500 mt-0.5" />
-                    <span>123 Education Ave, Silicon Valley, CA</span>
-=======
                     <span>quranicverse21@gmail.com</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
@@ -259,8 +247,7 @@ export default function HomeFooter() {
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
                     <MapPin className="w-4 h-4 text-blue-500 mt-0.5" />
-                    <span>Hous-70, Rd-4, DIT Project, middle Badda, Dhaka--01212, Badda, Bangladesh, 1212</span>
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
+                    <span>House-70, Rd-4, DIT Project, middle Badda, Dhaka--01212, Badda, Bangladesh, 1212</span>
                   </li>
                 </ul>
               </div>
@@ -296,7 +283,7 @@ export default function HomeFooter() {
           </div>
 
           {/* Newsletter Section */}
-          <div className="mt-12 p-6  from-blue-500/5 via-purple-500/5 to-orange-500/5 rounded-2xl border border-blue-200 dark:border-blue-800">
+          <div className="mt-12 p-6 bg-linear-to-r from-blue-500/5 via-purple-500/5 to-orange-500/5 rounded-2xl border border-blue-200 dark:border-blue-800">
             <div className="flex flex-col md:flex-row items-center gap-4 justify-between">
               <div className="flex items-center gap-3">
                 <Heart className="w-5 h-5 text-blue-500" />
@@ -344,11 +331,7 @@ export default function HomeFooter() {
 
               {/* Copyright */}
               <p className="text-sm text-gray-500 dark:text-gray-500 text-center">
-<<<<<<< HEAD
-                © {new Date().getFullYear()} Bright Path Academy. All rights reserved.
-=======
                 © {new Date().getFullYear()} Quranic Verse Academy. All rights reserved.
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
                 <br className="sm:hidden" /> 
                 <span className="hidden sm:inline"> | </span>
                 Empowering learners worldwide

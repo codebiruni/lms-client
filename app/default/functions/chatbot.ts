@@ -6,19 +6,13 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
-<<<<<<< HEAD
+
 // Bright Path Academy LMS Project Information
 const LMS_INFO = {
   projectName: "Bright Path Academy",
   tagline: "Illuminate Your Learning Journey - Comprehensive Learning Management System",
   description: "Bright Path Academy is a cutting-edge Learning Management System (LMS) designed to revolutionize education through technology. It provides a comprehensive platform for educational institutions, corporate training, and online course creators to deliver engaging learning experiences.",
-=======
-// Quranic Verse Academy LMS Project Information
-const LMS_INFO = {
-  projectName: "Quranic Verse Academy",
-  tagline: "Illuminate Your Learning Journey - Comprehensive Learning Management System",
-  description: "Quranic Verse Academy is a cutting-edge Learning Management System (LMS) designed to revolutionize education through technology. It provides a comprehensive platform for educational institutions, corporate training, and online course creators to deliver engaging learning experiences.",
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
+
   
   overview: {
     mission: "To make quality education accessible, engaging, and effective through innovative technology solutions.",
@@ -273,11 +267,7 @@ ${LMS_INFO.description}
 
 Ready to join the Bright Path community? Let's discuss your requirements!`,
 
-<<<<<<< HEAD
   features: `✨ **Bright Path Academy Features**
-=======
-  features: `✨ **Quranic Verse Academy Features**
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 
 🎯 **CORE FEATURES:**
 ${LMS_INFO.keyFeatures.core.map(feature => `• ${feature}`).join('\n')}
@@ -333,25 +323,15 @@ ${LMS_INFO.technicalSpecifications.security.map(sec => `• ${sec}`).join('\n')}
 
 **Scalability:** ${LMS_INFO.technicalSpecifications.scalability}`,
 
-<<<<<<< HEAD
   targetAudience: `🎯 **Who Can Benefit from Bright Path Academy?**
-=======
-  targetAudience: `🎯 **Who Can Benefit from Quranic Verse Academy?**
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 
 ${LMS_INFO.targetAudience.map(audience => 
   `**${audience.category}:**\n${audience.examples.map(ex => `• ${ex}`).join('\n')}`
 ).join('\n\n')}
 
-<<<<<<< HEAD
 No matter your educational needs, Bright Path Academy can be customized to serve your specific audience!`,
 
   benefits: `🌟 **Why Choose Bright Path Academy?**
-=======
-No matter your educational needs, Quranic Verse Academy can be customized to serve your specific audience!`,
-
-  benefits: `🌟 **Why Choose Quranic Verse Academy?**
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 
 ${LMS_INFO.benefits.map(benefit => `• ${benefit}`).join('\n')}
 
@@ -374,11 +354,7 @@ ${LMS_INFO.support.types.map(type => `• ${type}`).join('\n')}
 
 We're committed to your success every step of the way!`,
 
-<<<<<<< HEAD
   contact: `📞 **Contact Bright Path Academy**
-=======
-  contact: `📞 **Contact Quranic Verse Academy**
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 
 📧 Email: ${LMS_INFO.contact.email}
 📱 Phone: ${LMS_INFO.contact.phones.join(' / ')}
@@ -410,11 +386,7 @@ Have more questions? Feel free to ask!`,
 
   emergency: `I apologize, but I'm having trouble understanding your query. 
 
-<<<<<<< HEAD
 I'm specialized in helping with information about Bright Path Academy:
-=======
-I'm specialized in helping with information about Quranic Verse Academy:
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 • Features and modules
 • Pricing and plans
 • Technical specifications
@@ -491,11 +463,7 @@ function generateResponse(intent: string, userMessage: string): string {
       // General response with key highlights
       return `I understand you're asking about: "${userMessage}"
 
-<<<<<<< HEAD
 **Bright Path Academy** is a comprehensive Learning Management System that offers:
-=======
-**Quranic Verse Academy** is a comprehensive Learning Management System that offers:
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 
 ${LMS_INFO.keyFeatures.core.slice(0, 5).map(f => `• ${f}`).join('\n')}
 
@@ -525,17 +493,10 @@ async function Chatbot(userMessage: string) {
     // For complex or general queries, enhance with AI while maintaining LMS context
     if (intent === 'general' || userMessage.length > 50) {
       const enhancedPrompt = `
-<<<<<<< HEAD
 You are an AI assistant for Bright Path Academy - a comprehensive Learning Management System (LMS) designed for educational institutions, corporate training, and online course creators.
 
 Project Context:
 - Name: Bright Path Academy
-=======
-You are an AI assistant for Quranic Verse Academy - a comprehensive Learning Management System (LMS) designed for educational institutions, corporate training, and online course creators.
-
-Project Context:
-- Name: Quranic Verse Academy
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 - Core Features: ${LMS_INFO.keyFeatures.core.slice(0, 5).join(', ')}
 - Target Audience: Educational Institutions, Corporate Training, Individual Creators
 - Key Benefits: ${LMS_INFO.benefits.slice(0, 3).join(', ')}
@@ -546,11 +507,7 @@ User Question: "${userMessage}"
 
 Please provide a helpful, professional response that:
 1. Directly addresses the user's question about the LMS
-<<<<<<< HEAD
 2. Highlights relevant Bright Path Academy features
-=======
-2. Highlights relevant Quranic Verse Academy features
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 3. Focuses on educational/learning management solutions
 4. Maintains a professional and helpful tone
 5. Encourages scheduling a demo or further discussion
@@ -558,11 +515,7 @@ Please provide a helpful, professional response that:
 
 Response Guidelines:
 - Use emojis sparingly for emphasis
-<<<<<<< HEAD
 - Focus on how Bright Path Academy solves educational challenges
-=======
-- Focus on how Quranic Verse Academy solves educational challenges
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 - Include specific feature mentions when relevant
 - End with a call-to-action (demo, contact, or more info)
 
@@ -585,15 +538,9 @@ Enhanced Response:`;
       }
     }
 
-<<<<<<< HEAD
     // Ensure response includes Bright Path Academy branding
     if (!response.includes('Bright Path') && !response.includes('LMS') && intent !== 'greeting') {
       response += `\n\n---\n*Ready to illuminate your learning journey with **Bright Path Academy**? Schedule a demo today!*`;
-=======
-    // Ensure response includes Quranic Verse Academy branding
-    if (!response.includes('Bright Path') && !response.includes('LMS') && intent !== 'greeting') {
-      response += `\n\n---\n*Ready to illuminate your learning journey with **Quranic Verse Academy**? Schedule a demo today!*`;
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
     }
 
     console.log(`User: ${userMessage}`);
@@ -606,11 +553,7 @@ Enhanced Response:`;
     console.error('Chatbot error:', error);
     
     // Fallback responses
-<<<<<<< HEAD
     return `I apologize for the technical difficulty. **Bright Path Academy** is here to help with:
-=======
-    return `I apologize for the technical difficulty. **Quranic Verse Academy** is here to help with:
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 
 📚 Course Management & Virtual Classrooms
 📊 Learning Analytics & Progress Tracking
@@ -633,11 +576,7 @@ ${context}
 
 Current User Message: "${userMessage}"
 
-<<<<<<< HEAD
 You are Bright Path Academy AI assistant. Provide a helpful response focusing on our LMS features:
-=======
-You are Quranic Verse Academy AI assistant. Provide a helpful response focusing on our LMS features:
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
 - Course & Content Management
 - Virtual Classrooms
 - Student Progress Tracking
@@ -653,13 +592,9 @@ Keep responses professional, concise, and encourage demo scheduling or further d
       contents: contextualPrompt,
     });
     
-<<<<<<< HEAD
     return response.text || "Thank you for your interest in Bright Path Academy! How can I help you explore our LMS solutions today?";
-=======
-    return response.text || "Thank you for your interest in Quranic Verse Academy! How can I help you explore our LMS solutions today?";
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
-  } catch (error:any) {
-    console.log(error)
+  } catch (error: any) {
+    console.log(error);
     return Chatbot(userMessage);
   }
 }

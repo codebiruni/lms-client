@@ -9,20 +9,10 @@
   transition: all 0.2s ease;
 }
 .glass {
-  /* অপাসিটি কমিয়ে ০.১ থেকে ০.২৫ এর মধ্যে রাখুন */
   background: rgba(255, 255, 255, 0.2); 
-  
-  /* ব্লার বাড়িয়ে দিন যাতে পেছনের কন্টেন্ট সরাসরি দেখা না যায় */
   backdrop-filter: blur(10px); 
-  /* -webkit-backdrop-filter: blur(25px);  */
-  
-  /* বর্ডারকে আরও চিকন এবং হালকা স্বচ্ছ করুন */
   border: 1px solid rgba(255, 255, 255, 0.18);
-  
-  /* শ্যাডো যোগ করা খুব জরুরি, নাহলে অবজেক্টটি ভেসে উঠবে না */
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  
-  /* কোণাগুলো মডার্ন রাখতে rounded-md বা তার বেশি ব্যবহার করুন */
   border-radius: 8px; 
 }
         .futuristic-font {

@@ -7,10 +7,10 @@ import PwaInstaller from '../default/PwaInstaller'
 
 export default function Banner() {
   return (
-    <section className="relative py-12 md:py-20 overflow-hidden bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950/30">
+    <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950/30">
       
       {/* Background Decoration */}
-      <div className="absolute inset-0 bg-grid-slate-200 dark:bg-grid-slate-800 mask-[radial-gradient(ellipse_at_center,white,transparent)] opacity-20" />
+      <div className="absolute inset-0 bg-grid-slate-200 dark:bg-grid-slate-800 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] opacity-20" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -26,12 +26,8 @@ export default function Banner() {
             
             {/* Main Heading */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400">
-<<<<<<< HEAD
-                Welcome to Bright Path
-=======
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400">
                 Welcome to Quranic Verse
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
               </span>
               <span className="text-gray-800 dark:text-white"> Academy</span>
             </h1>
@@ -67,7 +63,7 @@ export default function Banner() {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
               <Button 
                 size="lg" 
-                className="group bg-blue-600 rounded-full hover:bg-blue-700 text-white px-8  text-base shadow-lg shadow-blue-600/25"
+                className="group bg-blue-600 rounded-full hover:bg-blue-700 text-white px-8 text-base shadow-lg shadow-blue-600/25"
               >
                 Explore Courses
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -75,13 +71,13 @@ export default function Banner() {
               
               <PwaInstaller>
                 <Button 
-                size="lg" 
-                variant="outline" 
-                className="group px-8  text-base border-2 rounded-full hover:bg-blue-50 dark:hover:bg-blue-950/30"
-              >
-                <Download className="mr-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
-                Install App
-              </Button>
+                  size="lg" 
+                  variant="outline" 
+                  className="group px-8 text-base border-2 rounded-full hover:bg-blue-50 dark:hover:bg-blue-950/30"
+                >
+                  <Download className="mr-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+                  Install App
+                </Button>
               </PwaInstaller>
             </div>
             
@@ -104,7 +100,7 @@ export default function Banner() {
               <div className="relative z-10">
                 <Image
                   src="/mobile.webp"
-                  alt="Bright Path Academy Mobile App"
+                  alt="Quranic Verse Academy Mobile App"
                   width={500}
                   height={500}
                   priority
@@ -124,7 +120,7 @@ export default function Banner() {
                   </div>
                 </div>
                 
-                <div className="absolute bottom-0 -left-6 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-3  delay-300">
+                <div className="absolute bottom-0 -left-6 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-3 animate-in delay-300">
                   <div className="flex items-center gap-2">
                     <div className="text-2xl">📱</div>
                     <div>
@@ -136,22 +132,24 @@ export default function Banner() {
               </div>
               
               {/* App Store Badges */}
-              <PwaInstaller><div className="flex items-center justify-center gap-3 mt-6">
-                <Image
-                  src="/playstore.png"
-                  alt="Google Play"
-                  width={120}
-                  height={40}
-                  className="h-10 w-auto object-contain"
-                />
-                <Image
-                  src="/appstore.png"
-                  alt="App Store"
-                  width={120}
-                  height={40}
-                  className="h-10 w-auto object-contain"
-                />
-              </div></PwaInstaller>
+              <PwaInstaller>
+                <div className="flex items-center justify-center gap-3 mt-6">
+                  <Image
+                    src="/playstore.png"
+                    alt="Google Play"
+                    width={120}
+                    height={40}
+                    className="h-10 w-auto object-contain"
+                  />
+                  <Image
+                    src="/appstore.png"
+                    alt="App Store"
+                    width={120}
+                    height={40}
+                    className="h-10 w-auto object-contain"
+                  />
+                </div>
+              </PwaInstaller>
             </div>
           </div>
         </div>
