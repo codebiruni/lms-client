@@ -16,7 +16,7 @@ export default function FeaturesBanner() {
         
         {/* Grid pattern - adjusted for dark mode */}
         <div 
-          className={`absolute inset-0 bg-[url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")] opacity-20 dark:opacity-10 dark:invert`}
+          className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20 dark:opacity-10 dark:invert"
         ></div>
         
         {/* Optional: Add subtle dark mode linear overlay */}
@@ -30,11 +30,7 @@ export default function FeaturesBanner() {
           <div className="flex justify-center mb-6">
             <Badge className="bg-linear-to-r from-purple-500 to-pink-500 dark:from-purple-600 dark:to-pink-600 text-white rounded-full border-0 px-4 py-1 text-sm font-medium shadow-lg dark:shadow-purple-900/30">
               <Sparkles className="w-4 h-4 mr-1" />
-<<<<<<< HEAD
               Discover Bright Path Academy Features
-=======
-              Discover Quranic Verse Academy Features
->>>>>>> 278fa469d45ab202208f501214f5ce6204cc883d
             </Badge>
           </div>
 
