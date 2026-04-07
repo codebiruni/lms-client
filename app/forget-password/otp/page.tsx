@@ -1,10 +1,10 @@
 import React from 'react'
-import ForgetPassword from './ForgetPassword'
+import OTPVerification from './OTPVerification'
 
 export default function page() {
   return (
     <div>
-      <ForgetPassword />
+        <OTPVerification />
     </div>
   )
 }

@@ -182,14 +182,7 @@ export default function StudentHeader() {
                   </SheetHeader>
 
                   <div className="p-4">
-                    <div className="mb-6">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Profile Completion</span>
-                        <span className="text-xs font-semibold text-blue-600">65%</span>
-                      </div>
-                      <Progress value={65} className="h-2 bg-gray-200 dark:bg-gray-700" />
-                      <p className="text-xs text-gray-500 mt-2">Complete your profile to unlock more features</p>
-                    </div>
+                    
 
                     <div className="space-y-1 max-h-[60vh] overflow-y-auto">
                       {navItems.map((item) => (

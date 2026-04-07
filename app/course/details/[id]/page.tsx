@@ -1,10 +1,10 @@
 import React from 'react'
-import ForgetPassword from './ForgetPassword'
+import CourseDetailsBanner from '../CourseDetailsBanner'
 
 export default function page() {
   return (
     <div>
-      <ForgetPassword />
+        <CourseDetailsBanner />
     </div>
   )
 }

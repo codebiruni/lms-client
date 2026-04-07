@@ -1,10 +1,10 @@
 import React from 'react'
-import ForgetPassword from './ForgetPassword'
+import ResetPassword from './ResetPassword'
 
 export default function page() {
   return (
     <div>
-      <ForgetPassword />
+        <ResetPassword />
     </div>
   )
 }
