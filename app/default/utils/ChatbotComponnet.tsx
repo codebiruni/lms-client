@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Bot, User, X, Send, Minimize2, Check, Sparkles, GraduationCap, BookOpen } from 'lucide-react'
 import Chatbot from '../functions/chatbot'
+import { usePathname } from 'next/navigation'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -26,6 +27,7 @@ export default function ChatbotComponent() {
   const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null)
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null)
   const [editContent, setEditContent] = useState('')
+  const pathname = usePathname()
 
   // Auto-scroll to bottom when messages change or when loading state changes
   useEffect(() => {
@@ -209,6 +211,8 @@ export default function ChatbotComponent() {
     // Convert newlines to br tags
     formattedContent = formattedContent.replace(/\n/g, '<br/>');
 
+    
+
     return (
       <div 
         className="message-content"
@@ -279,6 +283,10 @@ How can I illuminate your learning journey today? 🚀`,
     }
   }, [isOpen, messages.length])
 
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/profile')) {
+      return null
+    }
+
   return (
     <>
       {/* Floating Chat Button with Glass Morphism */}
@@ -311,7 +319,7 @@ How can I illuminate your learning journey today? 🚀`,
 
       {/* Chat Window with Glass Morphism */}
       {isOpen && (
-        <div className="fixed bottom-0 sm:bottom-6 sm:right-6 right-0 z-50 w-full sm:w-[calc(100vw-3rem)] sm:max-w-sm sm:h-150 h-full animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <div className="fixed bottom-0 sm:bottom-6 sm:right-6 right-0 z-50 w-full sm:w-[calc(100vw-3rem)] sm:max-w-sm sm:h-117.5 h-full animate-in fade-in slide-in-from-bottom-5 duration-300">
           {/* Glass morphism card */}
           <Card className="relative w-full h-full py-0 flex flex-col shadow-2xl rounded-none sm:rounded-2xl overflow-hidden border-0 bg-linear-to-br from-white/90 to-white/80 dark:from-gray-900/90 dark:to-gray-800/80 backdrop-blur-xl">
             
@@ -371,7 +379,7 @@ How can I illuminate your learning journey today? 🚀`,
               {/* Messages Area */}
               <div 
                 ref={scrollAreaRef}
-                className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-amber-500/20 scrollbar-track-transparent"
+                className="flex-1 overflow-y-auto p-4 py-0 space-y-2 scrollbar-thin scrollbar-thumb-amber-500/20 scrollbar-track-transparent"
               >
                 {messages.map((message, index) => (
                   <div key={message.id} className="space-y-2">

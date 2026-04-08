@@ -65,8 +65,9 @@ export default function AllCourses() {
     router.push(`/course/details/${courseId}`)
   }
 
-  const handleEnroll = (courseId: string) => {
-    router.push(`/course/enroll/${courseId}`)
+  const handleEnroll = (course: any) => {
+    localStorage.setItem('selectedCourse', JSON.stringify(course))
+    router.push(`/course/enroll/${course._id}`)
   }
 
   // Loading Skeleton
@@ -440,7 +441,7 @@ function CourseCard({
           Details
         </Button>
         <Button
-          onClick={() => onEnroll(course._id)}
+          onClick={() => onEnroll(course)}
           className="flex-1 gap-2 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
         >
           <GraduationCap className="w-4 h-4" />
