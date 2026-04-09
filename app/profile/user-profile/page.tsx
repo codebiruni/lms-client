@@ -1,7 +1,12 @@
 import React from 'react'
+import StudentData from './StudentData'
+import UserData from './UserData'
 
 export default function page() {
   return (
-    <div>page</div>
+    <div>
+      <StudentData />
+      <UserData />
+    </div>
   )
 }
