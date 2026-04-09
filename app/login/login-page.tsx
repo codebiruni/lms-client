@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import LoginForm from './login-form'
+import { Suspense } from 'react'
+import LoginSkeleton from './LoginSkeleton'
 
 export default function LoginPage() {
   return (
@@ -15,7 +17,9 @@ export default function LoginPage() {
         }}
         className="min-h-full min-w-full  flex items-center justify-center bg-muted/50 px-4"
       >
-        <LoginForm />
+        <Suspense fallback={<LoginSkeleton />}>
+      <LoginForm />
+    </Suspense>
       </motion.div>
   )
 }

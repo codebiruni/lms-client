@@ -4,34 +4,36 @@ import type { NextRequest } from "next/server";
 import LogedUser from "./app/default/functions/LogedUser";
 
 export async function proxy(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  const pathname = url.pathname;
+  const { pathname } = request.nextUrl;
 
-  // ✅ get logged-in user data
+  // ✅ Get logged-in user data
   const userData: any = await LogedUser();
 
-  // if no user or no role → block
+  // 1️⃣ If no user or no role → Redirect to login with callback
   if (!userData || !userData.role) {
-    url.pathname = "/";
-    return NextResponse.redirect(url);
+    const loginUrl = new URL("/login", request.url);
+    // Optional: Add the current page as a callback so they return here after login
+    loginUrl.searchParams.set("callbackUrl", pathname); 
+    return NextResponse.redirect(loginUrl);
   }
 
-  // ✅ Admin or Super Admin → allow dashboard
-  if (
-    (userData.role === "admin") &&
-    pathname.startsWith("/dashboard")
-  ) {
+  // 2️⃣ Role-based access logic
+  const isStudent = userData.role === "student";
+  const isStaff = ["instructor", "admin", "staff"].includes(userData.role);
+
+  if (isStudent && pathname.startsWith("/profile")) {
     return NextResponse.next();
-  }else if ((userData.role === "instructor") &&
-    pathname.startsWith("/instructor")) {
-    
+  } 
+  
+  if (isStaff && pathname.startsWith("/dashboard")) {
+    return NextResponse.next();
   }
 
-  // ❌ default → send to home
-  url.pathname = "/";
-  return NextResponse.redirect(url);
+  // 3️⃣ If role doesn't match the path → Send back to login (or an unauthorized page)
+  const fallbackUrl = new URL("/login", request.url);
+  return NextResponse.redirect(fallbackUrl);
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*" , "/instructor/:path*"],
+  matcher: ["/dashboard/:path*", "/profile/:path*" , "/course/enroll/:path*"],
 };

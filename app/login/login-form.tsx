@@ -22,7 +22,7 @@ import { useEffect, useState } from 'react'
 import LOGINUSER from '../default/functions/LoginUser'
 import { toast } from 'sonner'
 import useContextData from '../default/custom-component/useContextData'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
 type LoginFormValues = {
@@ -49,8 +49,10 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [activeTab, setActiveTab] = useState<'email' | 'phone'>('email')
-  const { handleUser, handleProfile } = useContextData()
+  const { UserData , handleUser, handleProfile } = useContextData()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<any>(null)
 
@@ -83,6 +85,8 @@ export default function LoginForm() {
     }
   }, [setValue])
 
+
+
   /* ---------------- Submit ---------------- */
   const onSubmit = async (data: LoginFormValues) => {
     saveLoginCreditional(data)
@@ -106,7 +110,12 @@ export default function LoginForm() {
         })
         toast.success('You have been logged in successfully')
         reset()
-        if (user.role === 'admin') {
+
+        if (callbackUrl) {
+          router.push(callbackUrl)
+        } else if (user.role === 'student') {
+          router.push('/profile')
+        } else {
           router.push('/dashboard')
         }
       }
@@ -117,6 +126,11 @@ export default function LoginForm() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (UserData) {
+    router.push(UserData.role === 'student' ? '/profile' : '/dashboard')
+    return null
   }
 
   return (

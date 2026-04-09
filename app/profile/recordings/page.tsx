@@ -1,7 +1,10 @@
 import React from 'react'
+import RecordingClasses from './RecordingClasses'
 
 export default function page() {
   return (
-    <div>page</div>
+    <div>
+      <RecordingClasses />
+    </div>
   )
 }
