@@ -1,14 +1,12 @@
 import React from 'react'
-import Banner from './home/banner'
-import FeaturesSection from './home/features-section'
-import IntroductionSection from './home/Introduction'
+import HomePages from './home/HomePages'
 
-export default function page() {
+export default async function page() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/home-page`)
+  const data = await res.json()
   return (
     <div>
-      <Banner />
-      <IntroductionSection />
-      <FeaturesSection />
+      <HomePages data={data.data} />
     </div>
   )
 }
