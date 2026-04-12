@@ -7,8 +7,8 @@ import AuthContext from "./default/utils/auth-context";
 import TanStackProvider from "./default/wrapper/TanStackProvider";
 import Logout from "./default/utils/Logout";
 import HomeNav from "./default/home-nav";
-import HomeFooter from "./default/home-footer";
 import ChatbotComponent from "./default/utils/ChatbotComponnet";
+import Footer from "./default/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -83,7 +83,7 @@ export default function RootLayout({
             <Logout />
             {children}
             <ChatbotComponent />
-            <HomeFooter />
+            <Footer />
             </TanStackProvider>
           </AuthContext>
           </ThemeProvider>

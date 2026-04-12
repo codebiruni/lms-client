@@ -1,10 +1,12 @@
 import React from 'react'
-import FeaturesBanner from './FeaturesBanner'
+import FeaturesPage from './FeaturesPage'
 
-export default function page() {
+export default async function page() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/featres-page`)
+  const data = await res.json()
   return (
     <div> 
-      <FeaturesBanner />
+      <FeaturesPage data={data.data} />
     </div>
   )
 }

@@ -1,10 +1,12 @@
 import React from 'react'
-import SupportHubBanner from './SupportHubBanner'
+import SupportHubPage from './SupportHubPage'
 
-export default function page() {
+export default async function page() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/support-hub-page`)
+  const data = await res.json()
   return (
     <div> 
-      <SupportHubBanner />
+      <SupportHubPage data={data.data} />
     </div>
   )
 }

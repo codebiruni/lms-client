@@ -1,10 +1,12 @@
 import React from 'react'
-import ContactBanner from './ContactBanner'
+import ContactPage from './ContactPage'
 
-export default function page() {
+export default async function page() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/contact-page`)
+  const data = await res.json()
   return (
     <div> 
-      <ContactBanner />
+      <ContactPage data={data.data} />
     </div>
   )
 }

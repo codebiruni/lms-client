@@ -4,6 +4,11 @@
 import { createContext, useState, ReactNode, useEffect } from "react";
 import LogedUser from "../functions/LogedUser";
 
+type NmaeAndLogo = {
+  name: string;
+  logo: string;
+};
+
 type ContextValue = {
   test: string;
   handleTest: (data: string) => void;
@@ -13,6 +18,8 @@ type ContextValue = {
   handleLogout?: any;
   handleProfile?: any;
   callLogout?: boolean;
+  nameAndLogo?: NmaeAndLogo | null;
+  handleNameandLogo?: any;
 };
 
 export const ContextData = createContext<ContextValue | undefined>(undefined);
@@ -26,6 +33,7 @@ export default function AuthContext({ children }: ContextProviderProps) {
   const [UserData, setUserData] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
   const [callLogout, setCallLogout] = useState<boolean>(false);
+  const [nameAndLogo , setNameAndLogo] = useState<NmaeAndLogo | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -45,6 +53,10 @@ export default function AuthContext({ children }: ContextProviderProps) {
   const handleUser = (data: any) => {
     setUserData(data);
   };
+
+  const handleNameandLogo = (data: NmaeAndLogo) => {
+    setNameAndLogo(data);
+  }
 
   const handleLogout = (data: boolean) => {
     setCallLogout(data);
@@ -66,7 +78,9 @@ export default function AuthContext({ children }: ContextProviderProps) {
     handleLogout,
     callLogout,
     profile,
-    handleProfile
+    handleProfile,
+    nameAndLogo,
+    handleNameandLogo
   };
 
   return <ContextData.Provider value={value}>{children}</ContextData.Provider>;

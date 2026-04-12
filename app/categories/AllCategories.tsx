@@ -1,17 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { BookOpen } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 
-export default function CategorySection({ data }: any) {
-  const categories = data?.categoryList || []
+export default function AllCategories({ categories }: any) {
+  const categoryList = categories || []
   
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
+    <section className="py-10 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
@@ -20,30 +18,30 @@ export default function CategorySection({ data }: any) {
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-purple-600">
-              {data?.title?.highlightText || "Popular"}
+              Browse All
             </span>
-            <span className="text-gray-800 dark:text-white"> {data?.title?.blackText || "Learning Categories"}</span>
+            <span className="text-gray-800 dark:text-white"> Categories</span>
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            {data?.description || "Browse through our diverse range of categories and find the perfect course"}
+            Explore our diverse range of categories and find the perfect course for your learning journey
           </p>
         </div>
         
         {/* Categories Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {categories.map((item: any, idx: number) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          {categoryList.map((category: any, idx: number) => (
             <Link 
-              key={item._id || idx}
-              href={`/categories/${item.categoryId?._id}`}
+              key={category._id || idx}
+              href={`/categories/${category._id}`}
               className="group"
             >
               <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-linear-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-900">
                 <CardContent className="p-6 text-center">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-md group-hover:shadow-xl transition-all">
-                    {item.categoryId?.image ? (
+                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-md group-hover:shadow-xl transition-all overflow-hidden">
+                    {category.image ? (
                       <Image 
-                        src={item.categoryId.image} 
-                        alt={item.categoryId.name}
+                        src={category.image} 
+                        alt={category.name}
                         width={50}
                         height={50}
                         className="w-12 h-12 object-contain"
@@ -53,17 +51,12 @@ export default function CategorySection({ data }: any) {
                     )}
                   </div>
                   <h3 className="font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 transition-colors">
-                    {item.categoryId?.name || "Category"}
+                    {category.name || "Category"}
                   </h3>
                 </CardContent>
               </Card>
             </Link>
           ))}
-        </div>
-        <div className="flex justify-center items-center">
-          <Link href="/categories" className="mt-8  inline-block ">
-          <Button className='hover:underline bg-blue-600 rounded-full'>View All Categories &rarr;</Button>
-        </Link>
         </div>
       </div>
     </section>
