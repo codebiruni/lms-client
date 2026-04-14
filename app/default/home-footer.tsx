@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
@@ -33,21 +34,218 @@ import PwaInstaller from "./PwaInstaller"
 import Subescrive from "./Subescrive"
 import useContextData from "./custom-component/useContextData"
 
-export default function HomeFooter({data}: any) {
+// Skeleton Loader Components
+const SkeletonText = ({ width = "w-full", height = "h-4", className = "" }) => (
+  <div className={`animate-pulse bg-gray-200 dark:bg-gray-700 rounded ${width} ${height} ${className}`} />
+)
+
+const SkeletonIcon = ({ size = "w-8 h-8", className = "" }) => (
+  <div className={`animate-pulse bg-gray-200 dark:bg-gray-700 rounded-full ${size} ${className}`} />
+)
+
+const SkeletonButton = ({ className = "" }) => (
+  <div className={`animate-pulse bg-gray-200 dark:bg-gray-700 rounded-xl ${className}`} />
+)
+
+const FooterSkeleton = () => (
+  <div className="relative bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
+        
+        {/* Brand Section Skeleton */}
+        <div className="lg:col-span-4 space-y-6">
+          <div className="flex items-center gap-3">
+            <SkeletonIcon size="w-12 h-12" />
+            <div className="space-y-2">
+              <SkeletonText width="w-48" height="h-6" />
+              <SkeletonText width="w-32" height="h-3" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <SkeletonText width="w-full" height="h-4" />
+            <SkeletonText width="w-5/6" height="h-4" />
+            <SkeletonText width="w-4/6" height="h-4" />
+          </div>
+          <div className="flex items-center gap-3">
+            <SkeletonIcon size="w-8 h-8" />
+            <SkeletonText width="w-40" height="h-4" />
+          </div>
+          <div className="flex gap-3">
+            <SkeletonButton className="w-24 h-10" />
+            <SkeletonButton className="w-24 h-10" />
+          </div>
+        </div>
+
+        {/* Quick Links Skeleton */}
+        <div className="lg:col-span-2">
+          <SkeletonText width="w-32" height="h-6" className="mb-6" />
+          <div className="space-y-3">
+            {[1,2,3,4,5,6].map((i) => (
+              <SkeletonText key={i} width="w-32" height="h-4" />
+            ))}
+          </div>
+        </div>
+
+        {/* Popular Categories Skeleton */}
+        <div className="lg:col-span-3">
+          <SkeletonText width="w-40" height="h-6" className="mb-6" />
+          <div className="space-y-3">
+            {[1,2,3,4].map((i) => (
+              <div key={i} className="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                <div className="flex justify-between items-center">
+                  <SkeletonText width="w-32" height="h-4" />
+                  <SkeletonText width="w-12" height="h-4" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Contact Skeleton */}
+        <div className="lg:col-span-3 space-y-6">
+          <div>
+            <SkeletonText width="w-32" height="h-6" className="mb-6" />
+            <div className="space-y-4">
+              <SkeletonText width="w-48" height="h-4" />
+              <SkeletonText width="w-40" height="h-4" />
+              <SkeletonText width="w-56" height="h-4" />
+            </div>
+          </div>
+          <SkeletonButton className="w-full h-24" />
+        </div>
+      </div>
+
+      {/* Newsletter Skeleton */}
+      <div className="my-12">
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-8">
+          <div className="text-center space-y-4">
+            <SkeletonText width="w-48" height="h-6" className="mx-auto" />
+            <SkeletonText width="w-96" height="h-4" className="mx-auto" />
+            <div className="flex justify-center gap-3">
+              <SkeletonButton className="w-64 h-12" />
+              <SkeletonButton className="w-32 h-12" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar Skeleton */}
+      <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-800">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex gap-3">
+            {[1,2,3,4].map((i) => (
+              <SkeletonIcon key={i} size="w-10 h-10" />
+            ))}
+          </div>
+          <SkeletonText width="w-64" height="h-4" />
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1">
+              {[1,2,3,4,5].map((i) => (
+                <SkeletonIcon key={i} size="w-4 h-4" />
+              ))}
+            </div>
+            <SkeletonText width="w-32" height="h-4" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)
+
+export default function HomeFooter() {
   const pathname = usePathname()
   const [showScrollTop, setShowScrollTop] = useState(false)
   const { handleNameandLogo } = useContextData()
-  const footerData = data || {}
+  const [footerData, setFooterData] = useState<any>({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  // Send name and logo to context
-  useEffect(() => {
-    if (footerData.name || footerData.logo) {
-      handleNameandLogo({
-        name: footerData.name || "QURANIC VERSE",
-        logo: footerData.logo || "/logo1.png"
-      })
+  // Cache keys
+  const CACHE_KEY = 'footer_data'
+  const CACHE_TIMESTAMP_KEY = 'footer_data_timestamp'
+  const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours
+
+  // Function to fetch footer data with caching
+  const fetchFooterData = async () => {
+    try {
+      // Check localStorage for cached data
+      const cachedData = localStorage.getItem(CACHE_KEY)
+      const cachedTimestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY)
+      
+      if (cachedData && cachedTimestamp) {
+        const timestamp = parseInt(cachedTimestamp)
+        const now = Date.now()
+        
+        // Check if cache is still valid (less than 24 hours old)
+        if (now - timestamp < CACHE_DURATION) {
+          const parsedData = JSON.parse(cachedData)
+          setFooterData(parsedData)
+          setLoading(false)
+          
+          // Send name and logo to context from cached data
+          if (parsedData.name || parsedData.logo) {
+            handleNameandLogo({
+              name: parsedData.name || "QURANIC VERSE",
+              logo: parsedData.logo || "/logo1.png"
+            })
+          }
+          return
+        }
+      }
+      
+      // Fetch fresh data if cache is expired or doesn't exist
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/footer`)
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      const data = await response.json()
+      
+      // Store in localStorage
+      localStorage.setItem(CACHE_KEY, JSON.stringify(data.data))
+      localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString())
+      
+      setFooterData(data.data)
+      setError(null)
+      
+      // Send name and logo to context
+      if (data.name || data.logo) {
+        handleNameandLogo({
+          name: data.name || "QURANIC VERSE",
+          logo: data.logo || "/logo1.png"
+        })
+      }
+    } catch (err) {
+      console.error('Failed to fetch footer data:', err)
+      setError('Failed to load footer data')
+      
+      // Try to use cached data even if expired as fallback
+      const cachedData = localStorage.getItem(CACHE_KEY)
+      if (cachedData) {
+        try {
+          const parsedData = JSON.parse(cachedData)
+          setFooterData(parsedData)
+          
+          // Send name and logo to context from fallback cache
+          if (parsedData.name || parsedData.logo) {
+            handleNameandLogo({
+              name: parsedData.name || "QURANIC VERSE",
+              logo: parsedData.logo || "/logo1.png"
+            })
+          }
+        } catch (parseErr) {
+          console.error('Failed to parse cached data:', parseErr)
+        }
+      }
+    } finally {
+      setLoading(false)
     }
-  }, [footerData.name, footerData.logo, handleNameandLogo])
+  }
+
+  useEffect(() => {
+    fetchFooterData()
+  }, [])
 
   // Handle scroll to show/hide scroll to top button
   useEffect(() => {
@@ -65,6 +263,11 @@ export default function HomeFooter({data}: any) {
 
   // Return null if on dashboard or profile pages
   if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile") || pathname.startsWith("/pages")) return null
+
+  // Show skeleton while loading
+  if (loading) {
+    return <FooterSkeleton />
+  }
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -224,14 +427,14 @@ export default function HomeFooter({data}: any) {
               </h3>
               <div className="space-y-3">
                 {footerData.popularCategories?.map((category: any, idx: number) => {
-                  const colorlinears = [
+                  const linears = [
                     'from-blue-500 to-cyan-500',
                     'from-purple-500 to-pink-500',
                     'from-orange-500 to-red-500',
                     'from-green-500 to-emerald-500',
                     'from-blue-500 to-purple-500'
                   ]
-                  const color = colorlinears[idx % colorlinears.length]
+                  const linear = linears[idx % linears.length]
                   return (
                     <Link 
                       key={idx}
@@ -240,7 +443,7 @@ export default function HomeFooter({data}: any) {
                     >
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full bg-linear-to-r ${color}`} />
+                          <div className={`w-2 h-2 rounded-full bg-linear-to-r ${linear}`} />
                           <h4 className="font-medium text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
                             {category.name}
                           </h4>

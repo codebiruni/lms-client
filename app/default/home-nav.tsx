@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { ModeToggle } from "@/components/theme-toggle"
 import useContextData from "./custom-component/useContextData"
-import { Menu, LogIn } from "lucide-react"
+import { Menu, LogIn, X } from "lucide-react"
 
 import {
   Sheet,
@@ -14,6 +14,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet"
 
 export default function HomeNav() {
@@ -30,7 +31,13 @@ export default function HomeNav() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile") || pathname.startsWith("/pages") ) return null
+  // Close sheet when pathname changes (navigation occurs)
+  useEffect(() => {
+    const timer = setTimeout(() => setIsOpen(false), 0)
+    return () => clearTimeout(timer)
+  }, [pathname])
+
+  if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile") || pathname.startsWith("/pages")) return null
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -153,29 +160,37 @@ export default function HomeNav() {
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <button className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
+                <button className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                   <Menu className="w-6 h-6"/>
                 </button>
               </SheetTrigger>
 
-              <SheetContent side="left" className="w-80">
-                <SheetHeader>
-                  <SheetTitle className="flex items-center gap-3">
-                    <Image src="/logo1.png" alt="logo" width={30} height={30}/>
-                    Quranic Verse Academy
-                  </SheetTitle>
+              <SheetContent side="left" className="w-80 p-0">
+                <SheetHeader className="p-4 border-b">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Image src="/logo1.png" alt="logo" width={30} height={30}/>
+                      <SheetTitle className="text-sm">
+                        Quranic Verse Academy
+                      </SheetTitle>
+                    </div>
+                    <SheetClose asChild>
+                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <X className="w-5 h-5" />
+                      </button>
+                    </SheetClose>
+                  </div>
                 </SheetHeader>
 
-                <div className="mt-6 flex flex-col gap-2">
+                <div className="flex flex-col gap-1 p-4">
                   {navItems.map(item => (
                     <Link
                       key={item.path}
                       href={item.path}
-                      onClick={() => setIsOpen(false)}
-                      className={`px-4 py-3 rounded-lg font-semibold ${
+                      className={`px-4 py-3 rounded-lg font-semibold transition ${
                         pathname === item.path
                           ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
                       }`}
                     >
                       {item.name}
@@ -189,15 +204,13 @@ export default function HomeNav() {
                     <>
                       <Link
                         href="/login"
-                        onClick={() => setIsOpen(false)}
-                        className="text-center py-3 rounded-xl bg-gray-900 text-white font-semibold"
+                        className="text-center py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition"
                       >
                         Login
                       </Link>
                       <Link
                         href="/signup"
-                        onClick={() => setIsOpen(false)}
-                        className="text-center py-3 rounded-xl bg-blue-600 text-white font-semibold"
+                        className="text-center py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
                       >
                         Signup
                       </Link>
@@ -207,8 +220,7 @@ export default function HomeNav() {
                   {UserData && (
                     <Link
                       href={getDashboardPath()}
-                      onClick={() => setIsOpen(false)}
-                      className="text-center py-3 rounded-xl bg-blue-600 text-white font-semibold"
+                      className="text-center py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
                     >
                       {getDashboardText()}
                     </Link>

@@ -9,6 +9,8 @@ import Logout from "./default/utils/Logout";
 import HomeNav from "./default/home-nav";
 import ChatbotComponent from "./default/utils/ChatbotComponnet";
 import Footer from "./default/Footer";
+import NextTopLoader from 'nextjs-toploader';
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,7 +79,11 @@ export default function RootLayout({
       >
         
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AuthContext><Toaster />
+          <AuthContext>
+            <NextTopLoader />
+            <Toaster />
+            <Suspense fallback={<div>Loading...</div>}>
+            
           <TanStackProvider>
             <HomeNav />
             <Logout />
@@ -85,6 +91,8 @@ export default function RootLayout({
             <ChatbotComponent />
             <Footer />
             </TanStackProvider>
+            
+            </Suspense>
           </AuthContext>
           </ThemeProvider>
       </body>
