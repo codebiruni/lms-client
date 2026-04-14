@@ -73,10 +73,10 @@ export default function ScholarsPages({ data }: any) {
                 <Card key={idx} className="border-0 bg-linear-to-br from-amber-50 to-emerald-50 dark:from-gray-800 dark:to-gray-800/50 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <CardContent className="p-6">
                     <div className="text-3xl md:text-4xl font-bold bg-linear-to-r from-amber-600 to-emerald-600 bg-clip-text text-transparent mb-2">
-                      {stat.value}
+                      {stat.value || ''}
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                      {stat.title}
+                      {stat.title || ''}
                     </p>
                   </CardContent>
                 </Card>
@@ -148,13 +148,13 @@ export default function ScholarsPages({ data }: any) {
                       <GraduationCap className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-800 dark:text-white text-center mb-2 group-hover:text-transparent group-hover:bg-linear-to-r group-hover:from-amber-600 group-hover:to-emerald-600 group-hover:bg-clip-text transition-all">
-                      {scholar.name}
+                      {scholar.name || ''}
                     </h3>
                     <p className="text-sm font-semibold text-amber-600 dark:text-amber-400 text-center mb-3">
-                      {scholar.title}
+                      {scholar.title || ''}
                     </p>
                     <p className="text-sm text-gray-600 dark:text-gray-300 text-center leading-relaxed">
-                      {scholar.description}
+                      {scholar.description || ''}
                     </p>
                     
                     {/* Decorative elements */}

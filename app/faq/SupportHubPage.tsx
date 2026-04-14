@@ -170,17 +170,17 @@ export default function SupportHubPage({ data }: any) {
                   <CardContent className="p-6 text-center">
                     <div className="w-12 h-12 rounded-full bg-linear-to-br from-sky-500 to-indigo-500 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                       <div className="text-white">
-                        {getContactIcon(option.icon)}
+                        {getContactIcon(option.icon) || ''}
                       </div>
                     </div>
                     <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2">
-                      {option.title}
+                      {option.title || ''}
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                      {option.description}
+                      {option.description || ''}
                     </p>
                     <p className="text-sm font-semibold text-sky-600 dark:text-sky-400">
-                      {option.value}
+                      {option.value || ''}
                     </p>
                   </CardContent>
                 </Card>

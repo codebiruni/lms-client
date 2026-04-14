@@ -19,8 +19,52 @@ import {
   Clock
 } from 'lucide-react'
 
+// Default data structure
+const defaultData = {
+  baseText: "Get in Touch",
+  bannerText: {
+    blackText: "Let's Start a",
+    colorText: "Conversation"
+  },
+  marqueeText: "Have questions about Bright Path Academy? We're here to help. Reach out to us through any of our channels and we'll respond as soon as possible.",
+  number: ["+1 (555) 123-4567", "+1 (555) 987-6543"],
+  email: ["info@brightpathacademy.edu", "support@brightpathacademy.edu"],
+  address: ["123 Education Lane, Suite 100", "Knowledge City, KC 12345"],
+  facebookLink: "https://facebook.com/brightpathacademy",
+  twitterLink: "https://twitter.com/brightpathacademy",
+  linkedinLink: "https://linkedin.com/company/brightpathacademy",
+  instagramLink: "https://instagram.com/brightpathacademy",
+  whatsappNumber: "https://wa.me/15551234567",
+  contactMembers: [
+    {
+      name: "Sarah Johnson",
+      position: "Admissions Coordinator",
+      number: "+1 (555) 123-4567"
+    },
+    {
+      name: "Michael Chen",
+      position: "Student Support Specialist",
+      number: "+1 (555) 234-5678"
+    },
+    {
+      name: "Emily Rodriguez",
+      position: "Academic Advisor",
+      number: "+1 (555) 345-6789"
+    }
+  ]
+}
+
 export default function ContactPage({ data }: any) {
-  const contactData = data || {}
+  // Merge provided data with default data
+  const contactData = {
+    ...defaultData,
+    ...(data || {}),
+    bannerText: {
+      ...defaultData.bannerText,
+      ...(data?.bannerText || {})
+    },
+    contactMembers: data?.contactMembers?.length > 0 ? data.contactMembers : defaultData.contactMembers
+  }
 
   const socialLinks = [
     { name: 'Facebook', icon: Facebook, link: contactData.facebookLink, color: 'bg-blue-600' },
@@ -67,21 +111,21 @@ export default function ContactPage({ data }: any) {
             <div className="flex justify-center mb-6">
               <Badge className="bg-linear-to-r from-violet-500 to-fuchsia-500 dark:from-violet-600 dark:to-fuchsia-600 text-white rounded-full border-0 px-4 py-1.5 text-sm font-medium shadow-lg dark:shadow-violet-900/30 transition-all duration-300">
                 <MessageSquare className="w-4 h-4 mr-1" />
-                {contactData.baseText || "Get in Touch"}
+                {contactData.baseText}
               </Badge>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-gray-100 mb-6 transition-colors duration-300">
-              {contactData.bannerText?.blackText || "Let's Start a"}
+              {contactData.bannerText.blackText}
               <span className="block mt-2">
                 <span className="bg-linear-to-r from-violet-600 via-fuchsia-500 to-pink-600 dark:from-violet-500 dark:via-fuchsia-400 dark:to-pink-500 bg-clip-text text-transparent">
-                  {contactData.bannerText?.colorText || "Conversation"}
+                  {contactData.bannerText.colorText}
                 </span>
               </span>
             </h1>
 
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-              {contactData.marqueeText || "Have questions about Bright Path Academy? We're here to help. Reach out to us through any of our channels and we'll respond as soon as possible."}
+              {contactData.marqueeText}
             </p>
           </div>
         </div>
@@ -98,11 +142,15 @@ export default function ContactPage({ data }: any) {
                   <Phone className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3">Phone</h3>
-                {contactData.number?.map((num: string, idx: number) => (
-                  <a key={idx} href={`tel:${num}`} className="block text-gray-600 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors mb-1">
-                    {num}
-                  </a>
-                ))}
+                {contactData.number && contactData.number.length > 0 ? (
+                  contactData.number.map((num: string, idx: number) => (
+                    <a key={idx} href={`tel:${num}`} className="block text-gray-600 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors mb-1">
+                      {num}
+                    </a>
+                  ))
+                ) : (
+                  <p className="text-gray-600 dark:text-gray-300">No phone numbers available</p>
+                )}
               </CardContent>
             </Card>
 
@@ -113,11 +161,15 @@ export default function ContactPage({ data }: any) {
                   <Mail className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3">Email</h3>
-                {contactData.email?.map((email: string, idx: number) => (
-                  <a key={idx} href={`mailto:${email}`} className="block text-gray-600 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors mb-1">
-                    {email}
-                  </a>
-                ))}
+                {contactData.email && contactData.email.length > 0 ? (
+                  contactData.email.map((email: string, idx: number) => (
+                    <a key={idx} href={`mailto:${email}`} className="block text-gray-600 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors mb-1">
+                      {email}
+                    </a>
+                  ))
+                ) : (
+                  <p className="text-gray-600 dark:text-gray-300">No email addresses available</p>
+                )}
               </CardContent>
             </Card>
 
@@ -128,11 +180,15 @@ export default function ContactPage({ data }: any) {
                   <MapPin className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3">Address</h3>
-                {contactData.address?.map((addr: string, idx: number) => (
-                  <p key={idx} className="text-gray-600 dark:text-gray-300">
-                    {addr}
-                  </p>
-                ))}
+                {contactData.address && contactData.address.length > 0 ? (
+                  contactData.address.map((addr: string, idx: number) => (
+                    <p key={idx} className="text-gray-600 dark:text-gray-300">
+                      {addr}
+                    </p>
+                  ))
+                ) : (
+                  <p className="text-gray-600 dark:text-gray-300">No address available</p>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -180,6 +236,8 @@ export default function ContactPage({ data }: any) {
           <div className="flex flex-wrap justify-center gap-4">
             {socialLinks.map((social, idx) => {
               const Icon = social.icon
+              // Only show social link if it exists
+              if (!social.link) return null
               return (
                 <a
                   key={idx}
@@ -217,16 +275,18 @@ export default function ContactPage({ data }: any) {
                       <User className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-1">
-                      {member.name}
+                      {member.name || "Team Member"}
                     </h3>
                     <p className="text-sm text-violet-600 dark:text-violet-400 mb-3">
                       <Briefcase className="w-3 h-3 inline mr-1" />
-                      {member.position}
+                      {member.position || "Staff"}
                     </p>
-                    <a href={`tel:${member.number}`} className="text-gray-600 dark:text-gray-300 hover:text-violet-600 transition-colors">
-                      <Phone className="w-4 h-4 inline mr-1" />
-                      {member.number}
-                    </a>
+                    {member.number && (
+                      <a href={`tel:${member.number}`} className="text-gray-600 dark:text-gray-300 hover:text-violet-600 transition-colors">
+                        <Phone className="w-4 h-4 inline mr-1" />
+                        {member.number}
+                      </a>
+                    )}
                   </CardContent>
                 </Card>
               ))}

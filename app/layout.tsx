@@ -11,6 +11,7 @@ import ChatbotComponent from "./default/utils/ChatbotComponnet";
 import Footer from "./default/Footer";
 import NextTopLoader from 'nextjs-toploader';
 import { Suspense } from "react";
+import { SkeletonLoader } from "./default/SkeletonLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -82,7 +83,9 @@ export default function RootLayout({
           <AuthContext>
             <NextTopLoader />
             <Toaster />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div>
+              <SkeletonLoader />
+            </div>}>
             
           <TanStackProvider>
             <HomeNav />
