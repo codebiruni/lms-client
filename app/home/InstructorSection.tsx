@@ -6,6 +6,10 @@ import React from 'react'
 
 export default function InstructorSection({ data }: any) {
   const list = data?.list || []
+
+    if (!data) {
+    return null
+  }
   
   return (
     <section className="py-16 md:py-24 bg-linear-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950/30">

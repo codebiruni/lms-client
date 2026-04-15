@@ -4,6 +4,9 @@ import { CheckCircle, Play } from 'lucide-react'
 import React from 'react'
 
 export default function WelcomeSection({ data }: any) {
+    if (!data) {
+    return null
+  }
   return (
     <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4">

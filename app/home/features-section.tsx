@@ -62,7 +62,9 @@ export default function FeatureSection({ data }: any) {
       setCurrentIndex(currentIndex - 1)
     }
   }
-
+  if (!data) {
+    return null
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const visibleFeatures = features.slice(currentIndex, currentIndex + itemsPerView)
 

@@ -39,6 +39,10 @@ export default function TestimonialSection({ data }: any) {
 
   const currentTestimonial = testimonials[currentIndex]
 
+    if (!data) {
+    return null
+  }
+
   return (
     <section className="py-16 md:py-24 bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950/30 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">

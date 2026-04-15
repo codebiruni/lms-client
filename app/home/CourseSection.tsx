@@ -20,6 +20,9 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 
 export default function CourseSection({ data }: any) {
+
+
+
   const courses = data?.courseList || []
   const [bookmarkedCourses, setBookmarkedCourses] = useState<Set<string>>(new Set())
 
@@ -54,6 +57,10 @@ export default function CourseSection({ data }: any) {
     return Math.round(((price - discountPrice) / price) * 100)
   }
 
+    if (!data) {
+    return null
+  }
+  
   return (
     <section className="py-16 md:py-24 bg-linear-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950/30">
       <div className="container mx-auto px-4">

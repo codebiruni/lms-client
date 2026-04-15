@@ -24,6 +24,8 @@ export default function IntroductionSection() {
     { icon: <PenTool className="w-8 h-8" />, title: "Writing", color: "from-pink-500 to-rose-500", delay: "1s" }
   ]
 
+
+
   return (
     <div className='py-8 px-3 lg:px-6 min-h-screen flex items-center justify-center'>
       <Card className='rounded-3xl w-full border-0 bg-white/40 dark:bg-gray-900/40 backdrop-blur-xl shadow-2xl overflow-hidden relative'>

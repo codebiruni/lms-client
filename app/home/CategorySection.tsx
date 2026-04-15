@@ -8,6 +8,10 @@ import Link from 'next/link'
 import React from 'react'
 
 export default function CategorySection({ data }: any) {
+
+  if (!data) {
+    return null
+  }
   const categories = data?.categoryList || []
   
   return (

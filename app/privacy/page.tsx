@@ -1,7 +1,10 @@
 import React from 'react'
+import Privacy from './Privacy'
 
 export default function page() {
   return (
-    <div>page</div>
+    <div>
+      <Privacy />
+    </div>
   )
 }

@@ -6,6 +6,10 @@ import React from 'react'
 
 export default function WhyChooseUsSection({ data }: any) {
   const cards = data?.cards || []
+
+    if (!data) {
+    return null
+  }
   
   return (
     <section className="py-16 md:py-24 bg-white dark:bg-gray-950">

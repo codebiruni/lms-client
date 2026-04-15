@@ -6,8 +6,49 @@ import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Download, Sparkles, Star } from 'lucide-react'
 import PwaInstaller from '../default/PwaInstaller'
 
-export default // Banner Component
-function Banner({ data }: any) {
+// Banner Component
+export default function Banner({ data }: any) {
+  // Default data structure
+  const defaultData = {
+    baseText: "Trusted by 50,000+ learners",
+    title: {
+      highlightText: "Welcome to",
+      blackText: "Academy"
+    },
+    descRiption: "Empowering learners with quality education and resources to build brighter futures",
+    bottomBaseText: {
+      firstText: "Join 50K+ learners",
+      secondText: "4.9 (10K+ reviews)"
+    },
+    list: {
+      firstList: "No credit card required",
+      secondList: "14-day free trial",
+      thirdList: "Cancel anytime"
+    },
+    buttons: {
+      primaryButton: "Explore Courses",
+      secondaryButton: "Install App"
+    },
+    images: {
+      mainImage: "/mobile.webp",
+      playStoreImage: "/playstore.png",
+      appStoreImage: "/appstore.png"
+    },
+    floatingBadges: {
+      firstBadge: {
+        title: "New",
+        description: "AI Features"
+      },
+      secondBadge: {
+        title: "Download",
+        description: "2M+ Active"
+      }
+    }
+  }
+
+  // Merge provided data with defaults
+  const bannerData = { ...defaultData, ...data }
+
   return (
     <section className="relative py-12 md:py-20 overflow-hidden bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950/30">
       
@@ -23,40 +64,48 @@ function Banner({ data }: any) {
             {/* Badge */}
             <Badge variant="outline" className="inline-flex items-center rounded-full gap-2 px-4 py-1.5 text-sm border-blue-200 dark:border-blue-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
               <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              <span className="text-blue-600 dark:text-blue-400 font-medium">{data.baseText || "Trusted by 50,000+ learners"}</span>
+              <span className="text-blue-600 dark:text-blue-400 font-medium">
+                {bannerData.baseText}
+              </span>
             </Badge>
             
             {/* Main Heading */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400">
-                {data.title?.highlightText || "Welcome to"}
+                {bannerData.title?.highlightText || "Welcome to"}
               </span>
-              <span className="text-gray-800 dark:text-white"> {data.title?.blackText || "Academy"}</span>
+              <span className="text-gray-800 dark:text-white"> 
+                {bannerData.title?.blackText || "Academy"}
+              </span>
             </h1>
             
             {/* Description */}
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl lg:mx-0 mx-auto">
-              {data.descRiption || "Empowering learners with quality education and resources to build brighter futures"}
+              {bannerData.descRiption}
             </p>
             
             {/* Stats */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 pt-4">
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-2">
-                  {[1,2,3,4].map((i) => (
+                  {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 border-2 border-white dark:border-gray-900 flex items-center justify-center">
                       <span className="text-xs font-bold text-blue-600 dark:text-blue-400">✨</span>
                     </div>
                   ))}
                 </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">{data.bottomBaseText?.firstText || "Join 50K+ learners"}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {bannerData.bottomBaseText?.firstText || "Join 50K+ learners"}
+                </span>
               </div>
               
               <div className="flex items-center gap-1">
-                {[1,2,3,4,5].map((star) => (
+                {[1, 2, 3, 4, 5].map((star) => (
                   <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                 ))}
-                <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">{data.bottomBaseText?.secondText || "4.9 (10K+ reviews)"}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">
+                  {bannerData.bottomBaseText?.secondText || "4.9 (10K+ reviews)"}
+                </span>
               </div>
             </div>
             
@@ -65,8 +114,12 @@ function Banner({ data }: any) {
               <Button 
                 size="lg" 
                 className="group bg-blue-600 rounded-full hover:bg-blue-700 text-white px-8 text-base shadow-lg shadow-blue-600/25"
+                onClick={() => {
+                  // Handle explore courses click
+                  window.location.href = '/courses'
+                }}
               >
-                Explore Courses
+                {bannerData.buttons?.primaryButton || "Explore Courses"}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               
@@ -77,16 +130,16 @@ function Banner({ data }: any) {
                   className="group px-8 text-base border-2 rounded-full hover:bg-blue-50 dark:hover:bg-blue-950/30"
                 >
                   <Download className="mr-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
-                  Install App
+                  {bannerData.buttons?.secondaryButton || "Install App"}
                 </Button>
               </PwaInstaller>
             </div>
             
             {/* Trust Badge */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 pt-6 text-sm text-gray-500 dark:text-gray-500">
-              <span>✓ {data.list?.firstList || "No credit card required"}</span>
-              <span>✓ {data.list?.secondList || "14-day free trial"}</span>
-              <span>✓ {data.list?.thirdList || "Cancel anytime"}</span>
+              <span>✓ {bannerData.list?.firstList || "No credit card required"}</span>
+              <span>✓ {bannerData.list?.secondList || "14-day free trial"}</span>
+              <span>✓ {bannerData.list?.thirdList || "Cancel anytime"}</span>
             </div>
           </div>
           
@@ -100,7 +153,7 @@ function Banner({ data }: any) {
               {/* Main Image */}
               <div className="relative z-10">
                 <Image
-                  src="/mobile.webp"
+                  src={bannerData.images?.mainImage || "/mobile.webp"}
                   alt="Mobile App"
                   width={500}
                   height={500}
@@ -115,8 +168,12 @@ function Banner({ data }: any) {
                       <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">New</p>
-                      <p className="text-sm font-semibold text-gray-800 dark:text-white">AI Features</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {bannerData.floatingBadges?.firstBadge?.title || "New"}
+                      </p>
+                      <p className="text-sm font-semibold text-gray-800 dark:text-white">
+                        {bannerData.floatingBadges?.firstBadge?.description || "AI Features"}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -125,8 +182,12 @@ function Banner({ data }: any) {
                   <div className="flex items-center gap-2">
                     <div className="text-2xl">📱</div>
                     <div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">Download</p>
-                      <p className="text-sm font-semibold text-gray-800 dark:text-white">2M+ Active</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {bannerData.floatingBadges?.secondBadge?.title || "Download"}
+                      </p>
+                      <p className="text-sm font-semibold text-gray-800 dark:text-white">
+                        {bannerData.floatingBadges?.secondBadge?.description || "2M+ Active"}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -135,20 +196,24 @@ function Banner({ data }: any) {
               {/* App Store Badges */}
               <PwaInstaller>
                 <div className="flex items-center justify-center gap-3 mt-6">
-                  <Image
-                    src="/playstore.png"
-                    alt="Google Play"
-                    width={120}
-                    height={40}
-                    className="h-10 w-auto object-contain cursor-pointer"
-                  />
-                  <Image
-                    src="/appstore.png"
-                    alt="App Store"
-                    width={120}
-                    height={40}
-                    className="h-10 w-auto object-contain cursor-pointer"
-                  />
+                  <div className="cursor-pointer hover:opacity-80 transition-opacity">
+                    <Image
+                      src={bannerData.images?.playStoreImage || "/playstore.png"}
+                      alt="Google Play"
+                      width={120}
+                      height={40}
+                      className="h-10 w-auto object-contain"
+                    />
+                  </div>
+                  <div className="cursor-pointer hover:opacity-80 transition-opacity">
+                    <Image
+                      src={bannerData.images?.appStoreImage || "/appstore.png"}
+                      alt="App Store"
+                      width={120}
+                      height={40}
+                      className="h-10 w-auto object-contain"
+                    />
+                  </div>
                 </div>
               </PwaInstaller>
             </div>

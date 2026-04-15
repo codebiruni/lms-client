@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
@@ -28,11 +27,11 @@ import {
   Award,
   Sun,
   Moon,
-  ChevronUp
+  ChevronUp,
+  Linkedin
 } from "lucide-react"
 import PwaInstaller from "./PwaInstaller"
 import Subescrive from "./Subescrive"
-import useContextData from "./custom-component/useContextData"
 
 // Skeleton Loader Components
 const SkeletonText = ({ width = "w-full", height = "h-4", className = "" }) => (
@@ -152,117 +151,69 @@ const FooterSkeleton = () => (
   </div>
 )
 
-export default function HomeFooter() {
+export default function HomeFooter({ data }: any) {
   const pathname = usePathname()
+  const [loading, setLoading] = useState(false)
   const [showScrollTop, setShowScrollTop] = useState(false)
-  const { handleNameandLogo } = useContextData()
-  const [footerData, setFooterData] = useState<any>({})
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
-  // Cache keys
-  const CACHE_KEY = 'footer_data'
-  const CACHE_TIMESTAMP_KEY = 'footer_data_timestamp'
-  const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours
-
-  // Function to fetch footer data with caching
-  const fetchFooterData = async () => {
-    try {
-      // Check localStorage for cached data
-      const cachedData = localStorage.getItem(CACHE_KEY)
-      const cachedTimestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY)
-      
-      if (cachedData && cachedTimestamp) {
-        const timestamp = parseInt(cachedTimestamp)
-        const now = Date.now()
-        
-        // Check if cache is still valid (less than 24 hours old)
-        if (now - timestamp < CACHE_DURATION) {
-          const parsedData = JSON.parse(cachedData)
-          setFooterData(parsedData)
-          setLoading(false)
-          
-          // Send name and logo to context from cached data
-          if (parsedData.name || parsedData.logo) {
-            handleNameandLogo({
-              name: parsedData.name || "QURANIC VERSE",
-              logo: parsedData.logo || "/logo1.png"
-            })
-          }
-          return
-        }
+  // Default data structure
+  const defaultData = {
+    _id: "default",
+    logo: "/logo1.png",
+    name: "QURANIC VERSE",
+    description: "Transform your potential into expertise with industry-leading courses, expert mentors, and a supportive community. Join thousands of successful learners who've accelerated their careers with us.",
+    quickLinks: [
+      { name: "Home", link: "/", _id: "default1" },
+      { name: "Features", link: "/features", _id: "default2" },
+      { name: "Course", link: "/course", _id: "default3" },
+      { name: "Scholars", link: "/scholars", _id: "default4" },
+      { name: "Support Hub", link: "/faq", _id: "default5" },
+      { name: "Contact", link: "/contact", _id: "default6" }
+    ],
+    boxText: "New: AI Course Bundle",
+    popularCategories: [
+      { name: "Arabic Language", sels: "10k", link: "/courses/arabic", _id: "default7" },
+      { name: "Quran Tafseer", sels: "8.5k", link: "/courses/tafseer", _id: "default8" },
+      { name: "Islamic Studies", sels: "12k", link: "/courses/islamic-studies", _id: "default9" },
+      { name: "Hadith Sciences", sels: "6k", link: "/courses/hadith", _id: "default10" }
+    ],
+    getInTouch: [
+      {
+        email: "info@quranicverse.com",
+        phone: "+1 (555) 123-4567",
+        address: "123 Education Street, Knowledge City, 10001",
+        _id: "default11"
       }
-      
-      // Fetch fresh data if cache is expired or doesn't exist
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/footer`)
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      
-      const data = await response.json()
-      
-      // Store in localStorage
-      localStorage.setItem(CACHE_KEY, JSON.stringify(data.data))
-      localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString())
-      
-      setFooterData(data.data)
-      setError(null)
-      
-      // Send name and logo to context
-      if (data.name || data.logo) {
-        handleNameandLogo({
-          name: data.name || "QURANIC VERSE",
-          logo: data.logo || "/logo1.png"
-        })
-      }
-    } catch (err) {
-      console.error('Failed to fetch footer data:', err)
-      setError('Failed to load footer data')
-      
-      // Try to use cached data even if expired as fallback
-      const cachedData = localStorage.getItem(CACHE_KEY)
-      if (cachedData) {
-        try {
-          const parsedData = JSON.parse(cachedData)
-          setFooterData(parsedData)
-          
-          // Send name and logo to context from fallback cache
-          if (parsedData.name || parsedData.logo) {
-            handleNameandLogo({
-              name: parsedData.name || "QURANIC VERSE",
-              logo: parsedData.logo || "/logo1.png"
-            })
-          }
-        } catch (parseErr) {
-          console.error('Failed to parse cached data:', parseErr)
-        }
-      }
-    } finally {
-      setLoading(false)
-    }
+    ],
+    officeHours: [
+      { name: "Monday - Friday", time: "9:00 AM - 6:00 PM", _id: "default12" },
+      { name: "Saturday", time: "10:00 AM - 4:00 PM", _id: "default13" },
+      { name: "Sunday", time: "Closed", _id: "default14" }
+    ],
+    facebookLink: "https://facebook.com/quranicverse",
+    twitterLink: "https://twitter.com/quranicverse",
+    linkedinLink: "https://linkedin.com/company/quranicverse",
+    instagramLink: "https://instagram.com/quranicverse",
+    youtubeLink: "https://youtube.com/quranicverse",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    __v: 0
   }
 
-  useEffect(() => {
-    fetchFooterData()
-  }, [])
+  // Merge provided data with defaults
+  const footerData = { ...defaultData, ...data }
 
-  // Handle scroll to show/hide scroll to top button
+  // Handle scroll to top button visibility
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 500) {
-        setShowScrollTop(true)
-      } else {
-        setShowScrollTop(false)
-      }
+      setShowScrollTop(window.scrollY > 500)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   // Return null if on dashboard or profile pages
-  if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile") || pathname.startsWith("/pages")) return null
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/profile") || pathname?.startsWith("/pages")) return null
 
   // Show skeleton while loading
   if (loading) {
@@ -274,10 +225,30 @@ export default function HomeFooter() {
   }
 
   // Get contact info
-  const contactInfo = footerData.getInTouch?.[0] || {}
+  const contactInfo = footerData.getInTouch?.[0] || {
+    email: "info@quranicverse.com",
+    phone: "+1 (555) 123-4567",
+    address: "123 Education Street, Knowledge City"
+  }
   
   // Get office hours
-  const officeHours = footerData.officeHours || []
+  const officeHours = footerData.officeHours?.length > 0 ? footerData.officeHours : defaultData.officeHours
+
+  // Icon mapping for quick links
+  const getQuickLinkIcon = (name: string) => {
+    const iconMap: { [key: string]: any } = {
+      'Home': Home,
+      'Features': Sparkles,
+      'Course': BookOpen,
+      'Scholars': GraduationCap,
+      'Support Hub': Heart,
+      'Contact': Phone,
+      'FAQ': Heart,
+      'About': Award
+    }
+    const Icon = iconMap[name] || ChevronRight
+    return <Icon className="w-4 h-4" />
+  }
 
   return (
     <>
@@ -301,7 +272,7 @@ export default function HomeFooter() {
         <div 
           className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03] pointer-events-none"
           style={{
-            backgroundImage: `radial-linear(circle at 1px 1px, currentColor 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
             backgroundSize: '40px 40px'
           }}
         />
@@ -325,10 +296,14 @@ export default function HomeFooter() {
                     width={50}
                     height={50}
                     className="relative z-10 object-contain"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.src = "/logo1.png"
+                    }}
                   />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold">
+                  <h2 className="text-2xl font-bold bg-linear-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
                     {footerData.name || "Quranic Verse Academy"}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-400 text-sm tracking-wide">Empower Your Future</p>
@@ -342,7 +317,7 @@ export default function HomeFooter() {
               {/* Trust Badge */}
               <div className="flex items-center gap-3 bg-blue-50 dark:bg-blue-950/30 rounded-full px-4 py-2 w-fit border border-blue-200 dark:border-blue-800">
                 <div className="flex -space-x-2">
-                  {[1,2,3].map((i) => (
+                  {[1, 2, 3].map((i) => (
                     <div key={i} className="w-6 h-6 rounded-full bg-linear-to-br from-blue-400 to-purple-400 border-2 border-white dark:border-gray-900 flex items-center justify-center text-white text-xs font-bold">
                       <Sparkles className="w-3 h-3" />
                     </div>
@@ -361,6 +336,10 @@ export default function HomeFooter() {
                       width={100}
                       height={30}
                       className="h-9 rounded-md"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = 'none'
+                      }}
                     />
                   </button>
                   <button className="flex items-center rounded-xl transition-all hover:scale-105 shadow-md group">
@@ -370,6 +349,10 @@ export default function HomeFooter() {
                       width={100}
                       height={30}
                       className="h-9 rounded-md"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = 'none'
+                      }}
                     />
                   </button>
                 </div>
@@ -383,29 +366,18 @@ export default function HomeFooter() {
                 <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 rounded-full"></span>
               </h3>
               <ul className="space-y-3">
-                {footerData.quickLinks?.map((item: any, idx: number) => {
-                  const iconMap: { [key: string]: any } = {
-                    'Home': Home,
-                    'Features': Sparkles,
-                    'Course': BookOpen,
-                    'Scholars': GraduationCap,
-                    'Support Hub': Heart,
-                    'Contact': Phone
-                  }
-                  const Icon = iconMap[item.name] || ChevronRight
-                  return (
-                    <li key={idx}>
-                      <Link 
-                        href={item.link}
-                        className="group flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 text-sm"
-                      >
-                        <Icon className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2 transition-all" />
-                        <span>{item.name}</span>
-                        <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      </Link>
-                    </li>
-                  )
-                })}
+                {footerData.quickLinks?.map((item: any, idx: number) => (
+                  <li key={item._id || idx}>
+                    <Link 
+                      href={item.link}
+                      className="group flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 text-sm"
+                    >
+                      {getQuickLinkIcon(item.name)}
+                      <span className="group-hover:translate-x-1 transition-transform">{item.name}</span>
+                      <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                    </Link>
+                  </li>
+                ))}
               </ul>
 
               {/* Featured Badge */}
@@ -427,29 +399,29 @@ export default function HomeFooter() {
               </h3>
               <div className="space-y-3">
                 {footerData.popularCategories?.map((category: any, idx: number) => {
-                  const linears = [
+                  const gradients = [
                     'from-blue-500 to-cyan-500',
                     'from-purple-500 to-pink-500',
                     'from-orange-500 to-red-500',
                     'from-green-500 to-emerald-500',
-                    'from-blue-500 to-purple-500'
+                    'from-indigo-500 to-purple-500'
                   ]
-                  const linear = linears[idx % linears.length]
+                  const gradient = gradients[idx % gradients.length]
                   return (
                     <Link 
-                      key={idx}
+                      key={category._id || idx}
                       href={category.link || '#'}
                       className="block p-3 bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all group"
                     >
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full bg-linear-to-r ${linear}`} />
+                          <div className={`w-2 h-2 rounded-full bg-linear-to-r ${gradient}`} />
                           <h4 className="font-medium text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
                             {category.name}
                           </h4>
                         </div>
-                        <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-full">
-                          {category.sels}
+                        <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-full font-medium">
+                          {category.sels}+
                         </span>
                       </div>
                     </Link>
@@ -468,20 +440,20 @@ export default function HomeFooter() {
                 </h3>
                 <ul className="space-y-4">
                   {contactInfo.email && (
-                    <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
-                      <Mail className="w-4 h-4 text-blue-500 mt-0.5" />
-                      <span>{contactInfo.email}</span>
+                    <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400 group hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      <Mail className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
+                      <span className="break-all">{contactInfo.email}</span>
                     </li>
                   )}
                   {contactInfo.phone && (
-                    <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
-                      <Phone className="w-4 h-4 text-blue-500 mt-0.5" />
+                    <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400 group hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      <Phone className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
                       <span>{contactInfo.phone}</span>
                     </li>
                   )}
                   {contactInfo.address && (
                     <li className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
-                      <MapPin className="w-4 h-4 text-blue-500 mt-0.5" />
+                      <MapPin className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
                       <span>{contactInfo.address}</span>
                     </li>
                   )}
@@ -489,7 +461,7 @@ export default function HomeFooter() {
               </div>
 
               {/* Support Hours */}
-              {officeHours.length > 0 && (
+              {officeHours && officeHours.length > 0 && officeHours[0]?.name !== "test" && (
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
                   <div className="flex items-center gap-2 mb-3">
                     <Clock className="w-4 h-4 text-blue-500" />
@@ -497,8 +469,8 @@ export default function HomeFooter() {
                   </div>
                   <div className="space-y-2 text-xs">
                     {officeHours.map((hour: any, idx: number) => (
-                      <div key={idx} className="flex justify-between">
-                        <span className="text-gray-500 dark:text-gray-500">{hour.name}:</span>
+                      <div key={hour._id || idx} className="flex justify-between">
+                        <span className="text-gray-500 dark:text-gray-400">{hour.name}:</span>
                         <span className="text-blue-600 dark:text-blue-400 font-medium">{hour.time}</span>
                       </div>
                     ))}
@@ -507,7 +479,7 @@ export default function HomeFooter() {
               )}
 
               {/* Security Badge */}
-              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-500">
+              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
                 <Shield className="w-4 h-4 text-blue-500" />
                 <span>SSL Secure & GDPR Compliant</span>
               </div>
@@ -522,46 +494,65 @@ export default function HomeFooter() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               {/* Social Icons */}
               <div className="flex gap-3">
-                {footerData.facebookLink && (
+                {footerData.facebookLink && footerData.facebookLink !== "https://www.quranic-verse.com/" && (
                   <Link 
                     href={footerData.facebookLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white transition-all group"
                     aria-label="Facebook"
                   >
                     <Facebook className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-white transition" />
                   </Link>
                 )}
-                {footerData.instagramLink && (
+                {footerData.instagramLink && footerData.instagramLink !== "https://www.quranic-verse.com/" && (
                   <Link 
                     href={footerData.instagramLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-pink-600 dark:hover:bg-pink-600 hover:text-white transition-all group"
                     aria-label="Instagram"
                   >
                     <Instagram className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-white transition" />
                   </Link>
                 )}
-                {footerData.youtubeLink && (
+                {footerData.youtubeLink && footerData.youtubeLink !== "https://www.quranic-verse.com/" && (
                   <Link 
                     href={footerData.youtubeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-red-600 dark:hover:bg-red-600 hover:text-white transition-all group"
                     aria-label="YouTube"
                   >
                     <Youtube className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-white transition" />
                   </Link>
                 )}
-                {footerData.twitterLink && (
+                {footerData.twitterLink && footerData.twitterLink !== "https://www.quranic-verse.com/" && (
                   <Link 
                     href={footerData.twitterLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-sky-500 dark:hover:bg-sky-500 hover:text-white transition-all group"
                     aria-label="Twitter"
                   >
                     <Twitter className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-white transition" />
                   </Link>
                 )}
+                {footerData.linkedinLink && footerData.linkedinLink !== "https://www.quranic-verse.com/" && (
+                  <Link 
+                    href={footerData.linkedinLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-blue-700 dark:hover:bg-blue-700 hover:text-white transition-all group"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-white transition" />
+                  </Link>
+                )}
               </div>
 
               {/* Copyright */}
-              <p className="text-sm text-gray-500 dark:text-gray-500 text-center">
+              <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
                 © {new Date().getFullYear()} {footerData.name || "Quranic Verse Academy"}. All rights reserved.
                 <br className="sm:hidden" /> 
                 <span className="hidden sm:inline"> | </span>
@@ -571,7 +562,7 @@ export default function HomeFooter() {
               {/* Rating */}
               <div className="flex items-center gap-2">
                 <div className="flex">
-                  {[1,2,3,4,5].map((star) => (
+                  {[1, 2, 3, 4, 5].map((star) => (
                     <Star key={star} className="w-4 h-4 text-orange-400 fill-orange-400" />
                   ))}
                 </div>
@@ -580,14 +571,14 @@ export default function HomeFooter() {
             </div>
 
             {/* Footer Links */}
-            <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs text-gray-500 dark:text-gray-500">
+            <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs text-gray-500 dark:text-gray-400">
               <Link href="/privacy" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Privacy Policy</Link>
               <span>•</span>
               <Link href="/terms" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Terms of Service</Link>
               <span>•</span>
-              <Link href="/cookies" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Cookie Policy</Link>
+              <Link href="/cancel" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Cookie Policy</Link>
               <span>•</span>
-              <Link href="/sitemap" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Sitemap</Link>
+              <Link href="/sitemap.xml" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Sitemap</Link>
             </div>
           </div>
         </div>
