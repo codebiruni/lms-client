@@ -42,7 +42,7 @@ export default function PwaInstaller({ children }: Props) {
 
 
   if (UserData && isInstalled) {
-    if (UserData.role === 'student') {
+    if (UserData?.role === 'student') {
         router.push("/profile")
     } else {
         router.push("/dashboard")

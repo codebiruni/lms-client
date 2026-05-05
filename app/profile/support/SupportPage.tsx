@@ -218,7 +218,7 @@ export default function SupportPage() {
                   <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
                     <Avatar className="w-10 h-10">
                       {UserData?.image ? (
-                        <AvatarImage src={UserData.image} alt={UserData?.name} />
+                        <AvatarImage src={UserData?.image} alt={UserData?.name} />
                       ) : (
                         <AvatarFallback className="bg-linear-to-br from-blue-500 to-indigo-600 text-white">
                           {UserData?.name?.charAt(0) || 'U'}

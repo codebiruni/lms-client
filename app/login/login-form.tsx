@@ -129,7 +129,7 @@ export default function LoginForm() {
   }
 
   if (UserData) {
-    router.push(UserData.role === 'student' ? '/profile' : '/dashboard')
+    router.push(UserData?.role === 'student' ? '/profile' : '/dashboard')
     return null
   }
 

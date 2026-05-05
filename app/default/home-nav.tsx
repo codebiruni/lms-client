@@ -50,13 +50,13 @@ export default function HomeNav() {
 
   const getDashboardPath = () => {
     if (!UserData) return "/login"
-    if (UserData.role === "student") return "/profile"
+    if (UserData?.role === "student") return "/profile"
     return "/dashboard"
   }
 
   const getDashboardText = () => {
     if (!UserData) return "Login"
-    if (UserData.role === "student") return "Profile"
+    if (UserData?.role === "student") return "Profile"
     return "Dashboard"
   }
 

@@ -1,7 +1,10 @@
 import React from 'react'
+import StudentProgressData from './StudentProgressData'
 
 export default function page() {
   return (
-    <div>page</div>
+    <div>
+      <StudentProgressData />
+    </div>
   )
 }

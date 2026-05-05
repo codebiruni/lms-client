@@ -10,7 +10,7 @@ export async function proxy(request: NextRequest) {
   const userData: any = await LogedUser();
 
   // 1️⃣ If no user or no role → Redirect to login with callback
-  if (!userData || !userData.role) {
+  if (!userData || !userData?.role) {
     const loginUrl = new URL("/login", request.url);
     // Optional: Add the current page as a callback so they return here after login
     loginUrl.searchParams.set("callbackUrl", pathname); 
@@ -18,8 +18,8 @@ export async function proxy(request: NextRequest) {
   }
 
   // 2️⃣ Role-based access logic
-  const isStudent = userData.role === "student";
-  const isStaff = ["instructor", "admin", "staff"].includes(userData.role);
+  const isStudent = userData?.role === "student";
+  const isStaff = ["instructor", "admin", "staff"].includes(userData?.role);
 
   if (isStudent && pathname.startsWith("/profile")) {
     return NextResponse.next();

@@ -55,16 +55,16 @@ export function NavUser({
             >
               <Avatar className="h-8 w-8 rounded">
                 <AvatarImage
-                  src={UserData ? UserData.image : user.avatar}
+                  src={UserData ? UserData?.image : user.avatar}
                   alt={user.name}
                 />
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
-                  {UserData ? UserData.name : user.name}
+                  {UserData ? UserData?.name : user.name}
                 </span>
                 <span className="truncate text-xs">
-                  {UserData ? UserData.role : user.email}
+                  {UserData ? UserData?.role : user.email}
                 </span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -80,17 +80,17 @@ export function NavUser({
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded">
                   <AvatarImage
-                    src={UserData ? UserData.image : user.avatar}
+                    src={UserData ? UserData?.image : user.avatar}
                     alt={user.name}
                   />
                   <AvatarFallback className="rounded">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">
-                    {UserData ? UserData.name : user.name}
+                    {UserData ? UserData?.name : user.name}
                   </span>
                   <span className="truncate text-xs">
-                    {UserData ? UserData.role : user.email}
+                    {UserData ? UserData?.role : user.email}
                   </span>
                 </div>
               </div>
@@ -100,7 +100,7 @@ export function NavUser({
               <DropdownMenuItem>
                 <Sparkles />
                 <span className="truncate text-xs">
-                  {UserData ? UserData.id : ""}
+                  {UserData ? UserData?.id : ""}
                 </span>
               </DropdownMenuItem>
             </DropdownMenuGroup>

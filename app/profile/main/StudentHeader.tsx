@@ -97,7 +97,7 @@ export default function StudentHeader() {
     { name: 'Attendance', path: '/profile/attendance', icon: Calendar, active: pathname === '/profile/attendance' },
     { name: 'Progress', path: '/profile/progress', icon: BarChart3, active: pathname === '/profile/progress' },
     { name: 'Certificates', path: '/profile/certificates', icon: Award, active: pathname === '/profile/certificates' },
-    { name: 'Exams', path: '/profile/exams', icon: FileText, active: pathname === '/profile/exams' },
+    // { name: 'Exams', path: '/profile/exams', icon: FileText, active: pathname === '/profile/exams' },
     // { name: 'Achievements', path: '/profile/achievements', icon: Trophy, active: pathname === '/profile/achievements' },
     { name: 'Reviews', path: '/profile/reviews', icon: Star, active: pathname === '/profile/reviews' },
     // { name: 'Messages', path: '/profile/messages', icon: MessageCircle, active: pathname === '/profile/messages' },
@@ -168,7 +168,7 @@ export default function StudentHeader() {
                       <Avatar className="w-12 h-12 ring-2 ring-blue-500/20">
                         <AvatarImage src={UserData?.image} />
                         <AvatarFallback className="bg-linear-to-br from-blue-500 to-purple-500 text-white">
-                          {UserData?.name ? getInitials(UserData.name) : 'ST'}
+                          {UserData?.name ? getInitials(UserData?.name) : 'ST'}
                         </AvatarFallback>
                       </Avatar>
                       <div>
@@ -347,7 +347,7 @@ export default function StudentHeader() {
                     <Avatar className="w-10 h-10 ring-2 ring-blue-500/20 ring-offset-2 ring-offset-white dark:ring-offset-gray-900">
                       <AvatarImage src={UserData?.image} />
                       <AvatarFallback className="bg-linear-to-br from-blue-500 to-purple-500 text-white font-semibold">
-                        {UserData?.name ? getInitials(UserData.name) : 'ST'}
+                        {UserData?.name ? getInitials(UserData?.name) : 'ST'}
                       </AvatarFallback>
                     </Avatar>
 

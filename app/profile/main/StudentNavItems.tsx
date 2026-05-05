@@ -53,7 +53,7 @@ export default function StudentNavItems() {
     { name: 'All Courses', path: '/profile/all-courses', icon: BookAIcon },
     { name: 'Progress', path: '/profile/progress', icon: TrendingUp },
     { name: 'Certificates', path: '/profile/certificates', icon: Award },
-    { name: 'Exams', path: '/profile/exams', icon: FileText },
+    // { name: 'Exams', path: '/profile/exams', icon: FileText },
     // { name: 'Achievements', path: '/profile/achievements', icon: Trophy },
     { name: 'Reviews', path: '/profile/reviews', icon: Star },
     // { name: 'Messages', path: '/profile/messages', icon: MessageCircle },
