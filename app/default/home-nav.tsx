@@ -86,7 +86,7 @@ export default function HomeNav() {
                 Quranic
               </span>
               <span className="text-[10px] text-blue-600 font-semibold uppercase tracking-widest">
-                Verse Academy
+                Verse Bangladesh
               </span>
             </div>
           </Link>
@@ -171,7 +171,7 @@ export default function HomeNav() {
                     <div className="flex items-center gap-3">
                       <Image src="/logo1.png" alt="logo" width={30} height={30}/>
                       <SheetTitle className="text-sm">
-                        Quranic Verse Academy
+                        Quranic Verse Bangladesh
                       </SheetTitle>
                     </div>
                     <SheetClose asChild>

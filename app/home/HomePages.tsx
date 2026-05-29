@@ -15,34 +15,24 @@ interface HomePageProps {
 }
 
 export default function HomePages({ data }: HomePageProps) {
- 
 
   return (
     <main className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950/30">
       
       {/* Banner Section */}
-      <Banner data={data.bannerSection} />
+      <Banner data={data?.bannerSection} />
       
       {/* Category Section */}
-      <CategorySection data={data.categorySection} />
+      <CategorySection data={data?.categorySection} />
       
       {/* Course Section */}
-      <CourseSection data={data.courseSection} />
-      
-      {/* Welcome Section */}
-      <WelcomeSection data={data.welcomeSection} />
-      
-      {/* Feature Section */}
-      <FeatureSection data={data.fetureSection} />
+      <CourseSection data={data?.courseSection} />
       
       {/* Why Choose Us Section */}
-      <WhyChooseUsSection data={data.whyChooseUsSection} />
-      
-      {/* Instructor Section */}
-      <InstructorSection data={data.instructorSection} />
+      <WhyChooseUsSection data={data?.whyChooseUsSection} />
       
       {/* Testimonial Section */}
-      <TestimonialSection data={data.testimonialSection} />
+      <TestimonialSection data={data?.testimonialSection} />
       
     </main>
   )

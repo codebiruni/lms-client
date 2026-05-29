@@ -6,21 +6,24 @@ import {
 
 export default function CoursesBanner() {
   return (
-    <section className="relative w-full overflow-hidden bg-linear-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-950 transition-colors duration-300">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0">
-        {/* Abstract shapes */}
-        <div className="absolute top-20 right-0 w-64 h-64 bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-20"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-200 dark:bg-purple-900/30 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-20"></div>
-        
-        {/* Dotted pattern */}
-        <div 
-          className="absolute inset-0 opacity-20 dark:opacity-10"
+    <section className="relative w-full overflow-hidden bg-emerald-50 dark:bg-emerald-950 transition-colors duration-300">
+      {/* Background decorative elements (no gradient, calm, Islamic + soft premium BD aesthetic) */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Soft blobs (no mix-blend / no gradient) */}
+        <div className="absolute top-16 right-[-3rem] w-72 h-72 bg-emerald-200/60 dark:bg-emerald-800/25 rounded-full blur-3xl opacity-60 dark:opacity-35" />
+        <div className="absolute bottom-[-4rem] left-[-3rem] w-96 h-96 bg-amber-100/70 dark:bg-amber-700/15 rounded-full blur-3xl opacity-60 dark:opacity-30" />
+
+        {/* Simple dotted pattern (no gradient) */}
+        <div
+          className="absolute inset-0 opacity-[0.18] dark:opacity-[0.08]"
           style={{
-            backgroundImage: 'radial-linear(circle, #94a3b8 1px, transparent 1px)',
-            backgroundSize: '30px 30px'
+            backgroundImage: "radial-gradient(circle, rgba(5,150,105,0.35) 1px, transparent 1px)",
+            backgroundSize: "30px 30px",
           }}
-        ></div>
+        />
+
+        {/* Soft overlay for readability (no gradient) */}
+        <div className="absolute inset-0 bg-white/35 dark:bg-black/20" />
       </div>
 
       {/* Main content */}
@@ -28,33 +31,26 @@ export default function CoursesBanner() {
         <div className="text-center mb-12">
           {/* Badge */}
           <div className="flex justify-center mb-6">
-            <Badge className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full border-0 px-4 py-1.5 text-sm font-medium shadow-lg dark:shadow-blue-900/30 transition-all duration-300">
+            <Badge className="bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white rounded-full border-0 px-4 py-1.5 text-sm font-medium shadow-lg shadow-emerald-900/10 dark:shadow-emerald-950/25 transition-all duration-300">
               <BookOpen className="w-4 h-4 mr-1" />
-              Explore Our Course Catalog
+              আমাদের কোর্সসমূহ
             </Badge>
           </div>
 
-          {/* Main heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-gray-100 mb-6 transition-colors duration-300">
-            Unlock Your Potential with
-            <span className="block mt-2">
-              <span className="bg-linear-to-r from-blue-600 via-indigo-500 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
-                Expert-Led Courses
-              </span>
+          {/* Main heading (Bangla, no gradient text) */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 dark:text-emerald-50 mb-6 transition-colors duration-300 tracking-tight">
+            কুরআনের আলোয়
+            <span className="block mt-2 text-emerald-800 dark:text-emerald-200">
+              আধুনিক শিক্ষার যাত্রা
             </span>
           </h1>
 
-          {/* Description */}
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-            From beginner to advanced, our comprehensive course library offers everything you need 
-            to master new skills and advance your career in education technology.
+          {/* Description (Bangla) */}
+          <p className="text-lg md:text-xl text-emerald-900/70 dark:text-emerald-100/75 max-w-3xl mx-auto mb-10 leading-relaxed">
+            বাংলাদেশের শিশু ও অভিভাবকদের জন্য নিরাপদ, শান্ত ও বিশ্বাসযোগ্য শেখার পরিবেশ। দ্বীনি
+            শিক্ষার সাথে আধুনিক স্কিল—সবকিছু এক প্ল্যাটফর্মে।
           </p>
-
-         
         </div>
-
-       
-
       </div>
     </section>
   )

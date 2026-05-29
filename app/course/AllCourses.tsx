@@ -4,9 +4,9 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { 
-  Search, 
-  BookOpen, 
+import {
+  Search,
+  BookOpen,
   Filter,
   ChevronDown,
   Bookmark,
@@ -15,24 +15,23 @@ import {
   GraduationCap,
   Tag,
   Sparkles,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react'
 import { toast } from 'sonner'
 
 // Shadcn/ui imports
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Card,  CardFooter, CardHeader } from '@/components/ui/card'
+import { Card, CardFooter, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Badge } from '@/components/ui/badge'
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import useFetchCourses from '../default/custom-component/useFeatchCourse'
-
 
 export default function AllCourses() {
   const router = useRouter()
@@ -73,7 +72,7 @@ export default function AllCourses() {
   // Loading Skeleton
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <div className="min-h-screen bg-emerald-50 dark:bg-emerald-950">
         <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
           {/* Header Skeleton */}
           <div className="mb-8">
@@ -96,7 +95,7 @@ export default function AllCourses() {
           {/* Cards Grid Skeleton */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
-              <Card key={i} className="overflow-hidden">
+              <Card key={i} className="overflow-hidden border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950">
                 <Skeleton className="h-48 w-full" />
                 <CardHeader>
                   <Skeleton className="h-6 w-3/4 mb-2" />
@@ -116,53 +115,53 @@ export default function AllCourses() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 flex items-center justify-center">
-        <Card className="max-w-md text-center p-8">
+      <div className="min-h-screen bg-emerald-50 dark:bg-emerald-950 flex items-center justify-center">
+        <Card className="max-w-md text-center p-8 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950">
           <div className="text-red-500 mb-4">
             <AlertCircle className="w-16 h-16 mx-auto" />
           </div>
-          <h3 className="text-xl font-semibold mb-2">Failed to Load Courses</h3>
+          <h3 className="text-xl font-semibold mb-2">কোর্স লোড করা যায়নি</h3>
           <p className="text-slate-600 dark:text-slate-400 mb-4">
-            {error.message || 'An error occurred while fetching courses'}
+            {error.message || 'কোর্স আনতে সমস্যা হয়েছে'}
           </p>
-          <Button onClick={() => window.location.reload()}>Try Again</Button>
+          <Button onClick={() => window.location.reload()}>আবার চেষ্টা করুন</Button>
         </Card>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-emerald-50 dark:bg-emerald-950">
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Header Section */}
+        {/* Header Section (Bangla + no gradient) */}
         <div className="mb-8 text-center lg:text-left">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div>
-              <h1 className="text-4xl font-bold bg-linear-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
-                All Courses
+              <h1 className="text-4xl font-bold text-emerald-950 dark:text-emerald-50">
+                সকল কোর্স
               </h1>
-              <p className="text-slate-600 dark:text-slate-400 mt-2">
-                Discover your next learning adventure
+              <p className="text-emerald-900/70 dark:text-emerald-100/70 mt-2">
+                আপনার সন্তানের জন্য দ্বীনি ও আধুনিক শিক্ষার সেরা কোর্সগুলো খুঁজে নিন
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="px-3 py-1">
+              <Badge variant="secondary" className="px-3 py-1 bg-white text-emerald-900 border border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-50 dark:border-emerald-900">
                 <BookOpen className="w-3 h-3 mr-1" />
-                {meta.total} Courses
+                {meta.total} টি কোর্স
               </Badge>
             </div>
           </div>
         </div>
 
-        {/* Search and Filter Section */}
+        {/* Search and Filter Section (Bangla + no gradient) */}
         <div className="mb-8 space-y-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-emerald-700/60 dark:text-emerald-200/60 w-4 h-4" />
             <Input
-              placeholder="Search courses by title, instructor, or category..."
+              placeholder="কোর্সের নাম, ক্যাটাগরি দিয়ে সার্চ করুন..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 h-12 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-blue-500 rounded-xl"
+              className="pl-10 h-12 bg-white dark:bg-emerald-950 border-emerald-200 dark:border-emerald-900 focus:ring-2 focus:ring-emerald-600 rounded-xl"
             />
           </div>
 
@@ -170,45 +169,45 @@ export default function AllCourses() {
             <div className="flex flex-wrap gap-3">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-900 dark:text-emerald-50">
                     <Filter className="w-4 h-4" />
-                    Level
+                    লেভেল
                     <ChevronDown className="w-3 h-3" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem onClick={() => setSelectedLevel('')}>
-                    All Levels
+                    সব লেভেল
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setSelectedLevel('beginner')}>
-                    Beginner
+                    বিগিনার
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setSelectedLevel('intermediate')}>
-                    Intermediate
+                    ইন্টারমিডিয়েট
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setSelectedLevel('advanced')}>
-                    Advanced
+                    অ্যাডভান্সড
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-900 dark:text-emerald-50">
                     <Tag className="w-4 h-4" />
-                    Status
+                    স্ট্যাটাস
                     <ChevronDown className="w-3 h-3" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem onClick={() => setSelectedStatus('')}>
-                    All Status
+                    সব স্ট্যাটাস
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setSelectedStatus('published')}>
-                    Published
+                    প্রকাশিত
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setSelectedStatus('draft')}>
-                    Draft
+                    ড্রাফট
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -220,17 +219,17 @@ export default function AllCourses() {
                     setSelectedLevel('')
                     setSelectedStatus('')
                   }}
-                  className="text-red-500"
+                  className="text-red-600"
                 >
-                  Clear Filters
+                  ফিল্টার মুছুন
                 </Button>
               )}
             </div>
 
             {isFetching && (
-              <div className="flex items-center gap-2 text-sm text-slate-500">
-                <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                Updating...
+              <div className="flex items-center gap-2 text-sm text-emerald-900/60 dark:text-emerald-100/60">
+                <div className="w-4 h-4 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+                আপডেট হচ্ছে...
               </div>
             )}
           </div>
@@ -239,18 +238,21 @@ export default function AllCourses() {
         {/* Courses Grid */}
         {courses.length === 0 ? (
           <div className="text-center py-16">
-            <div className="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-              <BookOpen className="w-12 h-12 text-slate-400" />
+            <div className="w-24 h-24 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-emerald-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <BookOpen className="w-12 h-12 text-emerald-700/40 dark:text-emerald-200/40" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">No courses found</h3>
-            <p className="text-slate-600 dark:text-slate-400">
-              Try adjusting your search or filters
+            <h3 className="text-xl font-semibold mb-2 text-emerald-950 dark:text-emerald-50">
+              কোনো কোর্স পাওয়া যায়নি
+            </h3>
+            <p className="text-emerald-900/70 dark:text-emerald-100/70">
+              সার্চ বা ফিল্টার পরিবর্তন করে দেখুন
             </p>
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-              {courses.map((course:any) => (
+            {/* tighter spacing like your example */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {courses.map((course: any) => (
                 <CourseCard
                   key={course._id}
                   course={course}
@@ -267,8 +269,9 @@ export default function AllCourses() {
                   variant="outline"
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
+                  className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950"
                 >
-                  Previous
+                  আগের পৃষ্ঠা
                 </Button>
                 <div className="flex items-center gap-2">
                   {[...Array(Math.min(5, Math.ceil(meta.total / meta.limit)))].map((_, i) => {
@@ -278,7 +281,11 @@ export default function AllCourses() {
                         key={i}
                         variant={currentPage === pageNum ? 'default' : 'outline'}
                         onClick={() => setCurrentPage(pageNum)}
-                        className="w-10"
+                        className={
+                          currentPage === pageNum
+                            ? 'w-10 bg-emerald-700 hover:bg-emerald-800 text-white'
+                            : 'w-10 border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50'
+                        }
                       >
                         {pageNum}
                       </Button>
@@ -289,8 +296,9 @@ export default function AllCourses() {
                   variant="outline"
                   onClick={() => setCurrentPage((p) => p + 1)}
                   disabled={currentPage >= Math.ceil(meta.total / meta.limit)}
+                  className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950"
                 >
-                  Next
+                  পরের পৃষ্ঠা
                 </Button>
               </div>
             )}
@@ -302,14 +310,14 @@ export default function AllCourses() {
 }
 
 // Course Card Component
-function CourseCard({ 
-  course, 
-  onDetails, 
-  onEnroll 
-}: { 
-  course: any, 
-  onDetails: (id: string) => void, 
-  onEnroll: (id: string) => void 
+function CourseCard({
+  course,
+  onDetails,
+  onEnroll,
+}: {
+  course: any
+  onDetails: (id: string) => void
+  onEnroll: (id: string) => void
 }) {
   const [isHovered, setIsHovered] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
@@ -317,92 +325,88 @@ function CourseCard({
   const getLevelColor = (level: string) => {
     switch (level) {
       case 'beginner':
-        return 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+        return 'bg-emerald-50 text-emerald-800 border border-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-200 dark:border-emerald-900'
       case 'intermediate':
-        return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
+        return 'bg-amber-50 text-amber-800 border border-amber-100 dark:bg-amber-900/15 dark:text-amber-200 dark:border-amber-900/40'
       case 'advanced':
-        return 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
+        return 'bg-rose-50 text-rose-800 border border-rose-100 dark:bg-rose-900/15 dark:text-rose-200 dark:border-rose-900/40'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-slate-50 text-slate-700 border border-slate-100 dark:bg-slate-900/20 dark:text-slate-200 dark:border-slate-800'
     }
   }
 
-  const discountPercentage = course.discountPrice 
+  const discountPercentage = course.discountPrice
     ? Math.round(((course.price - course.discountPrice) / course.price) * 100)
     : 0
 
   return (
-    <Card 
-      className="group overflow-hidden transition-all py-0 duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer border-0 bg-white dark:bg-slate-800/50 backdrop-blur-sm"
+    <Card
+      className="group overflow-hidden transition-all py-0 duration-300 hover:shadow-lg hover:-translate-y-[2px] cursor-pointer bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-emerald-900 rounded-2xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Thumbnail */}
-      <div className="relative h-48 overflow-hidden">
+      {/* Thumbnail / Top banner like example (soft) */}
+      <div className="relative h-40 overflow-hidden bg-emerald-50 dark:bg-emerald-900/15">
         {course.thumbnail ? (
           <Image
             src={course.thumbnail}
             alt={course.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
-            <BookOpen className="w-16 h-16 text-white/20" />
+          <div className="w-full h-full bg-emerald-100 dark:bg-emerald-900/25 flex items-center justify-center">
+            <BookOpen className="w-14 h-14 text-emerald-800/15 dark:text-emerald-200/10" />
           </div>
         )}
-        
+
         {/* Discount Badge */}
         {discountPercentage > 0 && (
           <div className="absolute top-2 left-2">
-            <Badge className="bg-red-500 text-white">
-              -{discountPercentage}%
-            </Badge>
+            <Badge className="bg-rose-600 text-white border-0">-{discountPercentage}%</Badge>
           </div>
         )}
-        
+
         {/* Bookmark Button */}
         <button
           onClick={(e) => {
             e.stopPropagation()
             setIsBookmarked(!isBookmarked)
-            toast.success(isBookmarked ? 'Removed from bookmarks' : 'Added to bookmarks')
+            toast.success(isBookmarked ? 'বুকমার্ক থেকে সরানো হয়েছে' : 'বুকমার্কে যোগ হয়েছে')
           }}
-          className="absolute top-2 right-2 p-2 bg-white/90 dark:bg-slate-800/90 rounded-full backdrop-blur-sm transition-all hover:scale-110"
+          className="absolute top-2 right-2 p-2 bg-white/95 dark:bg-emerald-950/90 rounded-full border border-emerald-100 dark:border-emerald-900 backdrop-blur-sm transition-all hover:scale-110"
         >
           {isBookmarked ? (
-            <BookmarkCheck className="w-4 h-4 text-blue-500" />
+            <BookmarkCheck className="w-4 h-4 text-emerald-700" />
           ) : (
-            <Bookmark className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+            <Bookmark className="w-4 h-4 text-emerald-900/60 dark:text-emerald-100/60" />
           )}
         </button>
 
         {/* Level Badge */}
         <div className="absolute bottom-2 left-2">
-          <Badge className={`${getLevelColor(course.level)} capitalize`}>
-            {course.level}
-          </Badge>
+          <Badge className={`${getLevelColor(course.level)} capitalize`}>{course.level}</Badge>
         </div>
 
         {/* Price Tag */}
         <div className="absolute bottom-2 right-2">
-          <Badge className="bg-white/90 dark:bg-slate-800/90 text-slate-900 dark:text-white backdrop-blur-sm">
+          <Badge className="bg-white/95 dark:bg-emerald-950/90 text-emerald-950 dark:text-emerald-50 border border-emerald-100 dark:border-emerald-900 backdrop-blur-sm">
             {course.isFree ? (
               <span className="flex items-center gap-1">
                 <Sparkles className="w-3 h-3" />
-                Free
+                ফ্রি
               </span>
             ) : (
               <div className="flex items-center gap-1">
                 {course.discountPrice ? (
                   <>
-                    <span className="line-through text-xs text-slate-500">
-                      ${course.price}
+                    <span className="line-through text-xs text-emerald-900/50 dark:text-emerald-100/50">
+                      ৳{course.price}
                     </span>
-                    <span className="font-bold">${course.discountPrice}</span>
+                    <span className="font-bold">৳{course.discountPrice}</span>
                   </>
                 ) : (
-                  <span className="font-bold">${course.price}</span>
+                  <span className="font-bold">৳{course.price}</span>
                 )}
               </div>
             )}
@@ -410,51 +414,54 @@ function CourseCard({
         </div>
       </div>
 
-      <CardHeader className="p-1 px-3">
-        {/* Category & Instructor */}
-        <div className="flex items-center gap-2 mb-2 text-xs text-slate-500 dark:text-slate-400">
-          <Badge variant="secondary" className="text-xs">
-            {course.category?.name || 'Uncategorized'}
+      {/* Body like your screenshot: icon-ish area + centered title + green enroll button */}
+      <CardHeader className="p-4 pb-2">
+        {/* Category row (small pill) */}
+        <div className="flex items-center justify-center mb-3">
+          <Badge
+            variant="secondary"
+            className="text-xs bg-emerald-50 text-emerald-900 border border-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-50 dark:border-emerald-900"
+          >
+            {course.category?.name || 'ক্যাটাগরি নেই'}
           </Badge>
-          <span>•</span>
-          {/* <span className="truncate">{course.instructor?.name || 'Unknown Instructor'}</span> */}
         </div>
 
-        {/* Title */}
-        <h3 className="font-semibold text-lg line-clamp-2 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        {/* Title (Bangla-ready style, centered) */}
+        <h3 className="text-center font-semibold text-lg leading-snug line-clamp-2 text-emerald-950 dark:text-emerald-50">
           {course.title}
         </h3>
 
-        {/* Description */}
-        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+        {/* Description (short, subtle) */}
+        <p className="mt-2 text-center text-sm text-emerald-900/65 dark:text-emerald-100/65 line-clamp-2">
           {course.description?.replace(/<[^>]*>/g, '').substring(0, 100)}...
         </p>
       </CardHeader>
 
-      <CardFooter className="p-1 px-3 pb-4 pt-0 flex gap-2">
+      <CardFooter className="p-4 pt-2 flex gap-2">
+        {/* Details (secondary) */}
         <Button
           onClick={() => onDetails(course._id)}
           variant="outline"
-          className="flex-1 gap-2 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+          className="flex-1 gap-2 border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
         >
           <Eye className="w-4 h-4" />
-          Details
+          বিস্তারিত
         </Button>
+
+        {/* Enroll (primary green, no gradient) */}
         <Button
           onClick={() => onEnroll(course)}
-          className="flex-1 gap-2 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+          className="flex-1 gap-2 bg-emerald-700 hover:bg-emerald-800 text-white"
         >
           <GraduationCap className="w-4 h-4" />
-          Enroll
+          ভর্তি হন
         </Button>
       </CardFooter>
 
-      {/* Hover Overlay Effect */}
-      {isHovered && (
-        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-      )}
+      {/* Hover Overlay Effect (no gradient) */}
+      {isHovered && <div className="absolute inset-0 bg-black/5 dark:bg-white/5 pointer-events-none" />}
     </Card>
   )
 }
 
-// Import AlertCircle for error state
+

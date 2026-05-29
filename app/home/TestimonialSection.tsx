@@ -44,23 +44,32 @@ export default function TestimonialSection({ data }: any) {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950/30 relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-white dark:bg-gray-950 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge variant="outline" className="mb-4 rounded-full border-blue-200 text-blue-600 dark:border-blue-800 dark:text-blue-400 px-4 py-1">
+          <Badge
+            variant="outline"
+            className="mb-4 rounded-full border-emerald-200 text-emerald-800 dark:border-emerald-900 dark:text-emerald-200 px-4 py-1"
+          >
             <Sparkles className="w-3 h-3 mr-1 inline" />
-            Testimonials
+            মতামত
           </Badge>
+
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-purple-600">
-              {data?.title?.highlightText || "What Our"}
+            <span className="text-emerald-800 dark:text-emerald-200">
+              {data?.title?.highlightText || "অভিভাবক ও শিক্ষার্থীদের"}
             </span>
-            <span className="text-gray-800 dark:text-white"> {data?.title?.blackText || "Students Say"}</span>
+            <span className="text-emerald-950 dark:text-emerald-50">
+              {" "}
+              {data?.title?.blackText || "অভিজ্ঞতা"}
+            </span>
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-4" />
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
-            {data?.description || "Don't just take our word for it - hear from our successful learners"}
+
+          <div className="w-20 h-1 bg-emerald-700 mx-auto rounded-full mb-4" />
+
+          <p className="text-emerald-900/70 dark:text-emerald-100/70 text-lg">
+            {data?.description || "আমাদের প্ল্যাটফর্ম নিয়ে বাস্তব অভিজ্ঞতা থেকে কিছু কথা"}
           </p>
         </div>
 
@@ -73,69 +82,67 @@ export default function TestimonialSection({ data }: any) {
                 <button
                   onClick={prevSlide}
                   disabled={isAnimating}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Previous testimonial"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white dark:bg-emerald-950 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900 shadow-sm transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label="আগের মতামত"
                 >
-                  <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                  <ChevronLeft className="w-5 h-5 text-emerald-900/60 dark:text-emerald-100/60" />
                 </button>
                 <button
                   onClick={nextSlide}
                   disabled={isAnimating}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Next testimonial"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white dark:bg-emerald-950 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900 shadow-sm transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label="পরের মতামত"
                 >
-                  <ChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                  <ChevronRight className="w-5 h-5 text-emerald-900/60 dark:text-emerald-100/60" />
                 </button>
               </>
             )}
 
             {/* Testimonial Content with Animation */}
             <div
-              className={`transition-all duration-500 ease-in-out text-center ${
-                isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
-              }`}
+              className={`transition-all duration-500 ease-in-out text-center ${isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+                }`}
             >
               {/* Large Quote Icon */}
               <div className="flex justify-center mb-8">
-                <Quote className="w-16 h-16 text-blue-400 dark:text-blue-500 opacity-50" />
+                <Quote className="w-16 h-16 text-emerald-700/40 dark:text-emerald-300/40 opacity-60" />
               </div>
-              
+
               {/* Feedback Text */}
-              <p className="text-gray-700 dark:text-gray-300 text-xl md:text-2xl leading-relaxed mb-8 max-w-3xl mx-auto">
+              <p className="text-emerald-950 dark:text-emerald-50/90 text-xl md:text-2xl leading-relaxed mb-8 max-w-3xl mx-auto">
                 ``{currentTestimonial.feedback}``
               </p>
-              
+
               {/* Stars */}
               <div className="flex justify-center gap-2 mb-6">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-6 h-6 transition-all duration-300 ${
-                      i < currentTestimonial.stars
-                        ? 'fill-yellow-400 text-yellow-400'
-                        : 'fill-gray-200 text-gray-200 dark:fill-gray-700 dark:text-gray-700'
-                    }`}
+                    className={`w-6 h-6 transition-all duration-300 ${i < currentTestimonial.stars
+                        ? 'fill-amber-400 text-amber-400'
+                        : 'fill-emerald-100 text-emerald-100 dark:fill-emerald-900/60 dark:text-emerald-900/60'
+                      }`}
                   />
                 ))}
               </div>
-              
-              {/* Divider */}
+
+              {/* Divider (no gradient) */}
               <div className="flex justify-center mb-6">
-                <div className="w-12 h-0.5 bg-linear-to-r from-transparent via-blue-400 to-transparent" />
+                <div className="w-12 h-0.5 bg-emerald-700/40 dark:bg-emerald-300/30" />
               </div>
-              
+
               {/* User Info */}
               <div className="flex items-center justify-center gap-4">
-                {/* Avatar */}
-                <div className="w-14 h-14 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+                {/* Avatar (no gradient) */}
+                <div className="w-14 h-14 rounded-full bg-emerald-700 dark:bg-emerald-600 flex items-center justify-center shadow-sm border border-emerald-100 dark:border-emerald-900">
                   <User className="w-7 h-7 text-white" />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-lg font-bold text-gray-800 dark:text-white">
+                  <h4 className="text-lg font-bold text-emerald-950 dark:text-emerald-50">
                     {currentTestimonial.name}
                   </h4>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Student
+                  <p className="text-sm text-emerald-900/60 dark:text-emerald-100/60">
+                    শিক্ষার্থী
                   </p>
                 </div>
               </div>
@@ -154,13 +161,13 @@ export default function TestimonialSection({ data }: any) {
                       setTimeout(() => setIsAnimating(false), 500)
                     }}
                     className={`
-                      transition-all duration-300 rounded-full
-                      ${currentIndex === idx
-                        ? 'w-8 h-2 bg-blue-600 dark:bg-blue-400'
-                        : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-blue-400 dark:hover:bg-blue-500'
+                  transition-all duration-300 rounded-full
+                  ${currentIndex === idx
+                        ? 'w-8 h-2 bg-emerald-700 dark:bg-emerald-300'
+                        : 'w-2 h-2 bg-emerald-200 dark:bg-emerald-900 hover:bg-emerald-300 dark:hover:bg-emerald-700'
                       }
-                    `}
-                    aria-label={`Go to testimonial ${idx + 1}`}
+                `}
+                    aria-label={`মতামত ${idx + 1} দেখুন`}
                   />
                 ))}
               </div>

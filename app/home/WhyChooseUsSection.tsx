@@ -12,43 +12,75 @@ export default function WhyChooseUsSection({ data }: any) {
   }
   
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
+    <section className="py-16 md:py-24 bg-[#F8FAF8] dark:bg-[#071E1A]">
+
       <div className="container mx-auto px-4">
+
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <Badge variant="outline" className="mb-4 rounded-full border-blue-200 text-blue-600 dark:border-blue-800 dark:text-blue-400">
-            Why Choose Us
+        <div className="text-center max-w-4xl mx-auto mb-14">
+
+          <Badge
+            variant="outline"
+            className="mb-4 rounded-full border-emerald-200 text-emerald-700 dark:border-emerald-800 dark:text-emerald-400"
+          >
+            কেন আমাদের বেছে নিবেন
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-purple-600">
-              {data?.title?.highlightText || "Why Students"}
+
+          <h2 className="text-3xl md:text-5xl font-bold mb-5">
+
+            <span className="text-emerald-800 dark:text-emerald-200">
+              {data?.title?.highlightText || "কুরআনের আলোয়"}
             </span>
-            <span className="text-gray-800 dark:text-white"> {data?.title?.blackText || "Choose Us"}</span>
+
+            <span className="text-[#12372A] dark:text-white block mt-2">
+              {data?.title?.blackText || "আধুনিক শিক্ষার বিশ্বস্ত প্ল্যাটফর্ম"}
+            </span>
+
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            {data?.description || "We're committed to providing an exceptional learning experience"}
+
+          <p className="text-gray-600 dark:text-gray-300 text-lg">
+            {data?.description ||
+              "শিশুদের দ্বীনি ও আধুনিক শিক্ষার সমন্বয়ে নিরাপদ, মানসম্মত এবং ভবিষ্যতমুখী শিক্ষার পরিবেশ"}
           </p>
+
         </div>
-        
-        {/* Cards Grid */}
+
+        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
           {cards.map((card: any, idx: number) => (
-            <Card key={card._id || idx} className="hover:shadow-xl transition-all duration-300 border-0 bg-linear-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-900">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-md">
-                  <Users className="w-8 h-8 text-blue-600" />
+
+            <Card
+              key={card._id || idx}
+              className="border border-gray-100 dark:border-emerald-900/30 bg-white dark:bg-[#0D2A24] rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+            >
+
+              <CardContent className="p-8 text-center">
+
+                <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-[#EAF7F5] dark:bg-[#12372A] flex items-center justify-center">
+
+                  <Users className="w-8 h-8 text-emerald-700 dark:text-emerald-400" />
+
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+
+                <h3 className="text-xl font-bold text-[#12372A] dark:text-white mb-3">
                   {card.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">
+
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                   {card.description}
                 </p>
+
               </CardContent>
+
             </Card>
+
           ))}
+
         </div>
+
       </div>
+
     </section>
   )
 }
