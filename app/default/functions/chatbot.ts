@@ -6,413 +6,505 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
-
-// Bright Path Academy LMS Project Information
-const LMS_INFO = {
-  projectName: "Bright Path Academy",
-  tagline: "Illuminate Your Learning Journey - Comprehensive Learning Management System",
-  description: "Bright Path Academy is a cutting-edge Learning Management System (LMS) designed to revolutionize education through technology. It provides a comprehensive platform for educational institutions, corporate training, and online course creators to deliver engaging learning experiences.",
-
+// Quranic Barse - Islamic Learning Platform Information
+const QURANIC_BARSE_INFO = {
+  projectName: "Quranic Barse",
+  tagline: "نور على نور - Light Upon Light | Your Spiritual Companion for Quranic Learning",
+  description: "Quranic Barse is a comprehensive Islamic Learning Management System designed to facilitate Quranic education, Islamic studies, and spiritual development for Muslims worldwide. It combines traditional Islamic teachings with modern technology to create an immersive learning experience.",
+  
+  arabicName: "البرصة القرآنية",
+  greeting: "السلام عليكم ورحمة الله وبركاته",
   
   overview: {
-    mission: "To make quality education accessible, engaging, and effective through innovative technology solutions.",
-    vision: "Creating a global ecosystem where learning knows no boundaries, and every learner can find their bright path to success.",
-    launchDate: "Q2 2024",
-    currentUsers: "5000+ Active Learners",
-    institutions: "25+ Educational Partners"
+    mission: "To spread authentic Quranic knowledge and Islamic teachings through accessible, engaging, and technology-driven platforms that nurture spiritual growth.",
+    vision: "Creating a global ummah connected through the light of the Quran, where every Muslim can access quality Islamic education regardless of location or background.",
+    launchDate: "Ramadan 1445 AH (March 2024)",
+    currentUsers: "10,000+ Active Learners",
+    institutions: "50+ Islamic Centers & Madrasas",
+    countries: "25+ Countries Worldwide"
   },
 
   keyFeatures: {
-    core: [
-      "Interactive Course Management",
-      "Virtual Classrooms with Live Streaming",
-      "Automated Grading & Assessment",
-      "Progress Tracking & Analytics",
-      "Certification Management",
-      "Multi-language Support (10+ languages)",
-      "Mobile-First Responsive Design",
-      "Offline Learning Capability"
+    quranic: [
+      "Complete Quran with 15+ Authentic Tafsir (Ibn Kathir, Al-Jalalayn, etc.)",
+      "Tajweed Rules with Audio Pronunciation Guide",
+      "Word-by-Word Quran Translation & Grammar Analysis",
+      "Multiple Qira'at (Recitation Styles) with Audio",
+      "Quran Memorization Tracker with Review Scheduling",
+      "Arabic Script Learning with Interactive Exercises"
     ],
     
-    advanced: [
-      "AI-Powered Personalized Learning Paths",
-      "Real-time Collaboration Tools",
-      "Gamification Elements (Badges, Leaderboards)",
-      "Video Conferencing Integration",
-      "Assignment & Quiz Builder",
-      "Discussion Forums & Communities",
-      "Learning Analytics Dashboard",
-      "Content Library Management"
+    islamic: [
+      "Sahih Hadith Collections (Bukhari, Muslim, Tirmidhi, etc.)",
+      "Islamic Studies Curriculum (Aqeedah, Fiqh, Seerah, etc.)",
+      "Prayer Times with Qibla Direction",
+      "Duas & Adhkar with Audio and Translation",
+      "Islamic Calendar with Important Events & Dates",
+      "Zakat Calculator & Islamic Finance Guidance"
     ],
-
+    
+    learning: [
+      "Live Virtual Classrooms with Quran Teachers",
+      "Interactive Quizzes & Assessments",
+      "Progress Tracking & Certification",
+      "Peer Discussion Forums",
+      "Resource Library with PDFs, Videos & Audio",
+      "Multi-language Support (English, Arabic, Urdu, Bengali, etc.)"
+    ],
+    
     administrative: [
-      "User Role Management (Admin, Instructor, Student, Parent)",
-      "Bulk User Enrollment",
-      "Attendance Tracking",
-      "Gradebook Management",
-      "Report Generation",
-      "Payment & Subscription Management",
-      "Email Notification System",
-      "Calendar & Event Management"
+      "Teacher & Student Management",
+      "Class Scheduling & Attendance Tracking",
+      "Payment & Fee Management (Zakat, Sadaqah)",
+      "Parent Portal for Student Progress",
+      "Report Generation & Analytics",
+      "Email & SMS Notification System"
     ]
   },
 
   targetAudience: [
     {
+      category: "Individual Learners",
+      examples: ["New Muslims", "Children & Youth", "Adults seeking Islamic knowledge", "Quran Memorization Students"]
+    },
+    {
       category: "Educational Institutions",
-      examples: ["K-12 Schools", "Universities", "Colleges", "Vocational Training Centers"]
+      examples: ["Madrasas & Islamic Schools", "Weekend Islamic Schools", "Online Quran Academies", "Universities (Islamic Studies)"]
     },
     {
-      category: "Corporate Training",
-      examples: ["Employee Onboarding", "Professional Development", "Compliance Training", "Skills Enhancement"]
-    },
-    {
-      category: "Individual Creators",
-      examples: ["Online Course Creators", "Tutors", "Coaches", "Consultants"]
+      category: "Community Organizations",
+      examples: ["Mosques & Islamic Centers", "Da'wah Organizations", "Islamic NGOs", "Halaqa Groups"]
     }
   ],
 
-  technicalSpecifications: {
-    platform: "Web-based, Mobile-responsive, Progressive Web App",
-    technology: [
-      "Frontend: React.js with TypeScript",
-      "Backend: Node.js with Express",
-      "Database: MongoDB & PostgreSQL",
-      "Cloud: AWS/GCP Integration",
-      "Video Streaming: WebRTC & HLS",
-      "Real-time Features: Socket.io",
-      "Mobile Apps: React Native (iOS & Android)",
-      "Payment Integration: SSLCommerz, Stripe, PayPal"
+  curriculum: {
+    quranLevels: [
+      "Level 1: Nuraniyah - Arabic Alphabet & Basic Reading",
+      "Level 2: Tajweed Essentials - Proper Pronunciation Rules",
+      "Level 3: Quran Recitation with Tajweed Application",
+      "Level 4: Memorization (Hifz) Program with Ijazah Track",
+      "Level 5: Tafsir Studies - Understanding the Message",
+      "Level 6: Quranic Arabic - Language & Grammar"
     ],
-    security: [
-      "Role-based Access Control (RBAC)",
-      "SSL/TLS Encryption",
-      "GDPR & Data Protection Compliance",
-      "Two-Factor Authentication",
-      "Secure Payment Gateway",
-      "Regular Security Audits"
+    
+    islamicStudies: [
+      "Aqeedah (Islamic Creed) - Beginner to Advanced",
+      "Fiqh (Islamic Jurisprudence) - According to 4 Major Schools",
+      "Seerah (Prophetic Biography) - Complete Life of Prophet Muhammad (PBUH)",
+      "Hadith Sciences - Memorization & Understanding",
+      "Tazkiyah (Spiritual Purification) - Sufism & Heart Softeners",
+      "Islamic History - From Prophets to Modern Era"
     ],
-    scalability: "Supports 10,000+ concurrent users with auto-scaling capabilities"
+    
+    arabicCourses: [
+      "Arabic Reading & Writing Foundation",
+      "Conversational Arabic for Daily Life",
+      "Quranic Arabic Grammar (Nahw & Sarf)",
+      "Media Arabic & Modern Communication"
+    ]
   },
 
-  useCases: [
-    {
-      title: "Online School Management",
-      description: "Complete solution for schools to manage classes, assignments, grades, and parent communications"
-    },
-    {
-      title: "University Course Delivery",
-      description: "Hybrid learning support with lecture recordings, virtual labs, and research collaboration"
-    },
-    {
-      title: "Corporate Training Portal",
-      description: "Employee training with progress tracking, certification, and compliance management"
-    },
-    {
-      title: "Skill Development Platform",
-      description: "Marketplace for courses with revenue sharing, student engagement, and community features"
-    }
-  ],
+  teachers: {
+    qualifications: [
+      "Certified Hafiz & Qari with Ijazah",
+      "Graduates from Renowned Islamic Universities (Al-Azhar, Islamic University of Madinah)",
+      "Specialized in Tajweed & Qira'at",
+      "Experienced in Online Teaching Methodologies",
+      "Native Arabic Speakers & Multilingual Instructors"
+    ],
+    studentRatio: "Maximum 10 students per live class for personalized attention",
+    demoClasses: "Free trial classes available for all courses"
+  },
 
-  benefits: [
-    "Reduce administrative workload by 40%",
-    "Increase student engagement through interactive content",
-    "24/7 accessibility across all devices",
-    "Data-driven insights for continuous improvement",
-    "Cost-effective compared to traditional LMS solutions",
-    "Seamless integration with existing systems",
-    "Customizable branding and white-labeling options"
-  ],
-
-  modules: {
-    student: [
-      "Personalized Dashboard",
-      "Course Enrollment",
-      "Learning Progress Tracking",
-      "Assignment Submission",
-      "Discussion Participation",
-      "Peer Collaboration",
-      "Achievement Badges"
+  technicalSpecifications: {
+    platform: "Web-based, Mobile-Responsive, PWA, Native Mobile Apps",
+    technology: [
+      "Frontend: React.js with TypeScript & Next.js",
+      "Backend: Node.js with Express",
+      "Database: MongoDB & PostgreSQL",
+      "Cloud: AWS/GCP with CDN for Global Access",
+      "Video Streaming: Optimized for Quran Audio/Video",
+      "Real-time Features: Socket.io for Live Classes",
+      "Mobile Apps: React Native (iOS & Android)",
+      "Payment: Multiple Gateways (Islamic Banking Compliant)"
     ],
-    instructor: [
-      "Course Builder",
-      "Content Management",
-      "Student Assessment",
-      "Performance Analytics",
-      "Communication Tools",
-      "Grade Management",
-      "Feedback System"
+    security: [
+      "Role-based Access Control (Admin, Teacher, Student, Parent)",
+      "SSL/TLS Encryption",
+      "Secure User Data Protection",
+      "Family Accounts & Parental Controls",
+      "Safe Online Environment for Children",
+      "Regular Security Audits"
     ],
-    admin: [
-      "Platform Configuration",
-      "User Management",
-      "Revenue Analytics",
-      "System Monitoring",
-      "Report Generation",
-      "Integration Management",
-      "Support Ticketing"
-    ],
-    parent: [
-      "Student Progress Monitoring",
-      "Attendance Tracking",
-      "Grade Reports",
-      "Teacher Communication",
-      "Payment History"
-    ]
+    accessibility: "WCAG 2.1 Compliant for users with disabilities"
   },
 
   pricing: {
     models: [
-      "Institutional License (Annual Subscription)",
-      "Per-Student Pricing",
-      "Enterprise Custom Package",
-      "Revenue Share for Course Creators"
+      "Monthly Subscription - Access to All Courses",
+      "Annual Plan - 2 Months Free (Best Value)",
+      "Family Package - Up to 5 Family Members",
+      "Institutional License for Madrasas & Islamic Centers",
+      "One-on-One Private Tutoring (Premium)"
     ],
-    startingPrice: {
-      basic: "$499/month (Up to 500 users)",
-      professional: "$999/month (Up to 2000 users)",
-      enterprise: "Custom pricing (2000+ users)"
+    monthlyPlans: {
+      basic: "$19.99/month - Access to All Self-Paced Courses",
+      standard: "$49.99/month - Includes 2 Live Classes/Week",
+      premium: "$99.99/month - Unlimited Live Classes + 1-on-1 Tutoring",
+      family: "$149.99/month - Family Package (Up to 5 Members)"
     },
-    included: [
-      "Unlimited courses",
-      "All core features",
-      "Basic support",
-      "Mobile apps access"
-    ]
+    annualDiscount: "20% off on all annual plans",
+    freeOptions: [
+      "Free Quran Reading Course",
+      "Weekly Live Tafsir Session",
+      "Islamic Knowledge Articles & Videos",
+      "Basic Prayer Times & Qibla Features"
+    ],
+    scholarships: "Need-based scholarships available - Apply through our Financial Aid Program"
+  },
+
+  uniqueFeatures: [
+    "AI-Powered Tajweed Feedback & Pronunciation Correction",
+    "Voice-Activated Quran Recitation Practice",
+    "Virtual Reality (VR) Hajj & Umrah Experience",
+    "Digital Ijazah Certification from Qualified Scholars",
+    "Ramadan Special Programs with Live Qiyam & Khatm al-Quran",
+    "Children-Friendly Gamified Learning Environment",
+    "Parent Dashboard with Progress Reports & Alerts",
+    "Community Halaqa Groups & Study Circles"
+  ],
+
+  benefits: [
+    "Learn from Qualified Scholars & Certified Teachers",
+    "Flexible Schedule - Learn at Your Own Pace",
+    "Safe, Ad-Free Islamic Learning Environment",
+    "Track Your Memorization Progress",
+    "Connect with Global Muslim Community",
+    "Access to Authentic Islamic Resources",
+    "Certificates Recognized by Islamic Institutions",
+    "Affordable Quality Education"
+  ],
+
+  successMetrics: [
+    "95% Student Satisfaction Rate",
+    "80% Quran Memorization Completion Rate (Level 1-3)",
+    "10,000+ Hours of Islamic Content",
+    "50+ Qualified Teachers",
+    "99.5% Platform Uptime",
+    "Daily Active Users from 25+ Countries"
+  ],
+
+  certification: {
+    types: [
+      "Certificate of Completion for Each Course Level",
+      "Ijazah Certification for Quran Memorization",
+      "Teaching License for Certified Instructors",
+      "Professional Development Credits for Teachers"
+    ],
+    accreditation: "Accredited by recognized Islamic educational bodies and scholars"
   },
 
   support: {
     types: [
-      "24/7 Technical Support",
-      "Dedicated Account Manager",
-      "Training & Onboarding",
-      "Documentation & Knowledge Base",
-      "Regular Feature Updates",
-      "Custom Development Support"
+      "24/5 Technical Support (Saturday - Thursday)",
+      "Dedicated Student Success Advisor",
+      "Teacher Office Hours for Extra Help",
+      "Islamic Scholarship Guidance",
+      "Technical Documentation & Video Tutorials",
+      "Community Support Forums"
     ],
-    responseTime: "Within 2 hours for critical issues",
-    training: "Comprehensive training for administrators and instructors"
+    responseTime: "Within 4 hours for technical issues (during business hours)",
+    language: "Support available in English, Arabic, Urdu, Bengali, and Bahasa"
   },
 
-  integrationCapabilities: [
-    "Zoom/Google Meet for virtual classes",
-    "Payment Gateways (SSLCommerz, Stripe, PayPal)",
-    "Google Workspace for Education",
-    "Microsoft Office 365",
-    "SCORM/xAPI compliance",
-    "ERP systems integration",
-    "CRM platforms",
-    "Analytics tools (Google Analytics, Mixpanel)"
-  ],
-
-  successMetrics: [
-    "92% Student Satisfaction Rate",
-    "85% Course Completion Rate",
-    "50% Reduction in Administrative Tasks",
-    "3x Increase in Student Engagement",
-    "99.9% Platform Uptime"
+  integrations: [
+    "Prayer Time APIs (Accurate to Your Location)",
+    "Qibla Direction via GPS",
+    "Islamic Calendar Integration (Hijri Dates)",
+    "Payment Gateways (Stripe, PayPal, Islamic Banking)",
+    "Zoom/Google Meet for Live Classes",
+    "Learning Tools Interoperability (LTI)",
+    "Social Media Sharing for Progress (Optional)"
   ],
 
   contact: {
-    email: "brightpath@codebiruni.com",
-    phones: ["+8801617688805", "+880176407140"],
-    location: "Dhaka, Bangladesh",
-    website: "https://brightpathacademy.com",
-    demo: "Schedule a live demo at https://calendly.com/brightpath/demo",
+    email: "info@quranicbarse.com",
+    support: "support@quranicbarse.com",
+    phones: ["+1 (555) 123-4567", "+44 20 1234 5678"],
+    location: "Global Operations - Serving Worldwide",
+    website: "https://quranicbarse.com",
+    socialMedia: {
+      instagram: "@quranicbarse",
+      facebook: "quranicbarse",
+      youtube: "@quranicbarse",
+      telegram: "quranicbarse"
+    },
+    demo: "Schedule a Free Demo at https://calendly.com/quranicbarse/demo",
     hours: {
-      weekdays: "Saturday - Thursday: 9:00 AM – 6:00 PM",
-      friday: "Friday: Closed (Demo requests accepted via email)"
+      support: "Saturday - Thursday: 8:00 AM – 8:00 PM (Your Local Time)",
+      friday: "Friday: Limited Support (Emergency Only)",
+      response: "Messages responded within 24 hours"
     }
   },
 
   faq: [
     {
-      question: "How long does implementation take?",
-      answer: "Typically 4-8 weeks depending on customization requirements."
+      question: "Are your teachers qualified?",
+      answer: "Yes, all our Quran teachers are Hafiz certified with Ijazah, graduates from renowned Islamic universities, and have extensive experience in online teaching."
     },
     {
-      question: "Can we migrate existing course content?",
-      answer: "Yes, we provide complete data migration services from any existing LMS."
+      question: "Do you offer free trial classes?",
+      answer: "Yes, we offer a free trial class for all our courses so you can experience our teaching methodology before committing."
     },
     {
-      question: "Is white-labeling available?",
-      answer: "Yes, you can customize the platform with your branding and domain."
+      question: "Can my child learn Quran online effectively?",
+      answer: "Absolutely! Our interactive platform, qualified teachers, and child-friendly approach make online Quran learning effective and engaging for children of all ages."
     },
     {
-      question: "What kind of support do you provide?",
-      answer: "24/7 technical support with dedicated account manager for enterprise clients."
+      question: "What is the recommended age to start?",
+      answer: "We have programs for all ages starting from 5 years old. Our curriculum is tailored to different age groups and learning levels."
+    },
+    {
+      question: "Do you offer certificates?",
+      answer: "Yes, students receive certificates of completion and upon completing Hifz, they can receive Ijazah certification recognized by Islamic scholars worldwide."
+    },
+    {
+      question: "What if I miss a live class?",
+      answer: "All live classes are recorded and available in your dashboard for review at any time. You can watch them as many times as needed."
+    },
+    {
+      question: "Is there a family discount?",
+      answer: "Yes, we offer special family packages with up to 5 members at a discounted rate."
+    },
+    {
+      question: "Do you teach adults and beginners?",
+      answer: "Yes, we welcome students of all ages and levels, including complete beginners. Our courses start from basic Arabic alphabet recognition."
     }
-  ]
+  ],
+
+  ramadanSpecial: {
+    features: [
+      "Daily Live Tafsir & Duas",
+      "Taraweeh Recitation Practice",
+      "Khatm al-Quran Program (Complete Quran in 30 Days)",
+      "I'tikaf Virtual Program (Last 10 Days)",
+      "Zakat Calculator & Sadaqah Guidance",
+      "Ramadan Recipe Sharing & Community Iftar Ideas"
+    ]
+  }
 };
 
 // Response templates for different query types
 const RESPONSE_TEMPLATES = {
-  greeting: `Welcome to **${LMS_INFO.projectName}**! 🌟
+  greeting: `${QURANIC_BARSE_INFO.greeting} 🙏
 
-${LMS_INFO.tagline}
+Welcome to **${QURANIC_BARSE_INFO.projectName}** - ${QURANIC_BARSE_INFO.arabicName}
+${QURANIC_BARSE_INFO.tagline}
 
-I'm your AI assistant here to help you explore how our LMS can transform your educational initiatives. How can I assist you today?`,
+✨ *${QURANIC_BARSE_INFO.description}*
 
-  overview: `🏫 **About ${LMS_INFO.projectName}**
+How may I assist you in your spiritual journey today? Whether you're looking to learn Quran, understand Islamic teachings, or enhance your connection with Allah, I'm here to guide you! 📖✨`,
 
-${LMS_INFO.description}
+  overview: `🕌 **About ${QURANIC_BARSE_INFO.projectName}**
 
-**Mission:** ${LMS_INFO.overview.mission}
-**Vision:** ${LMS_INFO.overview.vision}
+${QURANIC_BARSE_INFO.description}
 
-📊 **Key Metrics:**
-• Active Users: ${LMS_INFO.overview.currentUsers}
-• Partner Institutions: ${LMS_INFO.overview.institutions}
-• Launch Date: ${LMS_INFO.overview.launchDate}
+**Mission:** ${QURANIC_BARSE_INFO.overview.mission}
+**Vision:** ${QURANIC_BARSE_INFO.overview.vision}
 
-Ready to join the Bright Path community? Let's discuss your requirements!`,
+📊 **Global Impact:**
+• Active Learners: ${QURANIC_BARSE_INFO.overview.currentUsers}
+• Partner Institutions: ${QURANIC_BARSE_INFO.overview.institutions}
+• Countries Served: ${QURANIC_BARSE_INFO.overview.countries}
+• Launch: ${QURANIC_BARSE_INFO.overview.launchDate}
 
-  features: `✨ **Bright Path Academy Features**
+Ready to begin your Quranic journey with us? 🚀`,
 
-🎯 **CORE FEATURES:**
-${LMS_INFO.keyFeatures.core.map(feature => `• ${feature}`).join('\n')}
+  features: `✨ **${QURANIC_BARSE_INFO.projectName} Features**
 
-🚀 **ADVANCED CAPABILITIES:**
-${LMS_INFO.keyFeatures.advanced.map(feature => `• ${feature}`).join('\n')}
+📖 **QURANIC FEATURES:**
+${QURANIC_BARSE_INFO.keyFeatures.quranic.map(feature => `• ${feature}`).join('\n')}
 
-⚙️ **ADMINISTRATIVE TOOLS:**
-${LMS_INFO.keyFeatures.administrative.map(feature => `• ${feature}`).join('\n')}
+🕌 **ISLAMIC STUDIES:**
+${QURANIC_BARSE_INFO.keyFeatures.islamic.map(feature => `• ${feature}`).join('\n')}
 
-Which feature area interests you most?`,
+🎓 **LEARNING TOOLS:**
+${QURANIC_BARSE_INFO.keyFeatures.learning.map(feature => `• ${feature}`).join('\n')}
 
-  modules: `📚 **Platform Modules**
+⚙️ **ADMIN & MANAGEMENT:**
+${QURANIC_BARSE_INFO.keyFeatures.administrative.map(feature => `• ${feature}`).join('\n')}
 
-👨‍🎓 **STUDENT MODULE:**
-${LMS_INFO.modules.student.map(item => `• ${item}`).join('\n')}
+🎯 **UNIQUE TO US:**
+${QURANIC_BARSE_INFO.uniqueFeatures.map(feature => `• ${feature}`).join('\n')}
 
-👨‍🏫 **INSTRUCTOR MODULE:**
-${LMS_INFO.modules.instructor.map(item => `• ${item}`).join('\n')}
+Which feature interests you most? Let me tell you more! 💫`,
 
-👨‍💼 **ADMIN MODULE:**
-${LMS_INFO.modules.admin.map(item => `• ${item}`).join('\n')}
+  curriculum: `📚 **Our Curriculum**
 
-👪 **PARENT MODULE:**
-${LMS_INFO.modules.parent.map(item => `• ${item}`).join('\n')}
+**QURAN LEVELS:**
+${QURANIC_BARSE_INFO.curriculum.quranLevels.map(level => `• ${level}`).join('\n')}
 
-All modules work seamlessly together for a complete learning ecosystem!`,
+**ISLAMIC STUDIES:**
+${QURANIC_BARSE_INFO.curriculum.islamicStudies.map(course => `• ${course}`).join('\n')}
+
+**ARABIC COURSES:**
+${QURANIC_BARSE_INFO.curriculum.arabicCourses.map(course => `• ${course}`).join('\n')}
+
+We offer structured learning paths from beginner to advanced levels. Where would you like to start? 🤲`,
 
   pricing: `💰 **Pricing Plans**
 
-**Starting Prices:**
-• Basic (Up to 500 users): ${LMS_INFO.pricing.startingPrice.basic}
-• Professional (Up to 2000 users): ${LMS_INFO.pricing.startingPrice.professional}
-• Enterprise (2000+ users): ${LMS_INFO.pricing.startingPrice.enterprise}
+**Monthly Subscriptions:**
+• Basic: ${QURANIC_BARSE_INFO.pricing.monthlyPlans.basic}
+• Standard: ${QURANIC_BARSE_INFO.pricing.monthlyPlans.standard}
+• Premium: ${QURANIC_BARSE_INFO.pricing.monthlyPlans.premium}
+• Family: ${QURANIC_BARSE_INFO.pricing.monthlyPlans.family}
+
+**Annual Plans:** Save 20% on all yearly subscriptions
+
+**FREE Resources:**
+${QURANIC_BARSE_INFO.pricing.freeOptions.map(item => `• ${item}`).join('\n')}
 
 **Pricing Models:**
-${LMS_INFO.pricing.models.map(model => `• ${model}`).join('\n')}
+${QURANIC_BARSE_INFO.pricing.models.map(model => `• ${model}`).join('\n')}
 
-**All Plans Include:**
-${LMS_INFO.pricing.included.map(item => `• ${item}`).join('\n')}
+💰 **Scholarships:** Need-based financial aid available
 
-💡 *Contact us for a personalized quote based on your specific requirements.*`,
+💡 *Start your free trial today - No credit card required!*`,
+
+  teachers: `👨‍🏫 **Our Qualified Teachers**
+
+**Qualifications:**
+${QURANIC_BARSE_INFO.teachers.qualifications.map(qual => `• ${qual}`).join('\n')}
+
+**Class Size:** ${QURANIC_BARSE_INFO.teachers.studentRatio}
+
+**Free Trial:** ${QURANIC_BARSE_INFO.teachers.demoClasses}
+
+All our teachers undergo rigorous training and background checks to ensure a safe, high-quality learning environment for students of all ages. 🌟`,
+
+  certification: `🎓 **Certification & Accreditation**
+
+**Certificates Offered:**
+${QURANIC_BARSE_INFO.certification.types.map(cert => `• ${cert}`).join('\n')}
+
+**Accreditation:** ${QURANIC_BARSE_INFO.certification.accreditation}
+
+Our certificates are recognized by Islamic institutions worldwide and can be shared on professional platforms. 📜`,
+
+  ramadan: `🌙 **Ramadan Special Programs**
+
+${QURANIC_BARSE_INFO.ramadanSpecial.features.map(feature => `• ${feature}`).join('\n')}
+
+Make this Ramadan your most spiritually enriching month with our special programs designed to maximize your worship and Quranic connection! ✨`,
 
   technical: `🔧 **Technical Specifications**
 
-**Platform:** ${LMS_INFO.technicalSpecifications.platform}
+**Platform:** ${QURANIC_BARSE_INFO.technicalSpecifications.platform}
 
 **Technology Stack:**
-${LMS_INFO.technicalSpecifications.technology.map(tech => `• ${tech}`).join('\n')}
+${QURANIC_BARSE_INFO.technicalSpecifications.technology.map(tech => `• ${tech}`).join('\n')}
 
-**Security Features:**
-${LMS_INFO.technicalSpecifications.security.map(sec => `• ${sec}`).join('\n')}
+**Security & Safety:**
+${QURANIC_BARSE_INFO.technicalSpecifications.security.map(sec => `• ${sec}`).join('\n')}
 
-**Scalability:** ${LMS_INFO.technicalSpecifications.scalability}`,
+**Accessibility:** ${QURANIC_BARSE_INFO.technicalSpecifications.accessibility}
 
-  targetAudience: `🎯 **Who Can Benefit from Bright Path Academy?**
+We prioritize security, especially for our young learners, ensuring a safe online environment. 🛡️`,
 
-${LMS_INFO.targetAudience.map(audience => 
-  `**${audience.category}:**\n${audience.examples.map(ex => `• ${ex}`).join('\n')}`
-).join('\n\n')}
+  benefits: `🌟 **Why Choose ${QURANIC_BARSE_INFO.projectName}?**
 
-No matter your educational needs, Bright Path Academy can be customized to serve your specific audience!`,
-
-  benefits: `🌟 **Why Choose Bright Path Academy?**
-
-${LMS_INFO.benefits.map(benefit => `• ${benefit}`).join('\n')}
+${QURANIC_BARSE_INFO.benefits.map(benefit => `• ${benefit}`).join('\n')}
 
 📈 **Proven Results:**
-${LMS_INFO.successMetrics.map(metric => `• ${metric}`).join('\n')}`,
+${QURANIC_BARSE_INFO.successMetrics.map(metric => `• ${metric}`).join('\n')}
 
-  integrations: `🔌 **Integration Capabilities**
+Join thousands of satisfied learners worldwide! 🌍`,
 
-${LMS_INFO.integrationCapabilities.map(integration => `• ${integration}`).join('\n')}
+  support: `🛟 **Support & Assistance**
 
-We ensure seamless connectivity with your existing tools and systems!`,
+**Support Channels:**
+${QURANIC_BARSE_INFO.support.types.map(type => `• ${type}`).join('\n')}
 
-  support: `🛟 **Support & Training**
+**Response Time:** ${QURANIC_BARSE_INFO.support.responseTime}
+**Language Support:** ${QURANIC_BARSE_INFO.support.language}
 
-**Support Options:**
-${LMS_INFO.support.types.map(type => `• ${type}`).join('\n')}
+We're committed to your learning success every step of the way! 💪`,
 
-**Response Time:** ${LMS_INFO.support.responseTime}
-**Training:** ${LMS_INFO.support.training}
+  contact: `📞 **Contact ${QURANIC_BARSE_INFO.projectName}**
 
-We're committed to your success every step of the way!`,
+📧 Email: ${QURANIC_BARSE_INFO.contact.email}
+🆘 Support: ${QURANIC_BARSE_INFO.contact.support}
+📱 Phone: ${QURANIC_BARSE_INFO.contact.phones.join(' / ')}
+🌐 Website: ${QURANIC_BARSE_INFO.contact.website}
+📅 Demo: ${QURANIC_BARSE_INFO.contact.demo}
 
-  contact: `📞 **Contact Bright Path Academy**
+**Social Media:**
+• Instagram: ${QURANIC_BARSE_INFO.contact.socialMedia.instagram}
+• Facebook: ${QURANIC_BARSE_INFO.contact.socialMedia.facebook}
+• YouTube: ${QURANIC_BARSE_INFO.contact.socialMedia.youtube}
+• Telegram: ${QURANIC_BARSE_INFO.contact.socialMedia.telegram}
 
-📧 Email: ${LMS_INFO.contact.email}
-📱 Phone: ${LMS_INFO.contact.phones.join(' / ')}
-📍 Location: ${LMS_INFO.contact.location}
-🌐 Website: ${LMS_INFO.contact.website}
-📅 Demo: ${LMS_INFO.contact.demo}
+**Support Hours:**
+${QURANIC_BARSE_INFO.contact.hours.support}
+${QURANIC_BARSE_INFO.contact.hours.friday}
 
-**Business Hours:**
-${LMS_INFO.contact.hours.weekdays}
-${LMS_INFO.contact.hours.friday}
-
-Ready to illuminate your learning journey? Let's schedule a personalized demo!`,
-
-  useCases: `📋 **Success Stories & Use Cases**
-
-${LMS_INFO.useCases.map(useCase => 
-  `**${useCase.title}**\n${useCase.description}`
-).join('\n\n')}
-
-Want to discuss your specific use case? We'd love to help!`,
+May Allah bless your learning journey! 🤲`,
 
   faq: `❓ **Frequently Asked Questions**
 
-${LMS_INFO.faq.map(item => 
+${QURANIC_BARSE_INFO.faq.map(item => 
   `**Q: ${item.question}**\nA: ${item.answer}`
 ).join('\n\n')}
 
-Have more questions? Feel free to ask!`,
-
-  emergency: `I apologize, but I'm having trouble understanding your query. 
-
-I'm specialized in helping with information about Bright Path Academy:
-• Features and modules
-• Pricing and plans
-• Technical specifications
-• Implementation process
-• Integration capabilities
-
-Could you please rephrase your question, or would you like to schedule a demo with our team?`
+Have more questions? Feel free to ask, or schedule a free consultation call! 💬`
 };
 
-// Function to classify user intent
+// Function to classify user intent (Islamic-focused)
 function classifyIntent(userMessage: string): string {
   const message = userMessage.toLowerCase();
   
-  if (message.includes('hello') || message.includes('hi') || message.includes('hey')) return 'greeting';
+  // Arabic greetings
+  if (message.includes('السلام') || message.includes('assalam') || message.includes('salam') || 
+      message.includes('hello') || message.includes('hi') || message.includes('hey')) return 'greeting';
+  
+  // Islamic content queries
+  if (message.includes('quran') || message.includes('recitation') || message.includes('memorization') || message.includes('hifz')) return 'quran';
+  if (message.includes('tafsir') || message.includes('meaning') || message.includes('interpretation')) return 'tafsir';
+  if (message.includes('hadith') || message.includes('sunnah') || message.includes('prophet')) return 'hadith';
+  if (message.includes('dua') || message.includes('supplication') || message.includes('adhkar')) return 'dua';
+  if (message.includes('prayer') || message.includes('salah') || message.includes('namaz')) return 'prayer';
+  if (message.includes('ramadan') || message.includes('fasting')) return 'ramadan';
+  
+  // Course & curriculum
+  if (message.includes('curriculum') || message.includes('course') || message.includes('level') || message.includes('program')) return 'curriculum';
+  if (message.includes('arabic') || message.includes('language')) return 'arabic';
+  if (message.includes('tajweed') || message.includes('pronunciation')) return 'tajweed';
+  
+  // Features & benefits
   if (message.includes('feature') || message.includes('capabilit')) return 'features';
-  if (message.includes('module') || message.includes('component')) return 'modules';
-  if (message.includes('price') || message.includes('cost') || message.includes('how much') || message.includes('plan')) return 'pricing';
-  if (message.includes('technical') || message.includes('tech stack') || message.includes('technology')) return 'technical';
-  if (message.includes('audience') || message.includes('who is it for') || message.includes('target')) return 'targetAudience';
-  if (message.includes('benefit') || message.includes('advantage') || message.includes('why')) return 'benefits';
-  if (message.includes('integrat') || message.includes('connect') || message.includes('api')) return 'integrations';
-  if (message.includes('support') || message.includes('help') || message.includes('training')) return 'support';
+  if (message.includes('benefit') || message.includes('advantage') || message.includes('why choose')) return 'benefits';
+  
+  // Pricing & enrollment
+  if (message.includes('price') || message.includes('cost') || message.includes('how much') || 
+      message.includes('plan') || message.includes('subscription') || message.includes('fee')) return 'pricing';
+  if (message.includes('trial') || message.includes('free')) return 'trial';
+  if (message.includes('scholarship') || message.includes('financial aid')) return 'scholarship';
+  
+  // Teachers & certification
+  if (message.includes('teacher') || message.includes('instructor') || message.includes('scholar') || message.includes('qualified')) return 'teachers';
+  if (message.includes('certificate') || message.includes('ijazah') || message.includes('accreditation')) return 'certification';
+  
+  // Technical
+  if (message.includes('technical') || message.includes('tech') || message.includes('technology') || 
+      message.includes('app') || message.includes('mobile')) return 'technical';
+  if (message.includes('support') || message.includes('help') || message.includes('assistance')) return 'support';
   if (message.includes('contact') || message.includes('email') || message.includes('phone') || message.includes('demo')) return 'contact';
-  if (message.includes('use case') || message.includes('example') || message.includes('success')) return 'useCases';
+  
+  // General info
+  if (message.includes('about') || message.includes('overview') || message.includes('what is') || 
+      message.includes('who is') || message.includes('introduction')) return 'overview';
   if (message.includes('faq') || message.includes('question') || message.includes('ask')) return 'faq';
-  if (message.includes('about') || message.includes('overview') || message.includes('what is')) return 'overview';
   
   return 'general';
 }
@@ -422,63 +514,216 @@ function generateResponse(intent: string, userMessage: string): string {
   switch (intent) {
     case 'greeting':
       return RESPONSE_TEMPLATES.greeting;
-    
     case 'overview':
       return RESPONSE_TEMPLATES.overview;
-    
     case 'features':
       return RESPONSE_TEMPLATES.features;
-    
-    case 'modules':
-      return RESPONSE_TEMPLATES.modules;
-    
+    case 'curriculum':
+      return RESPONSE_TEMPLATES.curriculum;
     case 'pricing':
       return RESPONSE_TEMPLATES.pricing;
-    
+    case 'teachers':
+      return RESPONSE_TEMPLATES.teachers;
+    case 'certification':
+      return RESPONSE_TEMPLATES.certification;
+    case 'ramadan':
+      return RESPONSE_TEMPLATES.ramadan;
     case 'technical':
       return RESPONSE_TEMPLATES.technical;
-    
-    case 'targetAudience':
-      return RESPONSE_TEMPLATES.targetAudience;
-    
     case 'benefits':
       return RESPONSE_TEMPLATES.benefits;
-    
-    case 'integrations':
-      return RESPONSE_TEMPLATES.integrations;
-    
     case 'support':
       return RESPONSE_TEMPLATES.support;
-    
     case 'contact':
       return RESPONSE_TEMPLATES.contact;
-    
-    case 'useCases':
-      return RESPONSE_TEMPLATES.useCases;
-    
     case 'faq':
       return RESPONSE_TEMPLATES.faq;
+    case 'quran':
+      return `📖 **Quran Learning at ${QURANIC_BARSE_INFO.projectName}**
+
+We offer comprehensive Quran education:
+
+**Available Courses:**
+• Quran Reading Basics (Nuraniyah)
+• Tajweed Rules & Application  
+• Quran Memorization (Hifz) with Ijazah Track
+• Tafsir Studies (Understanding the Message)
+• Multiple Qira'at (Recitation Styles)
+
+**Key Features:**
+• One-on-one live sessions with certified teachers
+• AI-powered pronunciation feedback
+• Progress tracking & revision scheduling
+• Flexible timings (24/7 availability)
+
+**Success Rate:** ${QURANIC_BARSE_INFO.successMetrics[1]}
+
+Would you like to know about levels, pricing, or schedule a free trial class? 📚✨`;
+    
+    case 'tafsir':
+      return `📚 **Tafsir Studies at ${QURANIC_BARSE_INFO.projectName}**
+
+**Available Tafsir Collections:**
+• Tafsir Ibn Kathir (Most Authentic)
+• Tafsir Al-Jalalayn (Concise Explanation)
+• Tafsir Al-Sa'di (Thematic Analysis)
+• Tafsir Al-Qurtubi (Jurisprudential)
+
+**Course Structure:**
+• Word-by-word analysis of each Ayah
+• Historical context & reasons for revelation (Asbab al-Nuzul)
+• Lessons & practical applications
+• Discussion-based learning with scholars
+
+Join our Tafsir classes to understand the deeper meanings of Allah's words! 🌟`;
+    
+    case 'hadith':
+      return `🕌 **Hadith Studies at ${QURANIC_BARSE_INFO.projectName}**
+
+**Hadith Collections:**
+• Sahih Al-Bukhari
+• Sahih Muslim  
+• Sunan Abu Dawud
+• Jami' At-Tirmidhi
+• Sunan An-Nasa'i
+• Sunan Ibn Majah
+• Muwatta Imam Malik
+
+**Learning Outcomes:**
+• Understanding Hadith classifications (Sahih, Hasan, Da'if)
+• Memorization of 40 Hadith Nawawi
+• Application of Prophetic teachings in daily life
+
+Deepen your connection with the Sunnah of Prophet Muhammad (PBUH)! 💫`;
+    
+    case 'dua':
+      return `🤲 **Duas & Adhkar Program**
+
+**Our Dua Curriculum Includes:**
+• Morning & Evening Adhkar
+• Duas for Daily Activities (Eating, Sleeping, Traveling)
+• Fortress of the Muslim (Hisnul Muslim)
+• Quranic Duas from Prophets
+• Duas for Special Occasions
+
+**Features:**
+• Audio pronunciation guides
+• Transliteration for non-Arabic speakers
+• Translation & explanation
+• Memorization tracking
+• Daily reminder notifications
+
+Learn the beautiful supplications taught by Prophet Muhammad (PBUH)! ✨`;
+    
+    case 'prayer':
+      return `🕌 **Prayer (Salah) Learning Module**
+
+**What We Offer:**
+• Complete step-by-step prayer guide
+• Correct pronunciation of all prayer recitations
+• Learning prayer times for your location
+• Qibla direction finder
+• Virtual prayer practice sessions
+
+**Special Features:**
+• Prayer times calculation based on your location
+• Nearby mosque finder
+• Jummah (Friday) prayer reminders
+• Janazah (Funeral) prayer learning
+
+Never miss a prayer with our comprehensive Salah learning system! 🤲`;
+    
+    case 'arabic':
+      return `🇸🇦 **Arabic Language Courses**
+
+**Course Levels:**
+1. **Beginner:** Alphabet, basic reading & writing
+2. **Intermediate:** Grammar (Nahw & Sarf), vocabulary building
+3. **Advanced:** Quranic Arabic, classical texts
+4. **Conversational:** Modern Standard Arabic & dialects
+
+**Course Features:**
+• Interactive exercises & quizzes
+• Speaking practice with native teachers
+• Quranic vocabulary focus
+• Certificate upon completion
+
+Master the language of the Quran with our structured curriculum! 📖`;
+    
+    case 'tajweed':
+      return `🎵 **Tajweed Rules Mastery**
+
+**What You'll Learn:**
+• Makharij (Correct articulation points of letters)
+• Sifaat (Characteristics of letters)
+• Rules of Noon Saakin & Tanween
+• Rules of Meem Saakin
+• Madd (Prolongation) rules
+• Qalqalah, Ghunnah, and more
+
+**Features:**
+• Audio examples for each rule
+• Record & compare with teacher
+• Practice exercises with instant feedback
+• One-on-one correction sessions
+
+Perfect your Quran recitation with our expert Tajweed teachers! 🌟`;
+    
+    case 'trial':
+      return `🎁 **Free Trial Classes**
+
+**What's Included in Free Trial:**
+• 30-minute one-on-one session with a qualified teacher
+• Assessment of your current level
+• Personalized learning plan
+• Platform orientation
+• Q&A about courses and methodology
+
+**No credit card required!**
+
+Would you like me to help you schedule your free trial class? Just share your preferred day and time! 📅`;
+    
+    case 'scholarship':
+      return `💰 **Financial Aid & Scholarships**
+
+**Scholarship Programs:**
+• **Need-based Scholarship:** For students with financial constraints
+• **Hifz Excellence Scholarship:** For dedicated memorization students
+• **Orphan Support Program:** Free access for orphaned children
+• **Revert Support:** 50% discount for new Muslims
+• **Group Discounts:** Available for families & institutions
+
+**How to Apply:**
+1. Fill out the scholarship application form
+2. Submit required documentation
+3. Review by our scholarship committee
+4. Approval within 5-7 business days
+
+No student is turned away due to financial constraints. Apply today! 🤲`;
     
     default:
       // General response with key highlights
-      return `I understand you're asking about: "${userMessage}"
+      return `Thank you for your question about: "${userMessage}"
 
-**Bright Path Academy** is a comprehensive Learning Management System that offers:
+**${QURANIC_BARSE_INFO.projectName}** - Your comprehensive Islamic learning platform offering:
 
-${LMS_INFO.keyFeatures.core.slice(0, 5).map(f => `• ${f}`).join('\n')}
+📖 **Quran Learning** - Tajweed, Memorization, Tafsir
+🕌 **Islamic Studies** - Aqeedah, Fiqh, Seerah, Hadith
+🇸🇦 **Arabic Language** - From basics to Quranic Arabic
+🎓 **Certified Teachers** - Qualified scholars with Ijazah
 
 **Quick Facts:**
-• 🎯 Serves ${LMS_INFO.targetAudience.length} main audience segments
-• 📊 ${LMS_INFO.overview.currentUsers} active users
-• 💰 Plans starting from ${LMS_INFO.pricing.startingPrice.basic}
+• 🎯 10,000+ Active Learners Worldwide
+• 👨‍🏫 50+ Qualified Teachers
+• 🌍 Available in 25+ Countries
+• 💰 Plans from $19.99/month + FREE resources
 
-Could you specify which aspect you'd like to know more about? I can help with:
-• Features & Modules
-• Pricing & Plans
-• Technical Specifications
-• Implementation Process
-• Integration Options
-• Scheduling a Demo`;
+To better assist you, could you please specify:
+• Are you interested in Quran learning, Islamic studies, or Arabic?
+• Are you looking for self-paced or live classes?
+• Would you like information about pricing or free trial?
+
+I'm here to guide you on your spiritual learning journey! 🤲✨`;
   }
 }
 
@@ -490,38 +735,40 @@ async function Chatbot(userMessage: string) {
     // Generate base response
     let response = generateResponse(intent, userMessage);
     
-    // For complex or general queries, enhance with AI while maintaining LMS context
+    // For complex or general queries, enhance with AI while maintaining Islamic context
     if (intent === 'general' || userMessage.length > 50) {
       const enhancedPrompt = `
-You are an AI assistant for Bright Path Academy - a comprehensive Learning Management System (LMS) designed for educational institutions, corporate training, and online course creators.
+You are an AI assistant for ${QURANIC_BARSE_INFO.projectName} - an Islamic Learning Management System for Quranic and Islamic education.
 
-Project Context:
-- Name: Bright Path Academy
-- Core Features: ${LMS_INFO.keyFeatures.core.slice(0, 5).join(', ')}
-- Target Audience: Educational Institutions, Corporate Training, Individual Creators
-- Key Benefits: ${LMS_INFO.benefits.slice(0, 3).join(', ')}
-- Pricing: Starting from ${LMS_INFO.pricing.startingPrice.basic}
-- Contact: ${LMS_INFO.contact.email}
+Islamic Context:
+- Name: ${QURANIC_BARSE_INFO.projectName} (${QURANIC_BARSE_INFO.arabicName})
+- Platform Purpose: Quran learning, Tajweed, Islamic studies, Arabic language
+- Core Features: ${QURANIC_BARSE_INFO.keyFeatures.quranic.slice(0, 5).join(', ')}
+- Student Base: ${QURANIC_BARSE_INFO.overview.currentUsers} worldwide
+- Pricing: From ${QURANIC_BARSE_INFO.pricing.monthlyPlans.basic}
+- Unique: AI-powered Tajweed feedback, Ijazah certification
+
+IMPORTANT GUIDELINES:
+1. Be respectful and inclusive of all Muslims
+2. Reference Quran and Hadith appropriately when relevant
+3. Use Islamic greetings like "Assalamu Alaikum", "Insha'Allah", "Alhamdulillah" naturally
+4. Do NOT innovate in religious matters (bid'ah) - stick to authentic teachings
+5. If unsure about religious ruling, advise consulting a qualified scholar
+6. Encourage seeking knowledge and maintaining good character
+7. Keep responses helpful, concise, and focused on the platform's educational services
 
 User Question: "${userMessage}"
 
-Please provide a helpful, professional response that:
-1. Directly addresses the user's question about the LMS
-2. Highlights relevant Bright Path Academy features
-3. Focuses on educational/learning management solutions
-4. Maintains a professional and helpful tone
-5. Encourages scheduling a demo or further discussion
-6. Keeps response concise and actionable
-
-Response Guidelines:
-- Use emojis sparingly for emphasis
-- Focus on how Bright Path Academy solves educational challenges
-- Include specific feature mentions when relevant
-- End with a call-to-action (demo, contact, or more info)
+Please provide a helpful, professional response about ${QURANIC_BARSE_INFO.projectName} that:
+1. Directly addresses the user's question about Islamic/Quranic learning
+2. Highlights relevant features of our platform
+3. Maintains an Islamic tone (use greetings, duas where appropriate)
+4. Encourages taking action (free trial, demo, enrollment)
+5. Is concise and actionable
 
 Current base response: "${response}"
 
-Enhanced Response:`;
+Enhanced Response (Islamic, helpful, action-oriented):`;
 
       try {
         const aiResponse = await ai.models.generateContent({
@@ -538,9 +785,13 @@ Enhanced Response:`;
       }
     }
 
-    // Ensure response includes Bright Path Academy branding
-    if (!response.includes('Bright Path') && !response.includes('LMS') && intent !== 'greeting') {
-      response += `\n\n---\n*Ready to illuminate your learning journey with **Bright Path Academy**? Schedule a demo today!*`;
+    // Ensure response includes Islamic greetings and branding
+    if (!response.includes('Assalamu') && !response.includes('السلام') && intent !== 'greeting') {
+      response = `${QURANIC_BARSE_INFO.greeting} 🙏\n\n${response}`;
+    }
+    
+    if (!response.includes(QURANIC_BARSE_INFO.projectName) && intent !== 'greeting') {
+      response += `\n\n---\n✨ *Ready to begin your Quranic journey with **${QURANIC_BARSE_INFO.projectName}**? Schedule your free trial class today!* 🤲`;
     }
 
     console.log(`User: ${userMessage}`);
@@ -553,16 +804,25 @@ Enhanced Response:`;
     console.error('Chatbot error:', error);
     
     // Fallback responses
-    return `I apologize for the technical difficulty. **Bright Path Academy** is here to help with:
+    return `${QURANIC_BARSE_INFO.greeting} 🙏
 
-📚 Course Management & Virtual Classrooms
-📊 Learning Analytics & Progress Tracking
-🎓 Certification & Assessment Tools
-💼 Corporate Training Solutions
+I apologize for the technical difficulty. **${QURANIC_BARSE_INFO.projectName}** is here to help with your Islamic learning needs:
 
-Please contact us directly at ${LMS_INFO.contact.email} or call ${LMS_INFO.contact.phones[0]} for immediate assistance.
+📖 **Our Services:**
+• Quran Reading with Tajweed
+• Quran Memorization (Hifz) with Ijazah
+• Tafsir & Islamic Studies
+• Arabic Language Learning
+• Live Classes with Qualified Scholars
 
-We specialize in creating engaging learning experiences that drive educational success!`;
+Please contact us directly:
+📧 ${QURANIC_BARSE_INFO.contact.email}
+📱 ${QURANIC_BARSE_INFO.contact.phones[0]}
+🌐 ${QURANIC_BARSE_INFO.contact.website}
+
+Or schedule a free trial class: ${QURANIC_BARSE_INFO.contact.demo}
+
+May Allah bless your quest for knowledge! 🤲`;
   }
 }
 
@@ -576,15 +836,22 @@ ${context}
 
 Current User Message: "${userMessage}"
 
-You are Bright Path Academy AI assistant. Provide a helpful response focusing on our LMS features:
-- Course & Content Management
-- Virtual Classrooms
-- Student Progress Tracking
-- Assessment & Certification
-- Analytics & Reporting
-- Integration Capabilities
+You are ${QURANIC_BARSE_INFO.projectName} AI assistant, specializing in Islamic/Quranic education.
 
-Keep responses professional, concise, and encourage demo scheduling or further discussion about specific educational needs.`;
+Platform Overview:
+- ${QURANIC_BARSE_INFO.projectName} provides Quran learning, Tajweed, Islamic studies, and Arabic courses
+- Services: One-on-one live classes, self-paced courses, group sessions
+- Teachers: Qualified Hafiz and scholars with Ijazah
+- Features: AI Tajweed feedback, progress tracking, certification
+
+Provide a helpful, Islamic-focused response that:
+1. Addresses the user's specific question about Islamic learning
+2. Highlights relevant platform features
+3. Uses appropriate Islamic terminology and greetings
+4. Encourages scheduling a free trial or demo
+5. Is respectful and authentic
+
+Keep response professional, concise, and focused on educational services.`;
 
   try {
     const response = await ai.models.generateContent({
@@ -592,7 +859,7 @@ Keep responses professional, concise, and encourage demo scheduling or further d
       contents: contextualPrompt,
     });
     
-    return response.text || "Thank you for your interest in Bright Path Academy! How can I help you explore our LMS solutions today?";
+    return response.text || `${QURANIC_BARSE_INFO.greeting}! How can I help you with your Islamic learning journey today? We offer Quran, Tajweed, and Islamic studies courses with qualified teachers. Would you like to learn more or schedule a free trial?`;
   } catch (error: any) {
     console.log(error);
     return Chatbot(userMessage);

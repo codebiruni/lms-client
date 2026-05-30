@@ -1,7 +1,10 @@
 import React from 'react'
+import CreateStudent from './CreateStudent'
 
 export default function page() {
   return (
-    <div>page</div>
+    <div>
+      <CreateStudent />
+    </div>
   )
 }
