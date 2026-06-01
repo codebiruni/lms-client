@@ -228,11 +228,11 @@ const QURANIC_VERSE_INFO = {
   ],
 
   contact: {
-    email: "info@quranicVerse Bangladesh.com",
-    support: "support@quranicVerse Bangladesh.com",
-    phones: ["+1 (555) 123-4567", "+44 20 1234 5678"],
-    location: "Global Operations - Serving Worldwide",
-    website: "https://quranicVerse Bangladesh.com",
+    email: "quranicverse21@gmail.com",
+    support: "quranicverse21@gmail.com",
+    phones: ["+8801835-411107"],
+    location: "975, post office road, badda, dhaka-1212",
+    website: "https://quranic-verse.com",
     socialMedia: {
       instagram: "@quranicVerse Bangladesh",
       facebook: "quranicVerse Bangladesh",

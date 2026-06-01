@@ -68,36 +68,29 @@ export default function SupportHubPage({ data }: any) {
       <section className="relative w-full overflow-hidden bg-emerald-50 dark:bg-emerald-950 transition-colors duration-300">
         {/* Background decorative elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-200/60 dark:bg-emerald-900/20 rounded-full filter blur-3xl opacity-40"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-200/60 dark:bg-amber-900/15 rounded-full filter blur-3xl opacity-40"></div>
+          <div className="absolute top-20 left-20 w-96 h-96 bg-emerald-200/60 dark:bg-emerald-900/20 rounded-full filter blur-3xl opacity-40"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-amber-200/60 dark:bg-amber-900/15 rounded-full filter blur-3xl opacity-40"></div>
 
           <div
             className="absolute inset-0 opacity-[0.06] dark:opacity-[0.08]"
             style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10c-8.3 0-15 5.4-15 12 0 4.2 2.7 7.9 6.8 10.2L18 40l8.2-4.8c1.2.3 2.5.5 3.8.5 8.3 0 15-5.4 15-12s-6.7-12-15-12zm0 2c7.2 0 13 4.5 13 10s-5.8 10-13 10c-1.1 0-2.2-.1-3.2-.4l-1.1-.3-5.7 3.4 1.7-5.3-.5-.4C18.8 27.6 17 25 17 22c0-5.5 5.8-10 13-10z' fill='%23059669' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-              backgroundSize: '60px 60px',
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 10c-4.4 0-8 3.1-8 7 0 2.4 1.2 4.5 3.2 5.9L12 28l6.3-3.7c.5.1 1.1.2 1.7.2 4.4 0 8-3.1 8-7s-3.6-7-8-7z' fill='%23059669' fill-opacity='0.16' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+              backgroundSize: '40px 40px',
             }}
           ></div>
 
-          {/* dotted + line pattern (no gradient colors) */}
-          <svg
-            className="absolute inset-0 w-full h-full opacity-[0.07] dark:opacity-[0.12]"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <pattern id="pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="20" cy="20" r="1" fill="#065F46" />
-              <line
-                x1="20"
-                y1="20"
-                x2="40"
-                y2="20"
-                stroke="#065F46"
+          <div className="absolute inset-0 opacity-[0.06] dark:opacity-[0.10]">
+            <svg className="w-full h-full" viewBox="0 0 800 400" preserveAspectRatio="none">
+              <path
+                d="M400,50 C250,50 120,150 120,200 C120,250 250,350 400,350 C550,350 680,250 680,200 C680,150 550,50 400,50 Z"
+                fill="none"
+                stroke="currentColor"
+                className="text-emerald-900/30 dark:text-emerald-100/20"
                 strokeWidth="0.5"
-                strokeDasharray="2,2"
               />
-            </pattern>
-            <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern)" />
-          </svg>
+              <circle cx="400" cy="200" r="3" fill="currentColor" className="text-emerald-600 dark:text-emerald-300" />
+            </svg>
+          </div>
         </div>
 
         {/* Banner Content */}

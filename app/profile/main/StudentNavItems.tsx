@@ -51,18 +51,18 @@ export default function StudentNavItems() {
     { name: 'Recordings', path: '/profile/recordings', icon: Clock },
     { name: 'Attendance', path: '/profile/attendance', icon: Calendar },
     { name: 'All Courses', path: '/profile/all-courses', icon: BookAIcon },
-    { name: 'Progress', path: '/profile/progress', icon: TrendingUp },
+    // { name: 'Progress', path: '/profile/progress', icon: TrendingUp },
     { name: 'Certificates', path: '/profile/certificates', icon: Award },
     // { name: 'Exams', path: '/profile/exams', icon: FileText },
     // { name: 'Achievements', path: '/profile/achievements', icon: Trophy },
-    { name: 'Reviews', path: '/profile/reviews', icon: Star },
+    // { name: 'Reviews', path: '/profile/reviews', icon: Star },
     // { name: 'Messages', path: '/profile/messages', icon: MessageCircle },
-    { name: 'Community', path: '/profile/community', icon: Users },
+    // { name: 'Community', path: '/profile/community', icon: Users },
     { name: 'Profile', path: '/profile/user-profile', icon: User },
     { name: 'Settings', path: '/profile/settings', icon: Settings },
     { name: 'Change Password', path: '/profile/change-password', icon: Lock },
-    { name: 'Fees Receipt', path: '/profile/fees', icon: CreditCard },
-    { name: 'Help & Support', path: '/profile/support', icon: HelpCircle },
+    // { name: 'Fees Receipt', path: '/profile/fees', icon: CreditCard },
+    // { name: 'Help & Support', path: '/profile/support', icon: HelpCircle },
   ]
 
   // Mobile Design - 4 column grid
@@ -107,7 +107,7 @@ export default function StudentNavItems() {
                     className={`relative flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-200 ${
                       isActive
                         ? 'bg-linear-to-br from-blue-500 to-indigo-600 text-white shadow-lg'
-                        : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 group-hover:bg-gray-200 dark:group-hover:bg-gray-700'
+                      : ':bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
                     }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -121,14 +121,14 @@ export default function StudentNavItems() {
                     className={`mt-2 text-[11px] font-medium text-center leading-tight ${
                       isActive
                         ? 'text-gray-900 dark:text-white'
-                        : 'text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300'
+                        : 'text-gray-500 dark:text-gray-400'
                     }`}
                   >
                     {item.name.length > 10 ? item.name.slice(0, 8) + '…' : item.name}
                   </span>
 
                   {/* Subtle hover indicator */}
-                  <div className="absolute inset-x-2 bottom-0 h-0.5 bg-linear-to-r from-blue-500 to-indigo-600 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-center" />
+                  <div className="absolute inset-x-2 bottom-0 h-0.5 bg-linear-to-r from-blue-500 to-indigo-600 rounded-full scale-x-0 transition-transform origin-center" />
                 </Link>
               )
             })}
@@ -152,12 +152,6 @@ export default function StudentNavItems() {
               Manage your learning journey
             </p>
           </div>
-          <div className="hidden lg:flex items-center gap-3 mt-4 lg:mt-0">
-            <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-sm border border-gray-100 dark:border-gray-700">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">18 achievements</span>
-            </div>
-          </div>
         </div>
 
         {/* Grid Layout */}
@@ -174,21 +168,21 @@ export default function StudentNavItems() {
               >
                 <div className="relative flex flex-col items-center">
                   {/* Glow Effect on Hover */}
-                  <div className="absolute -inset-0.5 bg-linear-to-r from-blue-200 to-indigo-200 dark:from-blue-900/50 dark:to-indigo-900/50 rounded-2xl opacity-0 group-hover:opacity-100 blur-md transition duration-500 group-hover:duration-200" />
+                  <div className="absolute -inset-0.5 bg-linear-to-r from-blue-200 to-indigo-200 dark:from-blue-900/50 dark:to-indigo-900/50 rounded-2xl opacity-0  blur-md transition duration-500" />
                   
                   {/* Icon Box */}
                   <div
                     className={`relative w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center rounded-2xl transition-all duration-300 ${
                       isActive
                         ? 'bg-linear-to-br from-blue-500 to-indigo-600 shadow-xl scale-105'
-                        : 'bg-white dark:bg-gray-800 shadow-md group-hover:shadow-xl group-hover:scale-105 group-hover:bg-gray-50 dark:group-hover:bg-gray-700'
+                        : 'bg-white dark:bg-gray-800 shadow-md'
                     }`}
                   >
                     {/* Animated Border on Hover */}
                     <div className={`absolute inset-0 rounded-2xl transition-all duration-300 ${
                       isActive 
                         ? 'ring-2 ring-blue-500 dark:ring-blue-400' 
-                        : 'ring-1 ring-gray-200 dark:ring-gray-700 group-hover:ring-blue-300 dark:group-hover:ring-blue-700'
+                        : 'ring-1 ring-gray-200 dark:ring-gray-700'
                     }`} />
                     
                     {/* Icon */}
@@ -196,7 +190,7 @@ export default function StudentNavItems() {
                       className={`w-8 h-8 lg:w-9 lg:h-9 transition-all duration-300 ${
                         isActive
                           ? 'text-white'
-                          : 'text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
+                          : 'text-gray-600 dark:text-gray-400'
                       }`}
                       strokeWidth={1.5}
                     />
@@ -207,7 +201,7 @@ export default function StudentNavItems() {
                     )}
 
                     {/* Subtle Shine Effect */}
-                    <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 pointer-events-none" />
                   </div>
 
                   {/* Name */}
@@ -216,7 +210,7 @@ export default function StudentNavItems() {
                       className={`text-sm font-medium transition-all duration-200 ${
                         isActive
                           ? 'text-gray-900 dark:text-white'
-                          : 'text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300'
+                          : 'text-gray-500 dark:text-gray-400'
                       }`}
                     >
                       {item.name}
@@ -224,12 +218,12 @@ export default function StudentNavItems() {
                     
                     {/* Animated Underline */}
                     <div className={`h-0.5 bg-linear-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-300 mt-1 ${
-                      isActive ? 'w-6 opacity-100' : 'w-0 opacity-0 group-hover:w-6 group-hover:opacity-100'
+                      isActive ? 'w-6 opacity-100' : 'w-0 opacity-0'
                     } mx-auto`} />
                   </div>
 
                   {/* Hover Arrow */}
-                  <div className="absolute -right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0 translate-x-2">
+                  <div className="absolute -right-2 top-1/2 -translate-y-1/2 opacity-0  transition-all duration-300 translate-x-2">
                     <ChevronRight className="w-4 h-4 text-blue-400 dark:text-blue-500" strokeWidth={2} />
                   </div>
                 </div>
@@ -238,12 +232,7 @@ export default function StudentNavItems() {
           })}
         </div>
 
-        {/* Footer */}
-        <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800 text-center">
-          <p className="text-xs text-gray-400 dark:text-gray-600">
-            Navigate through your learning experience
-          </p>
-        </div>
+       
       </div>
     </div>
   )

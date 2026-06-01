@@ -40,12 +40,12 @@ export default function HomeNav() {
   if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile") || pathname.startsWith("/pages")) return null
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Features", path: "/features" },
-    { name: "Course", path: "/course" },
-    { name: "Scholars", path: "/scholars" },
-    { name: "Support Hub", path: "/faq" },
-    { name: "Contact", path: "/contact" },
+    { name: "হোম", path: "/" },
+    { name: "ফিচার", path: "/features" },
+    { name: "কোর্স", path: "/course" },
+    { name: "স্কলার", path: "/scholars" },
+    { name: "প্রশ্ন", path: "/faq" },
+    { name: "যোগাযোগ", path: "/contact" },
   ]
 
   const getDashboardPath = () => {
@@ -80,11 +80,11 @@ export default function HomeNav() {
               className="transition-transform duration-300 group-hover:scale-110"
             />
             <div className="flex flex-col leading-tight">
-              <span className="font-bold text-emerald-950 dark:text-white text-lg">
-                Quranic
+              <span className="font-bold text-emerald-950 dark:text-white text-md">
+                Quranic Verse Bangladesh
               </span>
               <span className="text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold uppercase tracking-widest">
-                Verse Bangladesh
+                কোরানিক ভার্স বাংলাদেশ
               </span>
             </div>
           </Link>
@@ -130,13 +130,7 @@ export default function HomeNav() {
             {!UserData && (
               <Link href="/signup" className="relative btn-wrapper">
                 <button className="btn relative overflow-hidden rounded-full px-6 py-2 bg-amber-400 hover:bg-amber-500 text-emerald-950 font-semibold transition active:scale-95 shadow-sm">
-                  <span className="txt-wrapper">
-                    {"SIGNUP".split("").map((letter, index) => (
-                      <span key={index} className="btn-letter">
-                        {letter}
-                      </span>
-                    ))}
-                  </span>
+                  <span className="txt-wrapper text-white">সাইন আপ</span>
                 </button>
               </Link>
             )}

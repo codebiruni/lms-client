@@ -12,7 +12,7 @@ export default function WhyChooseUsSection({ data }: any) {
   }
   
   return (
-    <section className="py-16 md:py-24 bg-[#F8FAF8] dark:bg-[#071E1A]">
+    <section className="py-16 md:py-24 bg-linear-to-b from-emerald-50 via-white to-emerald-50/80 dark:from-emerald-950 dark:via-gray-950 dark:to-emerald-950/8">
 
       <div className="container mx-auto px-4">
 

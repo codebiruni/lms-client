@@ -253,17 +253,33 @@ export default function FeaturesPage({ data }: any) {
   };
 
   return (
-    <section>
+    <section className="space-y-0">
       {/* Platform Features Section */}
-      <section className="relative w-full overflow-hidden bg-linear-to-b from-emerald-50 via-white to-emerald-50 dark:from-[#071E1A] dark:via-[#071E1A]/90 dark:to-[#071E1A] transition-colors duration-300 py-16">
+      <section className="relative w-full overflow-hidden bg-linear-to-b from-emerald-50 via-white to-emerald-50 dark:from-emerald-950 dark:via-gray-950 dark:to-emerald-950 transition-colors duration-300 py-16">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-amber-200/60 dark:bg-amber-900/20 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-emerald-200/60 dark:bg-emerald-900/20 rounded-full blur-3xl opacity-50"></div>
+
+          <div
+            className="absolute inset-0 opacity-[0.08] dark:opacity-[0.06]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10L10 22v16l20 12 20-12V22L30 10zm0 4l14 8-14 8-14-8 14-8zM14 28l12 7v8l-12-7v-8zm32 0v8l-12 7v-8l12-7z' fill='%23059669' fill-opacity='0.12' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+              backgroundSize: '60px 60px',
+            }}
+          ></div>
+
+          <div className="absolute top-20 right-1/4 w-1 h-1 bg-amber-300 dark:bg-amber-500 rounded-full animate-ping"></div>
+          <div className="absolute bottom-40 left-1/3 w-1.5 h-1.5 bg-emerald-300 dark:bg-emerald-500 rounded-full animate-ping delay-300"></div>
+        </div>
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#12372A] dark:text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 dark:text-emerald-50 mb-4">
               আমাদের বিশেষ সুবিধাসমূহ
             </h2>
-
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              শিশুদের দ্বীনি ও আধুনিক শিক্ষার জন্য প্রয়োজনীয় সকল ফিচার এক প্ল্যাটফর্মে
+            <p className="text-lg text-emerald-900/70 dark:text-emerald-100/70 max-w-2xl mx-auto">
+              শিশুদের দ্বীনি ও আধুনিক শিক্ষার জন্য প্রয়োজনীয় সকল ফিচার এক প্ল্যাটফর্মে
             </p>
           </div>
 
@@ -271,14 +287,13 @@ export default function FeaturesPage({ data }: any) {
             {featuresData.platformFeatures?.map((feature: any, idx: number) => (
               <div
                 key={idx}
-                className="bg-white dark:bg-[#0D2A24] rounded-3xl p-8 shadow-lg border border-emerald-100 dark:border-emerald-900/30"
+                className="bg-white dark:bg-emerald-950 rounded-3xl p-8 shadow-lg border border-emerald-100 dark:border-emerald-900/30"
               >
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-[#12372A] dark:text-white mb-2">
+                  <h3 className="text-2xl font-bold text-emerald-950 dark:text-emerald-50 mb-2">
                     {feature.title}
                   </h3>
-
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-emerald-900/70 dark:text-emerald-100/70">
                     {feature.description}
                   </p>
                 </div>
@@ -287,18 +302,18 @@ export default function FeaturesPage({ data }: any) {
                   {feature.features?.map((item: any, itemIdx: number) => (
                     <Card
                       key={itemIdx}
-                      className="border-0 bg-[#F8FAF8] dark:bg-[#071E1A] hover:shadow-2xl transition-all duration-300 rounded-2xl"
+                      className="border-0 bg-emerald-50/50 dark:bg-emerald-900/10 hover:shadow-xl transition-all duration-300 rounded-2xl"
                     >
                       <CardContent className="p-6 text-center">
-                        <div className="w-14 h-14 rounded-full bg-linear-to-br from-emerald-600 to-teal-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <div className="w-14 h-14 rounded-full bg-emerald-700 dark:bg-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
                           <div className="text-white">{getIcon(item.icon)}</div>
                         </div>
 
-                        <h4 className="text-lg font-semibold text-[#12372A] dark:text-white mb-2">
+                        <h4 className="text-lg font-semibold text-emerald-950 dark:text-emerald-50 mb-2">
                           {item.title}
                         </h4>
 
-                        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                        <p className="text-sm text-emerald-900/70 dark:text-emerald-100/70 leading-relaxed">
                           {item.description}
                         </p>
                       </CardContent>
@@ -313,14 +328,13 @@ export default function FeaturesPage({ data }: any) {
 
       {/* Stats Section */}
       {featuresData.statsSection && (
-        <section className="relative w-full overflow-hidden bg-linear-to-b from-white to-emerald-50 dark:from-[#071E1A] dark:to-[#071E1A]/80 transition-colors duration-300 py-16">
+        <section className="relative w-full overflow-hidden bg-white dark:bg-emerald-950 transition-colors duration-300 py-16">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#12372A] dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 dark:text-emerald-50 mb-4">
                 {featuresData.statsSection.title}
               </h2>
-
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p className="text-lg text-emerald-900/70 dark:text-emerald-100/70">
                 {featuresData.statsSection.description}
               </p>
             </div>
@@ -328,11 +342,10 @@ export default function FeaturesPage({ data }: any) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {featuresData.statsSection.stats?.map((stat: any, idx: number) => (
                 <div key={idx} className="text-center">
-                  <div className="text-4xl md:text-5xl font-bold bg-linear-to-r from-emerald-700 to-teal-600 bg-clip-text text-transparent mb-2">
+                  <div className="text-4xl md:text-5xl font-bold text-emerald-700 dark:text-emerald-300 mb-2">
                     {stat.value}
                   </div>
-
-                  <div className="text-gray-600 dark:text-gray-400">
+                  <div className="text-emerald-900/70 dark:text-emerald-100/70 font-medium">
                     {stat.label}
                   </div>
                 </div>
@@ -344,14 +357,13 @@ export default function FeaturesPage({ data }: any) {
 
       {/* Additional Features Section */}
       {featuresData.additionalFeatures && (
-        <section className="relative w-full overflow-hidden bg-linear-to-b from-emerald-50 via-white to-emerald-50 dark:from-[#071E1A]/90 dark:via-[#071E1A] dark:to-[#071E1A]/90 transition-colors duration-300 py-16">
+        <section className="relative w-full overflow-hidden bg-linear-to-b from-emerald-50 via-white to-emerald-50 dark:from-emerald-950 dark:via-gray-950 dark:to-emerald-950 transition-colors duration-300 py-16">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#12372A] dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 dark:text-emerald-50 mb-4">
                 {featuresData.additionalFeatures.title}
               </h2>
-
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p className="text-lg text-emerald-900/70 dark:text-emerald-100/70">
                 {featuresData.additionalFeatures.description}
               </p>
             </div>
@@ -360,18 +372,18 @@ export default function FeaturesPage({ data }: any) {
               {featuresData.additionalFeatures.features?.map((feature: any, idx: number) => (
                 <Card
                   key={idx}
-                  className="border-0 bg-white dark:bg-[#0D2A24] hover:shadow-2xl transition-all duration-300 rounded-2xl"
+                  className="border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950 hover:shadow-xl transition-all duration-300 rounded-2xl"
                 >
                   <CardContent className="p-6 text-center">
-                    <div className="w-14 h-14 rounded-full bg-linear-to-br from-emerald-600 to-teal-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <div className="w-14 h-14 rounded-full bg-emerald-700 dark:bg-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
                       <div className="text-white">{getIcon(feature.icon)}</div>
                     </div>
 
-                    <h3 className="text-lg font-semibold text-[#12372A] dark:text-white mb-2">
+                    <h3 className="text-lg font-semibold text-emerald-950 dark:text-emerald-50 mb-2">
                       {feature.title}
                     </h3>
 
-                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p className="text-sm text-emerald-900/70 dark:text-emerald-100/70 leading-relaxed">
                       {feature.description}
                     </p>
                   </CardContent>
@@ -384,15 +396,14 @@ export default function FeaturesPage({ data }: any) {
 
       {/* Testimonial Section */}
       {featuresData.testimonialSection && (
-        <section className="relative w-full overflow-hidden bg-linear-to-b from-white to-emerald-50 dark:from-[#071E1A] dark:to-[#071E1A]/80 transition-colors duration-300 py-16">
+        <section className="relative w-full overflow-hidden bg-white dark:bg-emerald-950 transition-colors duration-300 py-16">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#12372A] dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 dark:text-emerald-50 mb-4">
                 অভিভাবকদের মতামত
               </h2>
-
-              <p className="text-lg text-gray-600 dark:text-gray-300">
-                আমাদের শিক্ষাব্যবস্থা নিয়ে অভিভাবকদের অভিজ্ঞতা
+              <p className="text-lg text-emerald-900/70 dark:text-emerald-100/70">
+                আমাদের শিক্ষাব্যবস্থা নিয়ে অভিভাবকদের অভিজ্ঞতা
               </p>
             </div>
 
@@ -400,27 +411,24 @@ export default function FeaturesPage({ data }: any) {
               {featuresData.testimonialSection.testimonials?.map((testimonial: any, idx: number) => (
                 <Card
                   key={idx}
-                  className="border-0 bg-[#F8FAF8] dark:bg-[#0D2A24] rounded-2xl"
+                  className="border border-emerald-100 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-2xl"
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 rounded-full bg-linear-to-br from-emerald-600 to-teal-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                      <div className="w-12 h-12 rounded-full bg-emerald-700 dark:bg-emerald-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
                         {testimonial.name.charAt(0)}
                       </div>
-
                       <div className="ml-4">
-                        <div className="font-semibold text-[#12372A] dark:text-white">
+                        <div className="font-semibold text-emerald-950 dark:text-emerald-50">
                           {testimonial.name}
                         </div>
-
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-emerald-900/70 dark:text-emerald-100/70">
                           {testimonial.role}
                         </div>
                       </div>
                     </div>
-
-                    <p className="text-gray-600 dark:text-gray-300 italic leading-relaxed">
-                      “{testimonial.content}”
+                    <p className="text-emerald-900/70 dark:text-emerald-100/70 italic leading-relaxed">
+                      &quot;{testimonial.content}&quot;
                     </p>
                   </CardContent>
                 </Card>
@@ -431,16 +439,13 @@ export default function FeaturesPage({ data }: any) {
       )}
 
       {/* CTA Banner */}
-      <section className="w-full py-5">
-        <div className="container mx-auto p-4">
-          <div
-            className="w-full relative overflow-hidden rounded-3xl bg-linear-to-r from-emerald-700 to-teal-700 dark:from-[#0D2A24] dark:to-[#12372A]"
-            style={{ height: 'auto', minHeight: '220px' }}
-          >
+      <section className="w-full py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="w-full relative overflow-hidden rounded-3xl bg-emerald-700 dark:bg-emerald-900 shadow-xl" style={{ minHeight: '220px' }}>
             {/* Background Blobs */}
-            <div className="absolute top-0 -left-4 w-72 h-72 bg-white/10 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
-            <div className="absolute top-0 -right-4 w-72 h-72 bg-white/10 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
-            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-white/10 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
+            <div className="absolute top-0 -left-4 w-72 h-72 bg-white/10 rounded-full blur-3xl opacity-70"></div>
+            <div className="absolute top-0 -right-4 w-72 h-72 bg-white/10 rounded-full blur-3xl opacity-70"></div>
+            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl opacity-70"></div>
 
             {/* Content */}
             <div className="relative z-10 h-full flex items-center justify-center px-4 py-12">
@@ -448,9 +453,8 @@ export default function FeaturesPage({ data }: any) {
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                   আজই আপনার সন্তানকে যুক্ত করুন
                 </h2>
-
                 <p className="text-emerald-50 text-lg max-w-2xl mx-auto leading-relaxed">
-                  কুরআনের আলোয় আধুনিক শিক্ষার নিরাপদ ও বিশ্বস্ত প্ল্যাটফর্মে শেখার যাত্রা শুরু হোক আজই।
+                  কুরআনের আলোয় আধুনিক শিক্ষার নিরাপদ ও বিশ্বস্ত প্ল্যাটফর্মে শেখার যাত্রা শুরু হোক আজই।
                 </p>
               </div>
             </div>

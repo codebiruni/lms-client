@@ -95,17 +95,17 @@ export default function StudentHeader() {
     { name: 'Live Classes', path: '/profile/classes', icon: Video, active: pathname === '/profile/classes' },
     { name: 'Recordings', path: '/profile/recordings', icon: Clock, active: pathname === '/profile/recordings' },
     { name: 'Attendance', path: '/profile/attendance', icon: Calendar, active: pathname === '/profile/attendance' },
-    { name: 'Progress', path: '/profile/progress', icon: BarChart3, active: pathname === '/profile/progress' },
+    // { name: 'Progress', path: '/profile/progress', icon: BarChart3, active: pathname === '/profile/progress' },
     { name: 'Certificates', path: '/profile/certificates', icon: Award, active: pathname === '/profile/certificates' },
     // { name: 'Exams', path: '/profile/exams', icon: FileText, active: pathname === '/profile/exams' },
     // { name: 'Achievements', path: '/profile/achievements', icon: Trophy, active: pathname === '/profile/achievements' },
-    { name: 'Reviews', path: '/profile/reviews', icon: Star, active: pathname === '/profile/reviews' },
+    // { name: 'Reviews', path: '/profile/reviews', icon: Star, active: pathname === '/profile/reviews' },
     // { name: 'Messages', path: '/profile/messages', icon: MessageCircle, active: pathname === '/profile/messages' },
     { name: 'Profile', path: '/profile/user-profile', icon: User, active: pathname === '/profile/user-profile' },
     { name: 'Settings', path: '/profile/settings', icon: Settings, active: pathname === '/profile/settings' },
     { name: 'Change Password', path: '/profile/change-password', icon: Lock, active: pathname === '/profile/change-password' },
-    { name: 'Fees Receipt', path: '/profile/fees', icon: CreditCard, active: pathname === '/profile/fees' },
-    { name: 'Help & Support', path: '/profile/support', icon: HelpCircle, active: pathname === '/profile/support' },
+    // { name: 'Fees Receipt', path: '/profile/fees', icon: CreditCard, active: pathname === '/profile/fees' },
+    // { name: 'Help & Support', path: '/profile/support', icon: HelpCircle, active: pathname === '/profile/support' },
   ]
 
   // First 5 items to show directly
@@ -136,13 +136,13 @@ export default function StudentHeader() {
           <div className="flex items-center justify-between">
             <Link href="/profile" className="flex items-center gap-2 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-500 opacity-60 blur-lg rounded-full group-hover:scale-150 transition-transform" />
+                <div className="absolute inset-0" />
                 <Image
                   src="/logo1.png"
                   alt="Quranic Verse"
                   width={70}
                   height={46}
-                  className="relative z-10 transition-transform group-hover:scale-110"
+                  className="relative z-10 transition-transform"
             />
               </div>
              
@@ -150,11 +150,6 @@ export default function StudentHeader() {
 
             <div className="flex items-center gap-2">
               <ModeToggle />
-              
-              <Button variant="ghost" size="icon" className="rounded-full relative">
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              </Button>
               
               <Sheet open={showMobileMenu} onOpenChange={setShowMobileMenu}>
                 <SheetTrigger asChild>
@@ -265,13 +260,13 @@ export default function StudentHeader() {
             {/* Logo */}
             <Link href="/profile" className="flex items-center gap-3 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-500 opacity-60 blur-xl rounded-full group-hover:scale-150 transition-transform duration-500" />
+                <div className="absolute inset-0" />
                 <Image
                   src="/logo1.png"
                   alt="Quranic Verse"
                   width={100}
                   height={45}
-                  className="relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+                  className="relative z-10 transition-all duration-300"
                 />
               </div>
               
@@ -304,46 +299,17 @@ export default function StudentHeader() {
                   </Link>
                 )
               })}
-
-              {/* More Items Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-1 px-5 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all group">
-                    <span>More</span>
-                    <ChevronRight className="w-4 h-4 rotate-90 transition-transform group-hover:translate-x-0.5" />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-72 max-h-96 overflow-y-auto">
-                  <div className="grid grid-cols-2 gap-1 p-2">
-                    {moreNavItems.map((item) => {
-                      const Icon = item.icon
-                      return (
-                        <DropdownMenuItem key={item.path} asChild className="cursor-pointer">
-                          <Link href={item.path} className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-linear-to-r hover:from-blue-500/10 hover:to-purple-500/10">
-                            <Icon className="w-4 h-4 text-gray-500" />
-                            <span className="text-sm">{item.name}</span>
-                          </Link>
-                        </DropdownMenuItem>
-                      )
-                    })}
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
             </div>
           </div>
         </div>
-
-
 
             {/* Right Section */}
             <div className="flex items-center gap-2">
               <ModeToggle />
               
-             
-
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-3 hover:bg-linear-to-r hover:from-blue-500/10 hover:to-purple-500/10 rounded-full px-3 py-1.5 transition-all duration-300">
+                  <button className="flex items-center gap-3 rounded-full px-3 py-1.5 transition-all duration-300">
                     <Avatar className="w-10 h-10 ring-2 ring-blue-500/20 ring-offset-2 ring-offset-white dark:ring-offset-gray-900">
                       <AvatarImage src={UserData?.image} />
                       <AvatarFallback className="bg-linear-to-br from-blue-500 to-purple-500 text-white font-semibold">
@@ -368,10 +334,6 @@ export default function StudentHeader() {
                   <DropdownMenuItem onClick={() => router.push('/profile/courses')} className="cursor-pointer">
                     <BookOpen className="w-4 h-4 mr-2" />
                     My Courses
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => router.push('/profile/progress')} className="cursor-pointer">
-                    <BarChart3 className="w-4 h-4 mr-2" />
-                    Learning Progress
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => router.push('/profile/certificates')} className="cursor-pointer">
                     <Award className="w-4 h-4 mr-2" />

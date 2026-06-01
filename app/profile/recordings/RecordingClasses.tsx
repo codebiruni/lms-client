@@ -315,27 +315,17 @@ export default function RecordingClasses() {
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
       <div className="container mx-auto px-4 py-6">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold bg-linear-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+            Recording Classes
+          </h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            View and listen to recorded classes
+          </p>
+        </div>
         {/* Course Filter Section */}
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Select Course
-            </h2>
-            <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
-                className="text-gray-500"
-              >
-                {viewMode === 'grid' ? 
-                  <List className="w-4 h-4" /> : 
-                  <Grid3x3 className="w-4 h-4" />
-                }
-              </Button>
-            </div>
-          </div>
-          
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             {courseGroups.map((course) => (
               <Button
@@ -417,7 +407,7 @@ export default function RecordingClasses() {
                     </div>
                   </div>
 
-                  <div className="flex gap-2">
+                  {/* <div className="flex gap-2">
                     <Button
                       variant={isLiked ? "default" : "outline"}
                       onClick={handleLike}
@@ -438,11 +428,11 @@ export default function RecordingClasses() {
                       <Share2 className="w-4 h-4" />
                       Share
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Video Stats */}
-                <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
+                {/* <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
                   <div className="flex items-center gap-1">
                     <Eye className="w-4 h-4" />
                     <span>1.2K views</span>
@@ -455,10 +445,10 @@ export default function RecordingClasses() {
                     <Clock className="w-4 h-4" />
                     <span>{formatDuration(selectedVideo.duration)}</span>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Description */}
-                {selectedVideo.description && (
+                {/* {selectedVideo.description && (
                   <Card className="bg-gray-50 dark:bg-gray-800/50">
                     <CardContent className="p-4">
                       <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
@@ -466,10 +456,10 @@ export default function RecordingClasses() {
                       </p>
                     </CardContent>
                   </Card>
-                )}
+                )} */}
 
                 {/* Course Info */}
-                <Card>
+                {/* <Card>
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
@@ -491,7 +481,7 @@ export default function RecordingClasses() {
                       </Button>
                     </div>
                   </CardContent>
-                </Card>
+                </Card> */}
               </div>
             )}
           </div>
@@ -571,16 +561,6 @@ export default function RecordingClasses() {
                 ))}
               </div>
             </ScrollArea>
-
-            {/* Watch History */}
-            <Card className="mt-4">
-              <CardContent className="p-3">
-                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <Eye className="w-4 h-4" />
-                  <span>Continue watching from where you left off</span>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>

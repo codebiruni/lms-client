@@ -6,7 +6,6 @@ import CourseBottomBanner from './CourseBottomBanner'
 export default function page() {
   return (
     <div> 
-      <CoursesBanner />
       <AllCourses />
       <CourseBottomBanner />
     </div>

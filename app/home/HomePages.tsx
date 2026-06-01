@@ -21,13 +21,13 @@ export default function HomePages({ data }: HomePageProps) {
       
       {/* Banner Section */}
       <Banner data={data?.bannerSection} />
-      
-      {/* Category Section */}
-      <CategorySection data={data?.categorySection} />
-      
+
       {/* Course Section */}
       <CourseSection data={data?.courseSection} />
       
+      {/* Category Section */}
+      {/* <CategorySection data={data?.categorySection} /> */}
+
       {/* Why Choose Us Section */}
       <WhyChooseUsSection data={data?.whyChooseUsSection} />
       

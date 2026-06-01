@@ -8,8 +8,8 @@ export default function WelcomeSection({ data }: any) {
     return null
   }
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
-      <div className="container mx-auto px-4">
+    <section className="py-16 md:py-24 bg-linear-to-b from-emerald-50 via-white to-emerald-50/80 dark:from-emerald-950 dark:via-gray-950 dark:to-emerald-950/8">
+      <div className="container mx-auto px-4 bg-linear-to-b from-emerald-50 via-white to-emerald-50/80 dark:from-emerald-950 dark:via-gray-950 dark:to-emerald-950/8">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Left Content */}
           <div className="flex-1 space-y-6">
