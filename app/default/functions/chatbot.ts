@@ -6,11 +6,11 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
-// Quranic Barse - Islamic Learning Platform Information
-const QURANIC_BARSE_INFO = {
-  projectName: "Quranic Barse",
+// Quranic Verse Bangladesh - Islamic Learning Platform Information
+const QURANIC_VERSE_INFO = {
+  projectName: "Quranic Verse Bangladesh",
   tagline: "نور على نور - Light Upon Light | Your Spiritual Companion for Quranic Learning",
-  description: "Quranic Barse is a comprehensive Islamic Learning Management System designed to facilitate Quranic education, Islamic studies, and spiritual development for Muslims worldwide. It combines traditional Islamic teachings with modern technology to create an immersive learning experience.",
+  description: "Quranic Verse Bangladesh is a comprehensive Islamic Learning Management System designed to facilitate Quranic education, Islamic studies, and spiritual development for Muslims worldwide. It combines traditional Islamic teachings with modern technology to create an immersive learning experience.",
   
   arabicName: "البرصة القرآنية",
   greeting: "السلام عليكم ورحمة الله وبركاته",
@@ -228,18 +228,18 @@ const QURANIC_BARSE_INFO = {
   ],
 
   contact: {
-    email: "info@quranicbarse.com",
-    support: "support@quranicbarse.com",
+    email: "info@quranicVerse Bangladesh.com",
+    support: "support@quranicVerse Bangladesh.com",
     phones: ["+1 (555) 123-4567", "+44 20 1234 5678"],
     location: "Global Operations - Serving Worldwide",
-    website: "https://quranicbarse.com",
+    website: "https://quranicVerse Bangladesh.com",
     socialMedia: {
-      instagram: "@quranicbarse",
-      facebook: "quranicbarse",
-      youtube: "@quranicbarse",
-      telegram: "quranicbarse"
+      instagram: "@quranicVerse Bangladesh",
+      facebook: "quranicVerse Bangladesh",
+      youtube: "@quranicVerse Bangladesh",
+      telegram: "quranicVerse Bangladesh"
     },
-    demo: "Schedule a Free Demo at https://calendly.com/quranicbarse/demo",
+    demo: "Schedule a Free Demo at https://calendly.com/quranicVerse Bangladesh/demo",
     hours: {
       support: "Saturday - Thursday: 8:00 AM – 8:00 PM (Your Local Time)",
       friday: "Friday: Limited Support (Emergency Only)",
@@ -296,77 +296,77 @@ const QURANIC_BARSE_INFO = {
 
 // Response templates for different query types
 const RESPONSE_TEMPLATES = {
-  greeting: `${QURANIC_BARSE_INFO.greeting} 🙏
+  greeting: `${QURANIC_VERSE_INFO.greeting} 🙏
 
-Welcome to **${QURANIC_BARSE_INFO.projectName}** - ${QURANIC_BARSE_INFO.arabicName}
-${QURANIC_BARSE_INFO.tagline}
+Welcome to **${QURANIC_VERSE_INFO.projectName}** - ${QURANIC_VERSE_INFO.arabicName}
+${QURANIC_VERSE_INFO.tagline}
 
-✨ *${QURANIC_BARSE_INFO.description}*
+✨ *${QURANIC_VERSE_INFO.description}*
 
 How may I assist you in your spiritual journey today? Whether you're looking to learn Quran, understand Islamic teachings, or enhance your connection with Allah, I'm here to guide you! 📖✨`,
 
-  overview: `🕌 **About ${QURANIC_BARSE_INFO.projectName}**
+  overview: `🕌 **About ${QURANIC_VERSE_INFO.projectName}**
 
-${QURANIC_BARSE_INFO.description}
+${QURANIC_VERSE_INFO.description}
 
-**Mission:** ${QURANIC_BARSE_INFO.overview.mission}
-**Vision:** ${QURANIC_BARSE_INFO.overview.vision}
+**Mission:** ${QURANIC_VERSE_INFO.overview.mission}
+**Vision:** ${QURANIC_VERSE_INFO.overview.vision}
 
 📊 **Global Impact:**
-• Active Learners: ${QURANIC_BARSE_INFO.overview.currentUsers}
-• Partner Institutions: ${QURANIC_BARSE_INFO.overview.institutions}
-• Countries Served: ${QURANIC_BARSE_INFO.overview.countries}
-• Launch: ${QURANIC_BARSE_INFO.overview.launchDate}
+• Active Learners: ${QURANIC_VERSE_INFO.overview.currentUsers}
+• Partner Institutions: ${QURANIC_VERSE_INFO.overview.institutions}
+• Countries Served: ${QURANIC_VERSE_INFO.overview.countries}
+• Launch: ${QURANIC_VERSE_INFO.overview.launchDate}
 
 Ready to begin your Quranic journey with us? 🚀`,
 
-  features: `✨ **${QURANIC_BARSE_INFO.projectName} Features**
+  features: `✨ **${QURANIC_VERSE_INFO.projectName} Features**
 
 📖 **QURANIC FEATURES:**
-${QURANIC_BARSE_INFO.keyFeatures.quranic.map(feature => `• ${feature}`).join('\n')}
+${QURANIC_VERSE_INFO.keyFeatures.quranic.map(feature => `• ${feature}`).join('\n')}
 
 🕌 **ISLAMIC STUDIES:**
-${QURANIC_BARSE_INFO.keyFeatures.islamic.map(feature => `• ${feature}`).join('\n')}
+${QURANIC_VERSE_INFO.keyFeatures.islamic.map(feature => `• ${feature}`).join('\n')}
 
 🎓 **LEARNING TOOLS:**
-${QURANIC_BARSE_INFO.keyFeatures.learning.map(feature => `• ${feature}`).join('\n')}
+${QURANIC_VERSE_INFO.keyFeatures.learning.map(feature => `• ${feature}`).join('\n')}
 
 ⚙️ **ADMIN & MANAGEMENT:**
-${QURANIC_BARSE_INFO.keyFeatures.administrative.map(feature => `• ${feature}`).join('\n')}
+${QURANIC_VERSE_INFO.keyFeatures.administrative.map(feature => `• ${feature}`).join('\n')}
 
 🎯 **UNIQUE TO US:**
-${QURANIC_BARSE_INFO.uniqueFeatures.map(feature => `• ${feature}`).join('\n')}
+${QURANIC_VERSE_INFO.uniqueFeatures.map(feature => `• ${feature}`).join('\n')}
 
 Which feature interests you most? Let me tell you more! 💫`,
 
   curriculum: `📚 **Our Curriculum**
 
 **QURAN LEVELS:**
-${QURANIC_BARSE_INFO.curriculum.quranLevels.map(level => `• ${level}`).join('\n')}
+${QURANIC_VERSE_INFO.curriculum.quranLevels.map(level => `• ${level}`).join('\n')}
 
 **ISLAMIC STUDIES:**
-${QURANIC_BARSE_INFO.curriculum.islamicStudies.map(course => `• ${course}`).join('\n')}
+${QURANIC_VERSE_INFO.curriculum.islamicStudies.map(course => `• ${course}`).join('\n')}
 
 **ARABIC COURSES:**
-${QURANIC_BARSE_INFO.curriculum.arabicCourses.map(course => `• ${course}`).join('\n')}
+${QURANIC_VERSE_INFO.curriculum.arabicCourses.map(course => `• ${course}`).join('\n')}
 
 We offer structured learning paths from beginner to advanced levels. Where would you like to start? 🤲`,
 
   pricing: `💰 **Pricing Plans**
 
 **Monthly Subscriptions:**
-• Basic: ${QURANIC_BARSE_INFO.pricing.monthlyPlans.basic}
-• Standard: ${QURANIC_BARSE_INFO.pricing.monthlyPlans.standard}
-• Premium: ${QURANIC_BARSE_INFO.pricing.monthlyPlans.premium}
-• Family: ${QURANIC_BARSE_INFO.pricing.monthlyPlans.family}
+• Basic: ${QURANIC_VERSE_INFO.pricing.monthlyPlans.basic}
+• Standard: ${QURANIC_VERSE_INFO.pricing.monthlyPlans.standard}
+• Premium: ${QURANIC_VERSE_INFO.pricing.monthlyPlans.premium}
+• Family: ${QURANIC_VERSE_INFO.pricing.monthlyPlans.family}
 
 **Annual Plans:** Save 20% on all yearly subscriptions
 
 **FREE Resources:**
-${QURANIC_BARSE_INFO.pricing.freeOptions.map(item => `• ${item}`).join('\n')}
+${QURANIC_VERSE_INFO.pricing.freeOptions.map(item => `• ${item}`).join('\n')}
 
 **Pricing Models:**
-${QURANIC_BARSE_INFO.pricing.models.map(model => `• ${model}`).join('\n')}
+${QURANIC_VERSE_INFO.pricing.models.map(model => `• ${model}`).join('\n')}
 
 💰 **Scholarships:** Need-based financial aid available
 
@@ -375,85 +375,85 @@ ${QURANIC_BARSE_INFO.pricing.models.map(model => `• ${model}`).join('\n')}
   teachers: `👨‍🏫 **Our Qualified Teachers**
 
 **Qualifications:**
-${QURANIC_BARSE_INFO.teachers.qualifications.map(qual => `• ${qual}`).join('\n')}
+${QURANIC_VERSE_INFO.teachers.qualifications.map(qual => `• ${qual}`).join('\n')}
 
-**Class Size:** ${QURANIC_BARSE_INFO.teachers.studentRatio}
+**Class Size:** ${QURANIC_VERSE_INFO.teachers.studentRatio}
 
-**Free Trial:** ${QURANIC_BARSE_INFO.teachers.demoClasses}
+**Free Trial:** ${QURANIC_VERSE_INFO.teachers.demoClasses}
 
 All our teachers undergo rigorous training and background checks to ensure a safe, high-quality learning environment for students of all ages. 🌟`,
 
   certification: `🎓 **Certification & Accreditation**
 
 **Certificates Offered:**
-${QURANIC_BARSE_INFO.certification.types.map(cert => `• ${cert}`).join('\n')}
+${QURANIC_VERSE_INFO.certification.types.map(cert => `• ${cert}`).join('\n')}
 
-**Accreditation:** ${QURANIC_BARSE_INFO.certification.accreditation}
+**Accreditation:** ${QURANIC_VERSE_INFO.certification.accreditation}
 
 Our certificates are recognized by Islamic institutions worldwide and can be shared on professional platforms. 📜`,
 
   ramadan: `🌙 **Ramadan Special Programs**
 
-${QURANIC_BARSE_INFO.ramadanSpecial.features.map(feature => `• ${feature}`).join('\n')}
+${QURANIC_VERSE_INFO.ramadanSpecial.features.map(feature => `• ${feature}`).join('\n')}
 
 Make this Ramadan your most spiritually enriching month with our special programs designed to maximize your worship and Quranic connection! ✨`,
 
   technical: `🔧 **Technical Specifications**
 
-**Platform:** ${QURANIC_BARSE_INFO.technicalSpecifications.platform}
+**Platform:** ${QURANIC_VERSE_INFO.technicalSpecifications.platform}
 
 **Technology Stack:**
-${QURANIC_BARSE_INFO.technicalSpecifications.technology.map(tech => `• ${tech}`).join('\n')}
+${QURANIC_VERSE_INFO.technicalSpecifications.technology.map(tech => `• ${tech}`).join('\n')}
 
 **Security & Safety:**
-${QURANIC_BARSE_INFO.technicalSpecifications.security.map(sec => `• ${sec}`).join('\n')}
+${QURANIC_VERSE_INFO.technicalSpecifications.security.map(sec => `• ${sec}`).join('\n')}
 
-**Accessibility:** ${QURANIC_BARSE_INFO.technicalSpecifications.accessibility}
+**Accessibility:** ${QURANIC_VERSE_INFO.technicalSpecifications.accessibility}
 
 We prioritize security, especially for our young learners, ensuring a safe online environment. 🛡️`,
 
-  benefits: `🌟 **Why Choose ${QURANIC_BARSE_INFO.projectName}?**
+  benefits: `🌟 **Why Choose ${QURANIC_VERSE_INFO.projectName}?**
 
-${QURANIC_BARSE_INFO.benefits.map(benefit => `• ${benefit}`).join('\n')}
+${QURANIC_VERSE_INFO.benefits.map(benefit => `• ${benefit}`).join('\n')}
 
 📈 **Proven Results:**
-${QURANIC_BARSE_INFO.successMetrics.map(metric => `• ${metric}`).join('\n')}
+${QURANIC_VERSE_INFO.successMetrics.map(metric => `• ${metric}`).join('\n')}
 
 Join thousands of satisfied learners worldwide! 🌍`,
 
   support: `🛟 **Support & Assistance**
 
 **Support Channels:**
-${QURANIC_BARSE_INFO.support.types.map(type => `• ${type}`).join('\n')}
+${QURANIC_VERSE_INFO.support.types.map(type => `• ${type}`).join('\n')}
 
-**Response Time:** ${QURANIC_BARSE_INFO.support.responseTime}
-**Language Support:** ${QURANIC_BARSE_INFO.support.language}
+**Response Time:** ${QURANIC_VERSE_INFO.support.responseTime}
+**Language Support:** ${QURANIC_VERSE_INFO.support.language}
 
 We're committed to your learning success every step of the way! 💪`,
 
-  contact: `📞 **Contact ${QURANIC_BARSE_INFO.projectName}**
+  contact: `📞 **Contact ${QURANIC_VERSE_INFO.projectName}**
 
-📧 Email: ${QURANIC_BARSE_INFO.contact.email}
-🆘 Support: ${QURANIC_BARSE_INFO.contact.support}
-📱 Phone: ${QURANIC_BARSE_INFO.contact.phones.join(' / ')}
-🌐 Website: ${QURANIC_BARSE_INFO.contact.website}
-📅 Demo: ${QURANIC_BARSE_INFO.contact.demo}
+📧 Email: ${QURANIC_VERSE_INFO.contact.email}
+🆘 Support: ${QURANIC_VERSE_INFO.contact.support}
+📱 Phone: ${QURANIC_VERSE_INFO.contact.phones.join(' / ')}
+🌐 Website: ${QURANIC_VERSE_INFO.contact.website}
+📅 Demo: ${QURANIC_VERSE_INFO.contact.demo}
 
 **Social Media:**
-• Instagram: ${QURANIC_BARSE_INFO.contact.socialMedia.instagram}
-• Facebook: ${QURANIC_BARSE_INFO.contact.socialMedia.facebook}
-• YouTube: ${QURANIC_BARSE_INFO.contact.socialMedia.youtube}
-• Telegram: ${QURANIC_BARSE_INFO.contact.socialMedia.telegram}
+• Instagram: ${QURANIC_VERSE_INFO.contact.socialMedia.instagram}
+• Facebook: ${QURANIC_VERSE_INFO.contact.socialMedia.facebook}
+• YouTube: ${QURANIC_VERSE_INFO.contact.socialMedia.youtube}
+• Telegram: ${QURANIC_VERSE_INFO.contact.socialMedia.telegram}
 
 **Support Hours:**
-${QURANIC_BARSE_INFO.contact.hours.support}
-${QURANIC_BARSE_INFO.contact.hours.friday}
+${QURANIC_VERSE_INFO.contact.hours.support}
+${QURANIC_VERSE_INFO.contact.hours.friday}
 
 May Allah bless your learning journey! 🤲`,
 
   faq: `❓ **Frequently Asked Questions**
 
-${QURANIC_BARSE_INFO.faq.map(item => 
+${QURANIC_VERSE_INFO.faq.map(item => 
   `**Q: ${item.question}**\nA: ${item.answer}`
 ).join('\n\n')}
 
@@ -539,7 +539,7 @@ function generateResponse(intent: string, userMessage: string): string {
     case 'faq':
       return RESPONSE_TEMPLATES.faq;
     case 'quran':
-      return `📖 **Quran Learning at ${QURANIC_BARSE_INFO.projectName}**
+      return `📖 **Quran Learning at ${QURANIC_VERSE_INFO.projectName}**
 
 We offer comprehensive Quran education:
 
@@ -556,12 +556,12 @@ We offer comprehensive Quran education:
 • Progress tracking & revision scheduling
 • Flexible timings (24/7 availability)
 
-**Success Rate:** ${QURANIC_BARSE_INFO.successMetrics[1]}
+**Success Rate:** ${QURANIC_VERSE_INFO.successMetrics[1]}
 
 Would you like to know about levels, pricing, or schedule a free trial class? 📚✨`;
     
     case 'tafsir':
-      return `📚 **Tafsir Studies at ${QURANIC_BARSE_INFO.projectName}**
+      return `📚 **Tafsir Studies at ${QURANIC_VERSE_INFO.projectName}**
 
 **Available Tafsir Collections:**
 • Tafsir Ibn Kathir (Most Authentic)
@@ -578,7 +578,7 @@ Would you like to know about levels, pricing, or schedule a free trial class? �
 Join our Tafsir classes to understand the deeper meanings of Allah's words! 🌟`;
     
     case 'hadith':
-      return `🕌 **Hadith Studies at ${QURANIC_BARSE_INFO.projectName}**
+      return `🕌 **Hadith Studies at ${QURANIC_VERSE_INFO.projectName}**
 
 **Hadith Collections:**
 • Sahih Al-Bukhari
@@ -705,7 +705,7 @@ No student is turned away due to financial constraints. Apply today! 🤲`;
       // General response with key highlights
       return `Thank you for your question about: "${userMessage}"
 
-**${QURANIC_BARSE_INFO.projectName}** - Your comprehensive Islamic learning platform offering:
+**${QURANIC_VERSE_INFO.projectName}** - Your comprehensive Islamic learning platform offering:
 
 📖 **Quran Learning** - Tajweed, Memorization, Tafsir
 🕌 **Islamic Studies** - Aqeedah, Fiqh, Seerah, Hadith
@@ -738,14 +738,14 @@ async function Chatbot(userMessage: string) {
     // For complex or general queries, enhance with AI while maintaining Islamic context
     if (intent === 'general' || userMessage.length > 50) {
       const enhancedPrompt = `
-You are an AI assistant for ${QURANIC_BARSE_INFO.projectName} - an Islamic Learning Management System for Quranic and Islamic education.
+You are an AI assistant for ${QURANIC_VERSE_INFO.projectName} - an Islamic Learning Management System for Quranic and Islamic education.
 
 Islamic Context:
-- Name: ${QURANIC_BARSE_INFO.projectName} (${QURANIC_BARSE_INFO.arabicName})
+- Name: ${QURANIC_VERSE_INFO.projectName} (${QURANIC_VERSE_INFO.arabicName})
 - Platform Purpose: Quran learning, Tajweed, Islamic studies, Arabic language
-- Core Features: ${QURANIC_BARSE_INFO.keyFeatures.quranic.slice(0, 5).join(', ')}
-- Student Base: ${QURANIC_BARSE_INFO.overview.currentUsers} worldwide
-- Pricing: From ${QURANIC_BARSE_INFO.pricing.monthlyPlans.basic}
+- Core Features: ${QURANIC_VERSE_INFO.keyFeatures.quranic.slice(0, 5).join(', ')}
+- Student Base: ${QURANIC_VERSE_INFO.overview.currentUsers} worldwide
+- Pricing: From ${QURANIC_VERSE_INFO.pricing.monthlyPlans.basic}
 - Unique: AI-powered Tajweed feedback, Ijazah certification
 
 IMPORTANT GUIDELINES:
@@ -759,7 +759,7 @@ IMPORTANT GUIDELINES:
 
 User Question: "${userMessage}"
 
-Please provide a helpful, professional response about ${QURANIC_BARSE_INFO.projectName} that:
+Please provide a helpful, professional response about ${QURANIC_VERSE_INFO.projectName} that:
 1. Directly addresses the user's question about Islamic/Quranic learning
 2. Highlights relevant features of our platform
 3. Maintains an Islamic tone (use greetings, duas where appropriate)
@@ -787,11 +787,11 @@ Enhanced Response (Islamic, helpful, action-oriented):`;
 
     // Ensure response includes Islamic greetings and branding
     if (!response.includes('Assalamu') && !response.includes('السلام') && intent !== 'greeting') {
-      response = `${QURANIC_BARSE_INFO.greeting} 🙏\n\n${response}`;
+      response = `${QURANIC_VERSE_INFO.greeting} 🙏\n\n${response}`;
     }
     
-    if (!response.includes(QURANIC_BARSE_INFO.projectName) && intent !== 'greeting') {
-      response += `\n\n---\n✨ *Ready to begin your Quranic journey with **${QURANIC_BARSE_INFO.projectName}**? Schedule your free trial class today!* 🤲`;
+    if (!response.includes(QURANIC_VERSE_INFO.projectName) && intent !== 'greeting') {
+      response += `\n\n---\n✨ *Ready to begin your Quranic journey with **${QURANIC_VERSE_INFO.projectName}**? Schedule your free trial class today!* 🤲`;
     }
 
     console.log(`User: ${userMessage}`);
@@ -804,9 +804,9 @@ Enhanced Response (Islamic, helpful, action-oriented):`;
     console.error('Chatbot error:', error);
     
     // Fallback responses
-    return `${QURANIC_BARSE_INFO.greeting} 🙏
+    return `${QURANIC_VERSE_INFO.greeting} 🙏
 
-I apologize for the technical difficulty. **${QURANIC_BARSE_INFO.projectName}** is here to help with your Islamic learning needs:
+I apologize for the technical difficulty. **${QURANIC_VERSE_INFO.projectName}** is here to help with your Islamic learning needs:
 
 📖 **Our Services:**
 • Quran Reading with Tajweed
@@ -816,11 +816,11 @@ I apologize for the technical difficulty. **${QURANIC_BARSE_INFO.projectName}** 
 • Live Classes with Qualified Scholars
 
 Please contact us directly:
-📧 ${QURANIC_BARSE_INFO.contact.email}
-📱 ${QURANIC_BARSE_INFO.contact.phones[0]}
-🌐 ${QURANIC_BARSE_INFO.contact.website}
+📧 ${QURANIC_VERSE_INFO.contact.email}
+📱 ${QURANIC_VERSE_INFO.contact.phones[0]}
+🌐 ${QURANIC_VERSE_INFO.contact.website}
 
-Or schedule a free trial class: ${QURANIC_BARSE_INFO.contact.demo}
+Or schedule a free trial class: ${QURANIC_VERSE_INFO.contact.demo}
 
 May Allah bless your quest for knowledge! 🤲`;
   }
@@ -836,10 +836,10 @@ ${context}
 
 Current User Message: "${userMessage}"
 
-You are ${QURANIC_BARSE_INFO.projectName} AI assistant, specializing in Islamic/Quranic education.
+You are ${QURANIC_VERSE_INFO.projectName} AI assistant, specializing in Islamic/Quranic education.
 
 Platform Overview:
-- ${QURANIC_BARSE_INFO.projectName} provides Quran learning, Tajweed, Islamic studies, and Arabic courses
+- ${QURANIC_VERSE_INFO.projectName} provides Quran learning, Tajweed, Islamic studies, and Arabic courses
 - Services: One-on-one live classes, self-paced courses, group sessions
 - Teachers: Qualified Hafiz and scholars with Ijazah
 - Features: AI Tajweed feedback, progress tracking, certification
@@ -859,7 +859,7 @@ Keep response professional, concise, and focused on educational services.`;
       contents: contextualPrompt,
     });
     
-    return response.text || `${QURANIC_BARSE_INFO.greeting}! How can I help you with your Islamic learning journey today? We offer Quran, Tajweed, and Islamic studies courses with qualified teachers. Would you like to learn more or schedule a free trial?`;
+    return response.text || `${QURANIC_VERSE_INFO.greeting}! How can I help you with your Islamic learning journey today? We offer Quran, Tajweed, and Islamic studies courses with qualified teachers. Would you like to learn more or schedule a free trial?`;
   } catch (error: any) {
     console.log(error);
     return Chatbot(userMessage);

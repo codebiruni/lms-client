@@ -40,7 +40,6 @@ export default function AllCourses() {
   const [selectedLevel, setSelectedLevel] = useState<string>('')
   const [selectedStatus, setSelectedStatus] = useState<string>('')
   const [currentPage, setCurrentPage] = useState(1)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [showFilters, setShowFilters] = useState(false)
 
   // Debounce search
@@ -75,35 +74,37 @@ export default function AllCourses() {
       <div className="min-h-screen bg-emerald-50 dark:bg-emerald-950">
         <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
           {/* Header Skeleton */}
-          <div className="mb-8">
-            <Skeleton className="h-10 w-64 mb-2" />
-            <Skeleton className="h-5 w-96" />
+          <div className="mb-12">
+            <Skeleton className="h-10 w-64 mb-2 rounded-lg" />
+            <Skeleton className="h-5 w-96 rounded-lg" />
           </div>
 
           {/* Search Bar Skeleton */}
           <div className="mb-8">
-            <Skeleton className="h-12 w-full rounded-xl" />
+            <Skeleton className="h-12 w-full rounded-2xl" />
           </div>
 
           {/* Filters Skeleton */}
           <div className="flex gap-3 mb-8">
-            <Skeleton className="h-10 w-28 rounded-lg" />
-            <Skeleton className="h-10 w-28 rounded-lg" />
-            <Skeleton className="h-10 w-28 rounded-lg" />
+            <Skeleton className="h-10 w-28 rounded-xl" />
+            <Skeleton className="h-10 w-28 rounded-xl" />
           </div>
 
           {/* Cards Grid Skeleton */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {[...Array(8)].map((_, i) => (
-              <Card key={i} className="overflow-hidden border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950">
-                <Skeleton className="h-48 w-full" />
+              <Card
+                key={i}
+                className="overflow-hidden border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950 rounded-2xl"
+              >
+                <Skeleton className="h-40 w-full" />
                 <CardHeader>
-                  <Skeleton className="h-6 w-3/4 mb-2" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-2/3" />
+                  <Skeleton className="h-5 w-3/4 mb-2 rounded-lg" />
+                  <Skeleton className="h-4 w-full rounded-lg mb-2" />
+                  <Skeleton className="h-4 w-2/3 rounded-lg" />
                 </CardHeader>
-                <CardFooter>
-                  <Skeleton className="h-10 w-full" />
+                <CardFooter className="gap-2">
+                  <Skeleton className="h-10 w-full rounded-xl" />
                 </CardFooter>
               </Card>
             ))}
@@ -115,143 +116,146 @@ export default function AllCourses() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-emerald-50 dark:bg-emerald-950 flex items-center justify-center">
-        <Card className="max-w-md text-center p-8 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950">
-          <div className="text-red-500 mb-4">
+      <div className="min-h-screen bg-emerald-50 dark:bg-emerald-950 flex items-center justify-center px-4">
+        <Card className="max-w-md w-full text-center p-8 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950 rounded-3xl">
+          <div className="text-rose-500 mb-4">
             <AlertCircle className="w-16 h-16 mx-auto" />
           </div>
-          <h3 className="text-xl font-semibold mb-2">কোর্স লোড করা যায়নি</h3>
-          <p className="text-slate-600 dark:text-slate-400 mb-4">
+          <h3 className="text-xl font-bold text-emerald-950 dark:text-emerald-50 mb-2">
+            কোর্স লোড করা যায়নি
+          </h3>
+          <p className="text-emerald-900/70 dark:text-emerald-100/70 mb-6">
             {error.message || 'কোর্স আনতে সমস্যা হয়েছে'}
           </p>
-          <Button onClick={() => window.location.reload()}>আবার চেষ্টা করুন</Button>
+          <Button
+            onClick={() => window.location.reload()}
+            className="w-full bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl font-semibold"
+          >
+            আবার চেষ্টা করুন
+          </Button>
         </Card>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-emerald-50 dark:bg-emerald-950">
-      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Header Section (Bangla + no gradient) */}
-        <div className="mb-8 text-center lg:text-left">
-          <div className="flex items-center justify-between flex-wrap gap-4">
+    <div className="min-h-screen bg-linear-to-b from-emerald-50 via-white to-emerald-50/80 dark:from-emerald-950 dark:via-gray-950 dark:to-emerald-950/80">
+      <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-4xl font-bold text-emerald-950 dark:text-emerald-50">
+              <h1 className="text-4xl sm:text-5xl font-bold text-emerald-950 dark:text-emerald-50 mb-2">
                 সকল কোর্স
               </h1>
-              <p className="text-emerald-900/70 dark:text-emerald-100/70 mt-2">
-                আপনার সন্তানের জন্য দ্বীনি ও আধুনিক শিক্ষার সেরা কোর্সগুলো খুঁজে নিন
+              <p className="text-emerald-900/70 dark:text-emerald-100/70 text-base sm:text-lg">
+                আপনার সন্তানের জন্য সেরা কোর্স খুঁজে নিন
               </p>
             </div>
-            <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="px-3 py-1 bg-white text-emerald-900 border border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-50 dark:border-emerald-900">
-                <BookOpen className="w-3 h-3 mr-1" />
-                {meta.total} টি কোর্স
-              </Badge>
+            <Badge className="px-4 py-2 bg-white text-emerald-900 border border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-50 dark:border-emerald-900 rounded-full font-semibold w-fit">
+              <BookOpen className="w-4 h-4 mr-2" />
+              {meta.total} কোর্স
+            </Badge>
+          </div>
+
+          {/* Search Section */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-emerald-100/20 dark:bg-emerald-900/20 rounded-2xl blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300" />
+            <div className="relative flex items-center bg-white dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-900 rounded-2xl focus-within:ring-2 focus-within:ring-emerald-600 focus-within:border-emerald-600 transition-all duration-300 shadow-sm hover:shadow-md">
+              <Search className="w-5 h-5 text-emerald-700/60 dark:text-emerald-300/60 ml-4" />
+              <Input
+                placeholder="কোর্স সার্চ করুন..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="flex-1 h-12 bg-transparent border-0 focus:ring-0 text-emerald-950 dark:text-emerald-50 placeholder-emerald-900/40 dark:placeholder-emerald-100/40 rounded-r-2xl"
+              />
             </div>
           </div>
         </div>
 
-        {/* Search and Filter Section (Bangla + no gradient) */}
-        <div className="mb-8 space-y-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-emerald-700/60 dark:text-emerald-200/60 w-4 h-4" />
-            <Input
-              placeholder="কোর্সের নাম, ক্যাটাগরি দিয়ে সার্চ করুন..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 h-12 bg-white dark:bg-emerald-950 border-emerald-200 dark:border-emerald-900 focus:ring-2 focus:ring-emerald-600 rounded-xl"
-            />
-          </div>
+        {/* Filters Section */}
+        <div className="mb-8 flex flex-wrap items-center gap-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="border-emerald-200 dark:border-emerald-900 bg-white hover:bg-emerald-50 dark:bg-emerald-950 dark:hover:bg-emerald-900/50 text-emerald-950 dark:text-emerald-50 rounded-xl font-medium transition-colors">
+                <Filter className="w-4 h-4 mr-2" />
+                লেভেল
+                <ChevronDown className="w-4 h-4 ml-2" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="rounded-xl">
+              <DropdownMenuItem onClick={() => setSelectedLevel('')}>
+                সব লেভেল
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedLevel('beginner')}>
+                বিগিনার
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedLevel('intermediate')}>
+                ইন্টারমিডিয়েট
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedLevel('advanced')}>
+                অ্যাডভান্সড
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-          <div className="flex flex-wrap gap-3 items-center justify-between">
-            <div className="flex flex-wrap gap-3">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="gap-2 border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-900 dark:text-emerald-50">
-                    <Filter className="w-4 h-4" />
-                    লেভেল
-                    <ChevronDown className="w-3 h-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => setSelectedLevel('')}>
-                    সব লেভেল
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSelectedLevel('beginner')}>
-                    বিগিনার
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSelectedLevel('intermediate')}>
-                    ইন্টারমিডিয়েট
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSelectedLevel('advanced')}>
-                    অ্যাডভান্সড
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="border-emerald-200 dark:border-emerald-900 bg-white hover:bg-emerald-50 dark:bg-emerald-950 dark:hover:bg-emerald-900/50 text-emerald-950 dark:text-emerald-50 rounded-xl font-medium transition-colors">
+                <Tag className="w-4 h-4 mr-2" />
+                স্ট্যাটাস
+                <ChevronDown className="w-4 h-4 ml-2" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="rounded-xl">
+              <DropdownMenuItem onClick={() => setSelectedStatus('')}>
+                সব স্ট্যাটাস
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedStatus('published')}>
+                প্রকাশিত
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedStatus('draft')}>
+                ড্রাফট
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="gap-2 border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-900 dark:text-emerald-50">
-                    <Tag className="w-4 h-4" />
-                    স্ট্যাটাস
-                    <ChevronDown className="w-3 h-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => setSelectedStatus('')}>
-                    সব স্ট্যাটাস
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSelectedStatus('published')}>
-                    প্রকাশিত
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSelectedStatus('draft')}>
-                    ড্রাফট
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+          {(selectedLevel || selectedStatus) && (
+            <Button
+              onClick={() => {
+                setSelectedLevel('')
+                setSelectedStatus('')
+              }}
+              className="bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-700 dark:text-rose-400 rounded-xl font-medium transition-colors"
+            >
+              ফিল্টার রিসেট
+            </Button>
+          )}
 
-              {(selectedLevel || selectedStatus) && (
-                <Button
-                  variant="ghost"
-                  onClick={() => {
-                    setSelectedLevel('')
-                    setSelectedStatus('')
-                  }}
-                  className="text-red-600"
-                >
-                  ফিল্টার মুছুন
-                </Button>
-              )}
+          {isFetching && (
+            <div className="flex items-center gap-2 text-sm text-emerald-900/60 dark:text-emerald-100/60 ml-auto">
+              <div className="w-4 h-4 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+              আপডেট হচ্ছে...
             </div>
-
-            {isFetching && (
-              <div className="flex items-center gap-2 text-sm text-emerald-900/60 dark:text-emerald-100/60">
-                <div className="w-4 h-4 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin" />
-                আপডেট হচ্ছে...
-              </div>
-            )}
-          </div>
+          )}
         </div>
 
         {/* Courses Grid */}
         {courses.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="w-24 h-24 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-emerald-900 rounded-full flex items-center justify-center mx-auto mb-4">
-              <BookOpen className="w-12 h-12 text-emerald-700/40 dark:text-emerald-200/40" />
+          <div className="text-center py-20">
+            <div className="w-28 h-28 bg-white dark:bg-emerald-950 border-2 border-emerald-100 dark:border-emerald-900 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+              <BookOpen className="w-14 h-14 text-emerald-700/40 dark:text-emerald-300/40" />
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-emerald-950 dark:text-emerald-50">
+            <h3 className="text-2xl font-bold text-emerald-950 dark:text-emerald-50 mb-2">
               কোনো কোর্স পাওয়া যায়নি
             </h3>
-            <p className="text-emerald-900/70 dark:text-emerald-100/70">
-              সার্চ বা ফিল্টার পরিবর্তন করে দেখুন
+            <p className="text-emerald-900/70 dark:text-emerald-100/70 text-base">
+              আপনার অনুসন্ধান মানদণ্ড অনুযায়ী কোর্স পাওয়া যায়নি
             </p>
           </div>
         ) : (
           <>
-            {/* tighter spacing like your example */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-10">
               {courses.map((course: any) => (
                 <CourseCard
                   key={course._id}
@@ -264,27 +268,26 @@ export default function AllCourses() {
 
             {/* Pagination */}
             {meta.total > meta.limit && (
-              <div className="mt-8 flex justify-center gap-2">
+              <div className="flex justify-center items-center gap-2 mt-12">
                 <Button
-                  variant="outline"
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950"
+                  className="border-emerald-200 dark:border-emerald-900 bg-white hover:bg-emerald-50 dark:bg-emerald-950 dark:hover:bg-emerald-900/50 text-emerald-950 dark:text-emerald-50 rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  আগের পৃষ্ঠা
+                  পূর্ববর্তী
                 </Button>
-                <div className="flex items-center gap-2">
+
+                <div className="flex items-center gap-1">
                   {[...Array(Math.min(5, Math.ceil(meta.total / meta.limit)))].map((_, i) => {
                     const pageNum = i + 1
                     return (
                       <Button
                         key={i}
-                        variant={currentPage === pageNum ? 'default' : 'outline'}
                         onClick={() => setCurrentPage(pageNum)}
                         className={
                           currentPage === pageNum
-                            ? 'w-10 bg-emerald-700 hover:bg-emerald-800 text-white'
-                            : 'w-10 border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50'
+                            ? 'w-10 h-10 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg font-semibold'
+                            : 'w-10 h-10 border-emerald-200 dark:border-emerald-900 bg-white hover:bg-emerald-50 dark:bg-emerald-950 dark:hover:bg-emerald-900/50 text-emerald-950 dark:text-emerald-50 rounded-lg font-medium'
                         }
                       >
                         {pageNum}
@@ -292,13 +295,13 @@ export default function AllCourses() {
                     )
                   })}
                 </div>
+
                 <Button
-                  variant="outline"
                   onClick={() => setCurrentPage((p) => p + 1)}
                   disabled={currentPage >= Math.ceil(meta.total / meta.limit)}
-                  className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950"
+                  className="border-emerald-200 dark:border-emerald-900 bg-white hover:bg-emerald-50 dark:bg-emerald-950 dark:hover:bg-emerald-900/50 text-emerald-950 dark:text-emerald-50 rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  পরের পৃষ্ঠা
+                  পরবর্তী
                 </Button>
               </div>
             )}
@@ -341,29 +344,25 @@ function CourseCard({
 
   return (
     <Card
-      className="group overflow-hidden transition-all py-0 duration-300 hover:shadow-lg hover:-translate-y-[2px] cursor-pointer bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-emerald-900 rounded-2xl"
+      className="group overflow-hidden py-0 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-emerald-900 rounded-2xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Thumbnail / Top banner like example (soft) */}
-      <div className="relative h-40 overflow-hidden bg-emerald-50 dark:bg-emerald-900/15">
-        {course.thumbnail ? (
-          <Image
-            src={course.thumbnail}
-            alt={course.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        ) : (
-          <div className="w-full h-full bg-emerald-100 dark:bg-emerald-900/25 flex items-center justify-center">
-            <BookOpen className="w-14 h-14 text-emerald-800/15 dark:text-emerald-200/10" />
-          </div>
-        )}
+      {/* Thumbnail area - solid color instead of image */}
+      <div className="relative h-40 overflow-hidden bg-linear-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/30 dark:to-emerald-950 flex items-center justify-center group-hover:from-emerald-200 group-hover:to-emerald-100 dark:group-hover:from-emerald-800/40 dark:group-hover:to-emerald-900 transition-all duration-300">
+        <div className="text-center">
+          <BookOpen className="w-12 h-12 text-emerald-700/30 dark:text-emerald-300/20 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+          <p className="text-xs text-emerald-900/40 dark:text-emerald-100/30 font-medium">
+            {course.category?.name || 'কোর্স'}
+          </p>
+        </div>
 
         {/* Discount Badge */}
         {discountPercentage > 0 && (
-          <div className="absolute top-2 left-2">
-            <Badge className="bg-rose-600 text-white border-0">-{discountPercentage}%</Badge>
+          <div className="absolute top-3 left-3">
+            <Badge className="bg-rose-600 text-white border-0 font-bold">
+              -{discountPercentage}%
+            </Badge>
           </div>
         )}
 
@@ -374,94 +373,86 @@ function CourseCard({
             setIsBookmarked(!isBookmarked)
             toast.success(isBookmarked ? 'বুকমার্ক থেকে সরানো হয়েছে' : 'বুকমার্কে যোগ হয়েছে')
           }}
-          className="absolute top-2 right-2 p-2 bg-white/95 dark:bg-emerald-950/90 rounded-full border border-emerald-100 dark:border-emerald-900 backdrop-blur-sm transition-all hover:scale-110"
+          className="absolute top-3 right-3 p-2.5 bg-white/95 dark:bg-emerald-950/90 rounded-xl border border-emerald-100 dark:border-emerald-900 backdrop-blur-sm transition-all hover:scale-110 hover:shadow-lg"
         >
           {isBookmarked ? (
-            <BookmarkCheck className="w-4 h-4 text-emerald-700" />
+            <BookmarkCheck className="w-5 h-5 text-emerald-700 dark:text-emerald-300" />
           ) : (
-            <Bookmark className="w-4 h-4 text-emerald-900/60 dark:text-emerald-100/60" />
+            <Bookmark className="w-5 h-5 text-emerald-900/60 dark:text-emerald-100/60" />
           )}
         </button>
-
-        {/* Level Badge */}
-        <div className="absolute bottom-2 left-2">
-          <Badge className={`${getLevelColor(course.level)} capitalize`}>{course.level}</Badge>
-        </div>
-
-        {/* Price Tag */}
-        <div className="absolute bottom-2 right-2">
-          <Badge className="bg-white/95 dark:bg-emerald-950/90 text-emerald-950 dark:text-emerald-50 border border-emerald-100 dark:border-emerald-900 backdrop-blur-sm">
-            {course.isFree ? (
-              <span className="flex items-center gap-1">
-                <Sparkles className="w-3 h-3" />
-                ফ্রি
-              </span>
-            ) : (
-              <div className="flex items-center gap-1">
-                {course.discountPrice ? (
-                  <>
-                    <span className="line-through text-xs text-emerald-900/50 dark:text-emerald-100/50">
-                      ৳{course.price}
-                    </span>
-                    <span className="font-bold">৳{course.discountPrice}</span>
-                  </>
-                ) : (
-                  <span className="font-bold">৳{course.price}</span>
-                )}
-              </div>
-            )}
-          </Badge>
-        </div>
       </div>
 
-      {/* Body like your screenshot: icon-ish area + centered title + green enroll button */}
       <CardHeader className="p-4 pb-2">
-        {/* Category row (small pill) */}
-        <div className="flex items-center justify-center mb-3">
-          <Badge
-            variant="secondary"
-            className="text-xs bg-emerald-50 text-emerald-900 border border-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-50 dark:border-emerald-900"
-          >
-            {course.category?.name || 'ক্যাটাগরি নেই'}
-          </Badge>
-        </div>
+        {/* Category Badge */}
+        {course.category?.name && (
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <Badge className="text-xs bg-emerald-50 text-emerald-900 border border-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-50 dark:border-emerald-900 rounded-lg font-medium">
+              {course.category.name}
+            </Badge>
+            {course.level && (
+              <Badge className={`${getLevelColor(course.level)} text-xs font-semibold rounded-lg`}>
+                {course.level}
+              </Badge>
+            )}
+          </div>
+        )}
 
-        {/* Title (Bangla-ready style, centered) */}
-        <h3 className="text-center font-semibold text-lg leading-snug line-clamp-2 text-emerald-950 dark:text-emerald-50">
+        {/* Title */}
+        <h3 className="text-base font-bold text-emerald-950 dark:text-emerald-50 line-clamp-2 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors mb-2">
           {course.title}
         </h3>
 
-        {/* Description (short, subtle) */}
-        <p className="mt-2 text-center text-sm text-emerald-900/65 dark:text-emerald-100/65 line-clamp-2">
-          {course.description?.replace(/<[^>]*>/g, '').substring(0, 100)}...
-        </p>
+        {/* Price */}
+        <div className="flex items-center gap-2">
+          {course.isFree ? (
+            <Badge className="bg-emerald-700 text-white text-xs font-semibold rounded-lg">
+              <Sparkles className="w-3 h-3 mr-1" />
+              ফ্রি
+            </Badge>
+          ) : (
+            <div className="flex items-center gap-1 text-sm">
+              {course.discountPrice ? (
+                <>
+                  <span className="line-through text-emerald-900/50 dark:text-emerald-100/50 text-xs font-medium">
+                    ৳{course.price}
+                  </span>
+                  <span className="font-bold text-emerald-700 dark:text-emerald-300">
+                    ৳{course.discountPrice}
+                  </span>
+                </>
+              ) : (
+                <span className="font-bold text-emerald-700 dark:text-emerald-300">
+                  ৳{course.price}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
       </CardHeader>
 
-      <CardFooter className="p-4 pt-2 flex gap-2">
-        {/* Details (secondary) */}
+      <CardFooter className="p-4 pt-0 flex gap-2">
         <Button
           onClick={() => onDetails(course._id)}
-          variant="outline"
-          className="flex-1 gap-2 border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
+          className="flex-1 gap-2 border-emerald-200 dark:border-emerald-900 bg-white hover:bg-emerald-50 dark:bg-emerald-950 dark:hover:bg-emerald-900/30 text-emerald-950 dark:text-emerald-50 rounded-xl font-medium transition-all"
         >
           <Eye className="w-4 h-4" />
           বিস্তারিত
         </Button>
 
-        {/* Enroll (primary green, no gradient) */}
         <Button
           onClick={() => onEnroll(course)}
-          className="flex-1 gap-2 bg-emerald-700 hover:bg-emerald-800 text-white"
+          className="flex-1 gap-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl font-medium transition-all shadow-sm hover:shadow-md"
         >
           <GraduationCap className="w-4 h-4" />
           ভর্তি হন
         </Button>
       </CardFooter>
 
-      {/* Hover Overlay Effect (no gradient) */}
-      {isHovered && <div className="absolute inset-0 bg-black/5 dark:bg-white/5 pointer-events-none" />}
+      {/* Hover effect */}
+      {isHovered && (
+        <div className="absolute inset-0 bg-black/5 dark:bg-white/5 pointer-events-none rounded-2xl" />
+      )}
     </Card>
   )
 }
-
-

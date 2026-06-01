@@ -146,41 +146,24 @@ export default function CreateStudent() {
 
   /* -------------------- UI -------------------- */
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-emerald-50/80 dark:from-emerald-950 dark:via-gray-950 dark:to-emerald-950/80 py-12 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-2xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-lg mb-4">
-            <UserPlus className="h-8 w-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Create Student Account
-          </h1>
-          <p className="text-muted-foreground mt-2">
-            Join our learning community and start your educational journey
-          </p>
-        </div>
-
-        <Card className="shadow-xl border-0">
-          <CardHeader className="border-b pb-6">
-            <CardTitle className="text-2xl">Sign Up</CardTitle>
-            <CardDescription>
-              Fill in your details to create your account. All fields marked with * are required.
-            </CardDescription>
-          </CardHeader>
-
+        <Card className="shadow-lg border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950 rounded-3xl">
           <CardContent className="space-y-6 pt-6">
             {/* -------- PROFILE IMAGE -------- */}
             <div className="space-y-3">
-              <Label className="text-base font-semibold">Profile Picture</Label>
-              <Label className="text-sm font-normal text-muted-foreground block -mt-1">
+              <Label className="text-base font-semibold text-emerald-950 dark:text-emerald-50">
+                Profile Picture
+              </Label>
+              <Label className="text-sm font-normal text-emerald-900/60 dark:text-emerald-100/60 block -mt-1">
                 Optional - Upload a profile photo (Max 5MB)
               </Label>
 
               <div
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={handleDrop}
-                className="relative flex h-48 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50/50 transition-all hover:border-blue-400 hover:bg-blue-50/30"
+                className="relative flex h-48 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-emerald-200 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-900/10 transition-all hover:border-emerald-400 dark:hover:border-emerald-700 hover:bg-emerald-100/30 dark:hover:bg-emerald-900/20"
               >
                 <input
                   type="file"
@@ -196,14 +179,14 @@ export default function CreateStudent() {
                         src={preview}
                         alt="Profile preview"
                         fill
-                        className="rounded-xl object-cover"
+                        className="rounded-2xl object-cover"
                       />
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
                           removeImage()
                         }}
-                        className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition"
+                        className="absolute top-2 right-2 p-1 bg-rose-600 text-white rounded-full hover:bg-rose-700 transition"
                       >
                         <X className="h-4 w-4" />
                       </button>
@@ -211,11 +194,11 @@ export default function CreateStudent() {
                   </>
                 ) : (
                   <>
-                    <UploadCloud className="mb-3 h-10 w-10 text-gray-400" />
-                    <p className="text-sm text-gray-500 text-center px-4">
+                    <UploadCloud className="mb-3 h-10 w-10 text-emerald-700/60 dark:text-emerald-300/60" />
+                    <p className="text-sm text-emerald-900/70 dark:text-emerald-100/70 text-center px-4">
                       Drag & drop an image here or click to browse
                     </p>
-                    <p className="text-xs text-gray-400 mt-2">
+                    <p className="text-xs text-emerald-900/50 dark:text-emerald-100/50 mt-2">
                       Supports: JPG, PNG, WEBP, GIF (Max 5MB)
                     </p>
                   </>
@@ -225,54 +208,58 @@ export default function CreateStudent() {
 
             {/* -------- PERSONAL INFORMATION -------- */}
             <div className="space-y-4">
-              <h3 className="font-semibold text-lg border-l-4 border-blue-500 pl-3">
+              <h3 className="font-semibold text-lg text-emerald-950 dark:text-emerald-50 border-l-4 border-emerald-700 pl-3">
                 Personal Information
               </h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium">
-                    Full Name <span className="text-red-500">*</span>
+                  <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
+                    Full Name <span className="text-rose-600">*</span>
                   </Label>
                   <Input
                     placeholder="John Doe"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="focus:ring-2 focus:ring-blue-500"
+                    className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium">
-                    Email Address <span className="text-red-500">*</span>
+                  <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
+                    Email Address <span className="text-rose-600">*</span>
                   </Label>
                   <Input
                     type="email"
                     placeholder="john@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="focus:ring-2 focus:ring-blue-500"
+                    className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium">Phone Number</Label>
+                  <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
+                    Phone Number
+                  </Label>
                   <Input
                     placeholder="+8801XXXXXXXXX"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="focus:ring-2 focus:ring-blue-500"
+                    className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
                   />
                 </div>
 
                 <div className="space-y-2 md:col-span-2">
-                  <Label className="text-sm font-medium">Bio</Label>
+                  <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
+                    Bio
+                  </Label>
                   <Textarea
                     placeholder="Tell us a little about yourself..."
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
                     rows={3}
-                    className="focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl resize-none"
                   />
                 </div>
               </div>
@@ -280,14 +267,14 @@ export default function CreateStudent() {
 
             {/* -------- PASSWORD SECTION -------- */}
             <div className="space-y-4">
-              <h3 className="font-semibold text-lg border-l-4 border-blue-500 pl-3">
+              <h3 className="font-semibold text-lg text-emerald-950 dark:text-emerald-50 border-l-4 border-emerald-700 pl-3">
                 Security
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium">
-                    Password <span className="text-red-500">*</span>
+                  <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
+                    Password <span className="text-rose-600">*</span>
                   </Label>
                   <div className="relative">
                     <Input
@@ -295,21 +282,25 @@ export default function CreateStudent() {
                       placeholder="Create a strong password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="focus:ring-2 focus:ring-blue-500 pr-10"
+                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent pr-10 rounded-xl"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-900/50 dark:text-emerald-100/50 hover:text-emerald-900 dark:hover:text-emerald-100"
                     >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )}
                     </button>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium">
-                    Confirm Password <span className="text-red-500">*</span>
+                  <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
+                    Confirm Password <span className="text-rose-600">*</span>
                   </Label>
                   <div className="relative">
                     <Input
@@ -317,14 +308,18 @@ export default function CreateStudent() {
                       placeholder="Confirm your password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="focus:ring-2 focus:ring-blue-500 pr-10"
+                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent pr-10 rounded-xl"
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-900/50 dark:text-emerald-100/50 hover:text-emerald-900 dark:hover:text-emerald-100"
                     >
-                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -332,30 +327,44 @@ export default function CreateStudent() {
 
               {/* Password Requirements */}
               {password && (
-                <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                  <p className="text-sm font-medium text-gray-700">Password Requirements:</p>
+                <div className="bg-emerald-50 dark:bg-emerald-900/10 rounded-xl p-4 space-y-2 border border-emerald-100 dark:border-emerald-900">
+                  <p className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
+                    Password Requirements:
+                  </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {passwordRequirements.map((req, index) => (
                       <div key={index} className="flex items-center gap-2 text-sm">
                         {req.check ? (
-                          <Check className="h-4 w-4 text-green-500" />
+                          <Check className="h-4 w-4 text-emerald-700 dark:text-emerald-300" />
                         ) : (
-                          <X className="h-4 w-4 text-gray-400" />
+                          <X className="h-4 w-4 text-emerald-900/30 dark:text-emerald-100/30" />
                         )}
-                        <span className={req.check ? "text-gray-700" : "text-gray-500"}>
+                        <span
+                          className={
+                            req.check
+                              ? "text-emerald-950 dark:text-emerald-50"
+                              : "text-emerald-900/60 dark:text-emerald-100/60"
+                          }
+                        >
                           {req.label}
                         </span>
                       </div>
                     ))}
                     <div className="flex items-center gap-2 text-sm">
                       {passwordsMatch && confirmPassword ? (
-                        <Check className="h-4 w-4 text-green-500" />
+                        <Check className="h-4 w-4 text-emerald-700 dark:text-emerald-300" />
                       ) : confirmPassword ? (
-                        <X className="h-4 w-4 text-red-500" />
+                        <X className="h-4 w-4 text-rose-600" />
                       ) : (
-                        <X className="h-4 w-4 text-gray-400" />
+                        <X className="h-4 w-4 text-emerald-900/30 dark:text-emerald-100/30" />
                       )}
-                      <span className={passwordsMatch && confirmPassword ? "text-gray-700" : "text-gray-500"}>
+                      <span
+                        className={
+                          passwordsMatch && confirmPassword
+                            ? "text-emerald-950 dark:text-emerald-50"
+                            : "text-emerald-900/60 dark:text-emerald-100/60"
+                        }
+                      >
                         Passwords match
                       </span>
                     </div>
@@ -365,26 +374,29 @@ export default function CreateStudent() {
             </div>
 
             {/* -------- TERMS AND CONDITIONS -------- */}
-            <div className="flex items-start space-x-3 space-y-0">
+            <div className="flex items-start space-x-3 space-y-0 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-xl p-4 border border-emerald-100 dark:border-emerald-900">
               <Checkbox
                 id="terms"
                 checked={agreeTerms}
                 onCheckedChange={(checked) => setAgreeTerms(checked as boolean)}
-                className="mt-1"
+                className="mt-1 border-emerald-300 dark:border-emerald-700 accent-emerald-700"
               />
               <Label
                 htmlFor="terms"
-                className="text-sm font-normal leading-tight cursor-pointer"
+                className="text-sm font-normal leading-tight cursor-pointer text-emerald-950 dark:text-emerald-50"
               >
                 I agree to the{" "}
-                <Link href="/terms" className="text-blue-600 hover:underline font-medium">
+                <Link href="/terms" className="text-emerald-700 dark:text-emerald-300 hover:underline font-medium">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link href="/privacy" className="text-blue-600 hover:underline font-medium">
+                <Link
+                  href="/privacy"
+                  className="text-emerald-700 dark:text-emerald-300 hover:underline font-medium"
+                >
                   Privacy Policy
                 </Link>{" "}
-                <span className="text-red-500">*</span>
+                <span className="text-rose-600">*</span>
               </Label>
             </div>
 
@@ -392,7 +404,7 @@ export default function CreateStudent() {
             <Button
               onClick={handleSubmit}
               disabled={loading || !name || !email || !isPasswordValid || !agreeTerms}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
+              className="w-full bg-emerald-700 hover:bg-emerald-800 text-white transition-all duration-200 rounded-xl font-semibold"
               size="lg"
             >
               {loading ? (
@@ -409,10 +421,10 @@ export default function CreateStudent() {
             </Button>
           </CardContent>
 
-          <CardFooter className="border-t pt-6 flex justify-center">
-            <p className="text-sm text-muted-foreground">
+          <CardFooter className="border-t border-emerald-100 dark:border-emerald-900 pt-6 flex justify-center">
+            <p className="text-sm text-emerald-900/70 dark:text-emerald-100/70">
               Already have an account?{" "}
-              <Link href="/login" className="text-blue-600 hover:underline font-medium">
+              <Link href="/login" className="text-emerald-700 dark:text-emerald-300 hover:underline font-medium">
                 Sign in here
               </Link>
             </p>

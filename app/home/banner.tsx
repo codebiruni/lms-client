@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Download, Sparkles, Star } from 'lucide-react'
@@ -97,20 +98,16 @@ export default function Banner({ data }: any) {
 
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
 
-                <Button
-                  size="lg"
-                  className="bg-[#0A6A66] hover:bg-[#085955] text-white rounded-full px-8"
+                <Link
+                  href="/course"
+                  className="group inline-flex items-center gap-2 rounded-full bg-linear-to-r from-emerald-700 to-teal-700 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-emerald-800 hover:to-teal-800"
                 >
-                  কোর্স শুরু করি
-                </Button>
+                  <Sparkles className="w-4 h-4 text-amber-300" />
 
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full border-[#0A6A66] text-[#0A6A66]"
-                >
-                  বিস্তারিত দেখুন
-                </Button>
+                  কোর্স শুরু করি
+
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
 
               </div>
 
@@ -150,20 +147,14 @@ export default function Banner({ data }: any) {
 
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
 
-                <Button
-                  size="lg"
-                  className="bg-[#EACB6B] hover:bg-[#DDBB55] text-[#12372A] rounded-full px-8 font-semibold"
+                <Link
+                  href="/course"
+                  className="group inline-flex items-center gap-2 rounded-full border-2 border-emerald-600 bg-white px-7 py-3.5 text-sm font-semibold text-[#0A6A66] shadow-sm transition-all duration-300 hover:bg-emerald-50 hover:shadow-lg"
                 >
                   আপনার যাত্রা শুরু করুন
-                </Button>
 
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full border-white text-black hover:bg-white/10"
-                >
-                  মাওলানা কোর্স তথ্য
-                </Button>
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
 
               </div>
 

@@ -3,7 +3,7 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { Eye, EyeOff, Loader2, Lock, LogIn, Mail, Phone, Shield, Sparkles, ArrowRight, Github, Chrome, Fingerprint } from 'lucide-react'
+import { Eye, EyeOff, Loader2, Lock, LogIn, Mail, Phone, Shield, Sparkles, ArrowRight, Github, Chrome, Fingerprint, CheckCircle2, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { Button } from '@/components/ui/button'
@@ -16,6 +16,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter,
+  CardAction,
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useEffect, useState } from 'react'
@@ -136,21 +138,18 @@ export default function LoginForm() {
   return (
     <div className="relative w-full max-w-md my-10">
       {/* Animated background elements */}
-      <div className="absolute -top-20 -left-20 w-64 h-64 bg-linear-to-r from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-      <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-linear-to-r from-pink-400 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-1000" />
-      
+      <div className="absolute -top-20 -left-20 w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl opacity-40 animate-pulse" />
+      <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-amber-300/20 rounded-full blur-3xl opacity-40 animate-pulse delay-1000" />
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Card className="relative rounded-lg overflow-hidden border-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-2xl">
-          {/* Premium linear border */}
-          <div className="absolute inset-0 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 opacity-10" />
-          
+        <Card className="relative rounded-2xl overflow-hidden border border-emerald-100 dark:border-emerald-900 bg-white/90 dark:bg-emerald-950/90 backdrop-blur-xl shadow-xl">
           {/* Decorative elements */}
-          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-linear-to-br from-blue-400 to-purple-400 rounded-full blur-3xl opacity-20" />
-          <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-linear-to-br from-pink-400 to-orange-400 rounded-full blur-3xl opacity-20" />
+          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-emerald-400/20 rounded-full blur-3xl opacity-30" />
+          <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-amber-300/20 rounded-full blur-3xl opacity-30" />
 
           <CardHeader className="relative space-y-4 text-center">
             {/* Animated logo */}
@@ -160,18 +159,18 @@ export default function LoginForm() {
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-500 rounded-2xl blur-xl opacity-50" />
-                <div className="relative h-16 w-16 flex items-center justify-center rounded-2xl bg-linear-to-br from-blue-500 to-purple-600 text-white shadow-lg">
+                <div className="absolute inset-0 bg-emerald-700 rounded-2xl blur-lg opacity-40" />
+                <div className="relative h-16 w-16 flex items-center justify-center rounded-2xl bg-emerald-700 text-white shadow-lg">
                   <Lock className="h-8 w-8" />
                 </div>
               </div>
             </motion.div>
 
             <div className="space-y-2">
-              <CardTitle className="text-3xl font-bold bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+              <CardTitle className="text-3xl font-bold text-emerald-950 dark:text-emerald-50">
                 Welcome Back
               </CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-400">
+              <CardDescription className="text-emerald-900/70 dark:text-emerald-100/70">
                 Sign in to continue your learning journey
               </CardDescription>
             </div>
@@ -183,9 +182,9 @@ export default function LoginForm() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="w-full p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-red-600 dark:text-red-400 text-sm flex items-center justify-center gap-2"
+                  className="w-full p-3 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-900 rounded-xl text-rose-600 dark:text-rose-400 text-sm flex items-center justify-center gap-2"
                 >
-                  <Shield className="h-4 w-4" />
+                  <AlertCircle className="h-4 w-4" />
                   {error}
                 </motion.div>
               )}
@@ -194,15 +193,14 @@ export default function LoginForm() {
 
           <CardContent className="relative space-y-6">
             {/* Login method tabs */}
-            <div className="flex p-1 bg-gray-100 dark:bg-gray-800 rounded-xl">
+            <div className="flex p-1 bg-emerald-100/50 dark:bg-emerald-900/30 rounded-xl border border-emerald-100 dark:border-emerald-900">
               <button
                 type="button"
                 onClick={() => setActiveTab('email')}
-                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeTab === 'email'
-                    ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                }`}
+                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 ${activeTab === 'email'
+                    ? 'bg-white dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 shadow-sm'
+                    : 'text-emerald-900/60 dark:text-emerald-100/60 hover:text-emerald-900 dark:hover:text-emerald-100'
+                  }`}
               >
                 <Mail className="h-4 w-4 inline mr-2" />
                 Email
@@ -210,11 +208,10 @@ export default function LoginForm() {
               <button
                 type="button"
                 onClick={() => setActiveTab('phone')}
-                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeTab === 'phone'
-                    ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                }`}
+                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 ${activeTab === 'phone'
+                    ? 'bg-white dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 shadow-sm'
+                    : 'text-emerald-900/60 dark:text-emerald-100/60 hover:text-emerald-900 dark:hover:text-emerald-100'
+                  }`}
               >
                 <Phone className="h-4 w-4 inline mr-2" />
                 Phone
@@ -222,34 +219,38 @@ export default function LoginForm() {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              {/* Email or Phone with floating label effect */}
+              {/* Email or Phone */}
               <div className="space-y-2">
-                <Label htmlFor="identifier" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <Label
+                  htmlFor="identifier"
+                  className="text-sm font-medium text-emerald-950 dark:text-emerald-50"
+                >
                   {activeTab === 'email' ? 'Email Address' : 'Phone Number'}
                 </Label>
                 <div className="relative group">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2">
                     {activeTab === 'email' ? (
-                      <Mail className="h-4 w-4 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-200" />
+                      <Mail className="h-4 w-4 text-emerald-900/50 dark:text-emerald-100/50 group-focus-within:text-emerald-700 dark:group-focus-within:text-emerald-300 transition-colors duration-200" />
                     ) : (
-                      <Phone className="h-4 w-4 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-200" />
+                      <Phone className="h-4 w-4 text-emerald-900/50 dark:text-emerald-100/50 group-focus-within:text-emerald-700 dark:group-focus-within:text-emerald-300 transition-colors duration-200" />
                     )}
                   </div>
                   <Input
                     id="identifier"
-                    placeholder={activeTab === 'email' ? 'you@example.com' : '+1 (555) 000-9999'}
-                    className="pl-9 h-12 bg-gray-50 rounded-lg dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition-all duration-200"
+                    placeholder={activeTab === 'email' ? 'you@example.com' : '+8801XXXXXXXXX'}
+                    className="pl-9 h-12 bg-emerald-50/50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-900 text-emerald-950 dark:text-emerald-50 rounded-xl focus:border-emerald-600 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-900 transition-all duration-200"
                     {...register('identifier', {
                       required: `${activeTab === 'email' ? 'Email' : 'Phone'} is required`,
-                      pattern: activeTab === 'email' 
-                        ? {
+                      pattern:
+                        activeTab === 'email'
+                          ? {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                             message: 'Invalid email address',
                           }
-                        : {
+                          : {
                             value: /^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,4}[-\s\.]?[0-9]{1,9}$/,
                             message: 'Invalid phone number',
-                          }
+                          },
                     })}
                   />
                   {identifier && identifier.length > 0 && (
@@ -258,7 +259,7 @@ export default function LoginForm() {
                       animate={{ scale: 1 }}
                       className="absolute right-3 top-1/2 -translate-y-1/2"
                     >
-                      <Sparkles className="h-4 w-4 text-green-500" />
+                      <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                     </motion.div>
                   )}
                 </div>
@@ -266,17 +267,20 @@ export default function LoginForm() {
                   <motion.p
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="text-sm text-red-500 flex items-center gap-1"
+                    className="text-sm text-rose-600 dark:text-rose-400 flex items-center gap-1"
                   >
-                    <Shield className="h-3 w-3" />
+                    <AlertCircle className="h-3 w-3" />
                     {errors.identifier.message}
                   </motion.p>
                 )}
               </div>
 
-              {/* Password with strength indicator */}
+              {/* Password */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <Label
+                  htmlFor="password"
+                  className="text-sm font-medium text-emerald-950 dark:text-emerald-50"
+                >
                   Password
                 </Label>
                 <div className="relative group">
@@ -284,7 +288,7 @@ export default function LoginForm() {
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter your password"
-                    className="pr-20 h-12 bg-gray-50 rounded-lg dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition-all duration-200"
+                    className="pr-10 h-12 bg-emerald-50/50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-900 text-emerald-950 dark:text-emerald-50 rounded-xl focus:border-emerald-600 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-900 transition-all duration-200"
                     {...register('password', {
                       required: 'Password is required',
                       minLength: {
@@ -294,27 +298,25 @@ export default function LoginForm() {
                     })}
                   />
 
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
-                    >
-                      {showPassword ? (
-                        <EyeOff className="h-4 w-4" />
-                      ) : (
-                        <Eye className="h-4 w-4" />
-                      )}
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-900/50 dark:text-emerald-100/50 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors duration-200"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
                 </div>
                 {errors.password && (
                   <motion.p
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="text-sm text-red-500 flex items-center gap-1"
+                    className="text-sm text-rose-600 dark:text-rose-400 flex items-center gap-1"
                   >
-                    <Shield className="h-3 w-3" />
+                    <AlertCircle className="h-3 w-3" />
                     {errors.password.message}
                   </motion.p>
                 )}
@@ -323,41 +325,39 @@ export default function LoginForm() {
               {/* Remember Me and Forgot Password */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <Checkbox 
-                    id="remember" 
+                  <Checkbox
+                    id="remember"
                     {...register('remember')}
-                    className="data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+                    className="border-emerald-300 dark:border-emerald-700 data-[state=checked]:bg-emerald-700 data-[state=checked]:border-emerald-700"
                   />
-                  <Label 
-                    htmlFor="remember" 
-                    className="text-sm text-gray-600 dark:text-gray-400 cursor-pointer hover:text-gray-900 dark:hover:text-gray-200 transition-colors duration-200"
+                  <Label
+                    htmlFor="remember"
+                    className="text-sm text-emerald-900/70 dark:text-emerald-100/70 cursor-pointer hover:text-emerald-900 dark:hover:text-emerald-100 transition-colors duration-200"
                   >
                     Remember me
                   </Label>
                 </div>
 
-                <Link href={'/forget-password'}
-                  className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-all duration-200"
+                <Link
+                  href="/forget-password"
+                  className="text-sm text-emerald-700 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-emerald-200 hover:underline transition-all duration-200"
                 >
                   Forgot password?
                 </Link>
               </div>
 
-              {/* Sign In Button with animation */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
+              {/* Sign In Button */}
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
                   size="lg"
                   type="submit"
                   disabled={isLoading}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
-                  className="w-full h-12 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+                  className="w-full h-12 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
                 >
-                  <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                  
+                  <span className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+
                   {isLoading ? (
                     <>
                       <Loader2 className="h-5 w-5 animate-spin mr-2" />
@@ -367,10 +367,7 @@ export default function LoginForm() {
                     <>
                       <LogIn className="h-5 w-5 mr-2" />
                       <span>Sign In</span>
-                      <motion.div
-                        animate={{ x: isHovered ? 5 : 0 }}
-                        className="inline-block ml-2"
-                      >
+                      <motion.div animate={{ x: isHovered ? 5 : 0 }} className="inline-block ml-2">
                         <ArrowRight className="h-4 w-4" />
                       </motion.div>
                     </>
@@ -379,66 +376,30 @@ export default function LoginForm() {
               </motion.div>
             </form>
 
-            {/* Alternative login methods
-            <div className="space-y-4">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <Separator className="w-full" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white dark:bg-gray-900 px-2 text-gray-500 dark:text-gray-400">
-                    Or continue with
-                  </span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <Button
-                  variant="outline"
-                  className="h-11 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200"
-                >
-                  <Github className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-11 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200"
-                >
-                  <Chrome className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-11 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200"
-                >
-                  <Fingerprint className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
-
-            <Separator /> */}
-
             {/* Footer */}
-            <div className="text-center space-y-2">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Don`t have an account?{' '}
-                <Link href={'/signup'}
-                  className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium hover:underline transition-all duration-200"
+            <div className="text-center space-y-2 pt-2">
+              <p className="text-sm text-emerald-900/70 dark:text-emerald-100/70">
+                Don&apos;t have an account?{' '}
+                <Link
+                  href="/signup"
+                  className="text-emerald-700 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-emerald-200 font-medium hover:underline transition-all duration-200"
                 >
                   Sign up now
                 </Link>
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-500 flex items-center justify-center gap-1">
-                <Shield className="h-3 w-3" />
-                Secure login · Protected by industry-standard encryption
+              <p className="text-xs text-emerald-900/50 dark:text-emerald-100/50 flex items-center justify-center gap-1">
+                <Lock className="h-3 w-3" />
+                Secure login · Protected by encryption
               </p>
             </div>
           </CardContent>
 
           {/* Premium badge */}
-          <div className="absolute top-3 right-3">
+          <div className="absolute top-4 right-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-linear-to-r from-amber-400 to-pink-400 rounded-full blur opacity-50" />
-              <div className="relative bg-linear-to-r from-amber-400 to-pink-400 text-white text-xs font-bold px-3 py-1 rounded-full">
-                PREMIUM
+              <div className="absolute inset-0 bg-amber-400/50 rounded-full blur opacity-60" />
+              <div className="relative bg-amber-400 text-emerald-950 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                SECURE
               </div>
             </div>
           </div>

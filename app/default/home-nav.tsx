@@ -63,14 +63,12 @@ export default function HomeNav() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-sm py-3"
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
+            ? "bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl shadow-sm py-3 border-b border-emerald-100/70 dark:border-emerald-900/60"
             : "py-5"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-
           {/* ================= Logo ================= */}
           <Link href="/" className="flex items-center gap-3 group">
             <Image
@@ -82,10 +80,10 @@ export default function HomeNav() {
               className="transition-transform duration-300 group-hover:scale-110"
             />
             <div className="flex flex-col leading-tight">
-              <span className="font-bold text-gray-900 dark:text-white text-lg">
+              <span className="font-bold text-emerald-950 dark:text-white text-lg">
                 Quranic
               </span>
-              <span className="text-[10px] text-blue-600 font-semibold uppercase tracking-widest">
+              <span className="text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold uppercase tracking-widest">
                 Verse Bangladesh
               </span>
             </div>
@@ -93,20 +91,20 @@ export default function HomeNav() {
 
           {/* ================= Desktop Nav ================= */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map(item => (
+            {navItems.map((item) => (
               <Link
                 key={item.path}
                 href={item.path}
-                className={`relative font-medium text-sm transition group ${
-                  pathname === item.path
-                    ? "text-blue-600"
-                    : "text-gray-600 dark:text-gray-300 hover:text-blue-600"
-                }`}
+                className={`relative font-medium text-sm transition group ${pathname === item.path
+                    ? "text-emerald-700 dark:text-emerald-300"
+                    : "text-emerald-900/70 dark:text-emerald-100/70 hover:text-emerald-700 dark:hover:text-emerald-300"
+                  }`}
               >
-                {item.name}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-blue-600 transition-all duration-300 ${
-                  pathname === item.path ? "w-full" : "w-0 group-hover:w-full"
-                }`} />
+                {item.name ?? item.name}
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-emerald-700 dark:bg-emerald-300 transition-all duration-300 ${pathname === item.path ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                />
               </Link>
             ))}
           </div>
@@ -119,21 +117,21 @@ export default function HomeNav() {
             {!UserData && (
               <Link
                 href="/login"
-                className="group flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-2 py-2 rounded-full transition hover:bg-blue-600"
+                className="group flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900 px-3 py-2 rounded-full transition hover:bg-emerald-700 dark:hover:bg-emerald-600"
               >
-                <LogIn className="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-white transition"/>
-                <span className="max-w-0 overflow-hidden group-hover:max-w-15 transition-all duration-300 text-sm font-semibold text-white whitespace-nowrap">
-                  Login
+                <LogIn className="w-5 h-5 text-emerald-900/70 dark:text-emerald-100/70 group-hover:text-white transition" />
+                <span className="max-w-0 overflow-hidden group-hover:max-w-16 transition-all duration-300 text-sm font-semibold text-white whitespace-nowrap">
+                  লগইন
                 </span>
               </Link>
             )}
 
-            {/* Signup glowing button */}
+            {/* Signup button with animation */}
             {!UserData && (
               <Link href="/signup" className="relative btn-wrapper">
-                <button className="btn relative overflow-hidden rounded-full px-6 py-2">
+                <button className="btn relative overflow-hidden rounded-full px-6 py-2 bg-amber-400 hover:bg-amber-500 text-emerald-950 font-semibold transition active:scale-95 shadow-sm">
                   <span className="txt-wrapper">
-                    {"Signup".split("").map((letter, index) => (
+                    {"SIGNUP".split("").map((letter, index) => (
                       <span key={index} className="btn-letter">
                         {letter}
                       </span>
@@ -147,7 +145,7 @@ export default function HomeNav() {
             {UserData && (
               <Link
                 href={getDashboardPath()}
-                className="px-6 py-2 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition active:scale-95"
+                className="px-6 py-2 rounded-full bg-emerald-700 text-white font-semibold hover:bg-emerald-800 transition active:scale-95 shadow-sm"
               >
                 {getDashboardText()}
               </Link>
@@ -160,40 +158,37 @@ export default function HomeNav() {
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <button className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                  <Menu className="w-6 h-6"/>
+                <button className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition">
+                  <Menu className="w-6 h-6 text-emerald-950 dark:text-emerald-50" />
                 </button>
               </SheetTrigger>
 
-              <SheetContent side="left" className="w-80 p-0">
-                <SheetHeader className="p-4 border-b">
+              <SheetContent
+                side="left"
+                className="w-80 p-0 bg-white dark:bg-emerald-950 border-r border-emerald-100 dark:border-emerald-900"
+              >
+                <SheetHeader className="p-4 border-b border-emerald-100 dark:border-emerald-900">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Image src="/logo1.png" alt="logo" width={30} height={30}/>
-                      <SheetTitle className="text-sm">
+                      <Image src="/logo1.png" alt="logo" width={30} height={30} />
+                      <SheetTitle className="text-sm text-emerald-950 dark:text-emerald-50">
                         Quranic Verse Bangladesh
                       </SheetTitle>
                     </div>
-                    <SheetClose asChild>
-                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-                        <X className="w-5 h-5" />
-                      </button>
-                    </SheetClose>
                   </div>
                 </SheetHeader>
 
                 <div className="flex flex-col gap-1 p-4">
-                  {navItems.map(item => (
+                  {navItems.map((item) => (
                     <Link
                       key={item.path}
                       href={item.path}
-                      className={`px-4 py-3 rounded-lg font-semibold transition ${
-                        pathname === item.path
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
-                      }`}
+                      className={`px-4 py-3 rounded-xl font-semibold transition ${pathname === item.path
+                          ? "bg-emerald-700 text-white"
+                          : "hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50"
+                        }`}
                     >
-                      {item.name}
+                      {item.name ?? item.name}
                     </Link>
                   ))}
                 </div>
@@ -204,15 +199,15 @@ export default function HomeNav() {
                     <>
                       <Link
                         href="/login"
-                        className="text-center py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition"
+                        className="text-center py-3 rounded-xl bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 font-semibold border border-emerald-100 dark:border-emerald-900 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition"
                       >
-                        Login
+                        লগইন
                       </Link>
                       <Link
                         href="/signup"
-                        className="text-center py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+                        className="text-center py-3 rounded-xl bg-emerald-700 text-white font-semibold hover:bg-emerald-800 transition"
                       >
-                        Signup
+                        সাইনআপ
                       </Link>
                     </>
                   )}
@@ -220,7 +215,7 @@ export default function HomeNav() {
                   {UserData && (
                     <Link
                       href={getDashboardPath()}
-                      className="text-center py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+                      className="text-center py-3 rounded-xl bg-emerald-700 text-white font-semibold hover:bg-emerald-800 transition"
                     >
                       {getDashboardText()}
                     </Link>
@@ -231,7 +226,7 @@ export default function HomeNav() {
           </div>
         </div>
       </nav>
-      <div className="h-20"/>
+      <div className="h-20" />
     </>
   )
 }

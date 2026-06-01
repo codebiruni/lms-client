@@ -74,7 +74,7 @@ export default function ChatbotComponent() {
       console.error('Chat error:', error)
       const errorMessage: Message = {
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again or contact us directly at quranicbarse@example.com',
+        content: 'Sorry, I encountered an error. Please try again or contact us directly at quranicverse21@gmail.com',
         timestamp: new Date(),
         id: Date.now().toString() + Math.random().toString(36).substr(2, 9)
       }
@@ -256,7 +256,7 @@ export default function ChatbotComponent() {
     if (isOpen && messages.length === 0) {
       const welcomeMessage: Message = {
         role: 'assistant',
-        content: `✨ **Welcome to Quranic Barse!** ✨
+        content: `✨ **Welcome to Quranic Verse Bangladesh!** ✨
 
 السلام عليكم ورحمة الله وبركاته
 
@@ -307,12 +307,12 @@ How may I assist you in your spiritual journey today? 🤲`,
             {/* Pulse ring */}
             <div className="absolute inset-0 rounded-full border-2 border-emerald-400 animate-ping opacity-20"></div>
             
-            <span className="sr-only">Open Quranic Barse Chat</span>
+            <span className="sr-only">Open Quranic Verse Bangladesh Chat</span>
           </Button>
           
           {/* Tooltip - Hidden on mobile, visible on larger screens */}
           <div className="hidden sm:block absolute bottom-20 right-0 bg-white/90 backdrop-blur-sm text-emerald-700 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg shadow-xl text-xs sm:text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-emerald-200">
-            Chat with Quranic Barse
+            Chat with Quranic Verse Bangladesh
             <div className="absolute -bottom-1.5 right-4 w-3 h-3 bg-white/90 transform rotate-45 border-r border-b border-emerald-200"></div>
           </div>
         </div>
@@ -343,7 +343,7 @@ How may I assist you in your spiritual journey today? 🤲`,
                   </div>
                   <div>
                     <CardTitle className="text-base sm:text-lg font-bold leading-tight bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
-                      Quranic Barse
+                      Quranic Verse Bangladesh
                     </CardTitle>
                     <div className="flex items-center gap-1">
                       <Star className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-emerald-500" />
@@ -354,15 +354,6 @@ How may I assist you in your spiritual journey today? 🤲`,
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-7 w-7 sm:h-8 sm:w-8 hover:bg-emerald-500/10 hover:text-emerald-600 transition-colors"
-                    onClick={clearChat}
-                    title="Clear chat"
-                  >
-                    <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                  </Button>
                   <Button
                     variant="ghost"
                     size="icon"

@@ -1,0 +1,32 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /dashboard/*
+Disallow: /profile/*
+Disallow: /api/*
+Disallow: /admin/*
+Disallow: /payment/*
+Disallow: /checkout/*
+Disallow: /_next/*
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /dashboard/*
+Disallow: /profile/*
+Disallow: /api/*
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /dashboard/*
+Disallow: /profile/*
+Disallow: /api/*
+
+# Host
+Host: https://www.quranic-verse.com
+
+# Sitemaps
+Sitemap: https://www.quranic-verse.com/sitemap.xml
+Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: https://www.quranic-verse.com/server-sitemap.xml
