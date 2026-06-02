@@ -152,7 +152,7 @@ export default function CreateStudent() {
         <Card className="shadow-lg border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950 rounded-3xl">
           <CardContent className="space-y-6 pt-6">
             {/* -------- PROFILE IMAGE -------- */}
-            <div className="space-y-3">
+            {/* <div className="space-y-3">
               <Label className="text-base font-semibold text-emerald-950 dark:text-emerald-50">
                 Profile Picture
               </Label>
@@ -204,7 +204,7 @@ export default function CreateStudent() {
                   </>
                 )}
               </div>
-            </div>
+            </div> */}
 
             {/* -------- PERSONAL INFORMATION -------- */}
             <div className="space-y-4">
@@ -213,7 +213,7 @@ export default function CreateStudent() {
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                   <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
                     Full Name <span className="text-rose-600">*</span>
                   </Label>
@@ -223,7 +223,7 @@ export default function CreateStudent() {
                     onChange={(e) => setName(e.target.value)}
                     className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
                   />
-                </div>
+                </div> */}
 
                 <div className="space-y-2">
                   <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
@@ -250,7 +250,7 @@ export default function CreateStudent() {
                   />
                 </div>
 
-                <div className="space-y-2 md:col-span-2">
+                {/* <div className="space-y-2 md:col-span-2">
                   <Label className="text-sm font-medium text-emerald-950 dark:text-emerald-50">
                     Bio
                   </Label>
@@ -261,7 +261,7 @@ export default function CreateStudent() {
                     rows={3}
                     className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl resize-none"
                   />
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -374,7 +374,7 @@ export default function CreateStudent() {
             </div>
 
             {/* -------- TERMS AND CONDITIONS -------- */}
-            <div className="flex items-start space-x-3 space-y-0 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-xl p-4 border border-emerald-100 dark:border-emerald-900">
+            {/* <div className="flex items-start space-x-3 space-y-0 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-xl p-4 border border-emerald-100 dark:border-emerald-900">
               <Checkbox
                 id="terms"
                 checked={agreeTerms}
@@ -398,7 +398,7 @@ export default function CreateStudent() {
                 </Link>{" "}
                 <span className="text-rose-600">*</span>
               </Label>
-            </div>
+            </div> */}
 
             {/* -------- SUBMIT BUTTON -------- */}
             <Button
