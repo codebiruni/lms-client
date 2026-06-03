@@ -163,7 +163,7 @@ export default function LoginForm() {
 
           <CardHeader className="relative space-y-4 text-center">
             {/* Animated logo */}
-            <motion.div
+            {/* <motion.div
               className="mx-auto"
               whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -174,16 +174,16 @@ export default function LoginForm() {
                   <Lock className="h-8 w-8" />
                 </div>
               </div>
-            </motion.div>
+            </motion.div> */}
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <CardTitle className="text-3xl font-bold text-emerald-950 dark:text-emerald-50">
                 Welcome Back
               </CardTitle>
               <CardDescription className="text-emerald-900/70 dark:text-emerald-100/70">
                 Sign in to continue your learning journey
               </CardDescription>
-            </div>
+            </div> */}
 
             {/* Error message with animation */}
             <AnimatePresence>
@@ -376,7 +376,7 @@ export default function LoginForm() {
                   ) : (
                     <>
                       <LogIn className="h-5 w-5 mr-2" />
-                      <span>Sign In</span>
+                      <span>Login</span>
                       <motion.div animate={{ x: isHovered ? 5 : 0 }} className="inline-block ml-2">
                         <ArrowRight className="h-4 w-4" />
                       </motion.div>
@@ -403,16 +403,6 @@ export default function LoginForm() {
               </p>
             </div>
           </CardContent>
-
-          {/* Premium badge */}
-          <div className="absolute top-4 right-4">
-            <div className="relative">
-              <div className="absolute inset-0 bg-amber-400/50 rounded-full blur opacity-60" />
-              <div className="relative bg-amber-400 text-emerald-950 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                SECURE
-              </div>
-            </div>
-          </div>
         </Card>
       </motion.div>
     </div>
