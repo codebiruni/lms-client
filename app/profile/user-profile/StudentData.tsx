@@ -1,687 +1,897 @@
-'use client'
+/* eslint-disable @next/next/no-img-element */
+"use client";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import GETDATA from "@/app/default/functions/GetData";
+import POSTDATA from "@/app/default/functions/Post";
+import PATCHDATA from "@/app/default/functions/Patch";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-import { useState } from "react"
-import { Save, Loader2, AlertCircle, CheckCircle2, X, UploadCloud } from "lucide-react"
-import { toast } from "sonner"
-import Image from "next/image"
+interface StudentProfileData {
+  _id?: string;
+  userId?: string;
+  profileImage?: string;
+  studentNameBn: string;
+  studentNameEn: string;
+  dateOfBirth: string;
+  nidOrBirthNo: string;
+  gender: "male" | "female";
+  bloodGroup?: string;
+  isExpatriate: boolean;
+  country?: string;
+  whatsappNumber?: string;
+  previousInstitute?: string;
+  fatherName: string;
+  fatherProfession?: string;
+  fatherPhone: string;
+  motherName: string;
+  motherPhone?: string;
+  guardianIsExpatriate: boolean;
+  guardianCountry?: string;
+  guardianWhatsapp?: string;
+  emergencyContactName: string;
+  emergencyPhone: string;
+  presentAddress: string;
+  permanentAddress: string;
+}
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+export default function StudentData() {
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [existingData, setExistingData] = useState<StudentProfileData | null>(
+    null
+  );
+  const [isEditing, setIsEditing] = useState(false);
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [profileImagePreview, setProfileImagePreview] = useState<string>("");
 
-import PUTDATA from "@/app/default/functions/put"
-
-const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
-const COUNTRIES = ["Bangladesh", "USA", "UK", "Canada", "Australia", "Saudi Arabia", "UAE", "Malaysia", "Singapore"]
-
-export default function StudentProfilePage() {
-  const [activeTab, setActiveTab] = useState("profile-picture")
-  const [isSaving, setIsSaving] = useState(false)
-
-  /* ================== PROFILE PICTURE ================== */
-  const [profileImage, setProfileImage] = useState<File | null>(null)
-  const [profilePreview, setProfilePreview] = useState<string | null>(null)
-
-  /* ================== TAB 1: STUDENT INFORMATION ================== */
-  const [studentInfo, setStudentInfo] = useState({
-    fullNameBn: "",
-    fullNameEn: "",
+  const [formData, setFormData] = useState<StudentProfileData>({
+    studentNameBn: "",
+    studentNameEn: "",
     dateOfBirth: "",
-    nidNumber: "",
-    gender: "",
+    nidOrBirthNo: "",
+    gender: "male",
     bloodGroup: "",
-    isExpatriate: "",
-    expatriateCountry: "",
+    isExpatriate: false,
+    country: "",
     whatsappNumber: "",
-    email: "",
-    previousSchool: "",
-  })
-
-  /* ================== TAB 2: PARENTS & CONTACT ================== */
-  const [parentInfo, setParentInfo] = useState({
+    previousInstitute: "",
     fatherName: "",
-    fatherOccupation: "",
+    fatherProfession: "",
     fatherPhone: "",
     motherName: "",
     motherPhone: "",
-    parentIsExpatriate: "",
-    parentExpatriateCountry: "",
-    parentWhatsappNumber: "",
+    guardianIsExpatriate: false,
+    guardianCountry: "",
+    guardianWhatsapp: "",
     emergencyContactName: "",
-    emergencyContactPhone: "",
-    currentAddress: "",
+    emergencyPhone: "",
+    presentAddress: "",
     permanentAddress: "",
-  })
+  });
 
-  /* ================== IMAGE HANDLERS ================== */
-  const handleProfileImageFile = (file: File) => {
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error("Image size should be less than 5MB")
-      return
-    }
-    if (!file.type.startsWith("image/")) {
-      toast.error("Please upload a valid image file")
-      return
-    }
-    setProfileImage(file)
-    setProfilePreview(URL.createObjectURL(file))
-    toast.success("Image selected successfully!")
-  }
+  // Fetch existing data on component mount
+  useEffect(() => {
+    fetchMyProfile();
+  }, []);
 
-  const handleProfileImageDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    if (e.dataTransfer.files?.[0]) {
-      handleProfileImageFile(e.dataTransfer.files[0])
-    }
-  }
-
-  const removeProfileImage = () => {
-    setProfileImage(null)
-    if (profilePreview) {
-      URL.revokeObjectURL(profilePreview)
-      setProfilePreview(null)
-    }
-    toast.success("Image removed")
-  }
-
-  /* ================== FORM HANDLERS ================== */
-  const handleStudentChange = (field: string, value: string) => {
-    if (field === "fullNameEn") {
-      value = value.toUpperCase()
-    }
-    setStudentInfo(prev => ({ ...prev, [field]: value }))
-  }
-
-  const handleParentChange = (field: string, value: string) => {
-    setParentInfo(prev => ({ ...prev, [field]: value }))
-  }
-
-  /* ================== SAVE PROFILE ================== */
-  const handleSaveProfile = async () => {
+  const fetchMyProfile = async () => {
     try {
-      setIsSaving(true)
-
-      const formData = new FormData()
-
-      // Add profile image if selected
-      if (profileImage) {
-        formData.append("profileImage", profileImage)
+      setLoading(true);
+      const response = await GETDATA("/v1/student-profile/me");
+      if (response?.data) {
+        setExistingData(response.data);
+        setFormData(response.data);
+        if (response.data.profileImage) {
+          setProfileImagePreview(response.data.profileImage);
+        }
       }
-
-      // Add student info as JSON string
-      formData.append("student", JSON.stringify(studentInfo))
-
-      // Add parent info as JSON string
-      formData.append("parent", JSON.stringify(parentInfo))
-
-      const res = await PUTDATA("/v1/student/profile", formData)
-
-      if (!res.success) {
-        throw new Error(res?.message || "Failed to update profile")
-      }
-
-      toast.success("Profile updated successfully! ✅")
-    } catch (error: any) {
-      toast.error(error.message || "Something went wrong")
+    } catch (error) {
+      console.error("Error fetching profile:", error);
     } finally {
-      setIsSaving(false)
+      setLoading(false);
     }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = e.target;
+
+    if (type === "checkbox") {
+      const checkbox = e.target as HTMLInputElement;
+      setFormData((prev) => ({ ...prev, [name]: checkbox.checked }));
+    } else if (name === "studentNameEn") {
+      setFormData((prev) => ({ ...prev, [name]: value.toUpperCase() }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleRadioChange = (name: string, value: string | boolean) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setProfileImage(file);
+      const previewUrl = URL.createObjectURL(file);
+      setProfileImagePreview(previewUrl);
+    }
+  };
+
+  const uploadImage = async (file: File): Promise<string> => {
+    const uploadFormData = new FormData();
+    uploadFormData.append("image", file);
+
+    const response = await fetch("/api/upload-image", {
+      method: "POST",
+      body: uploadFormData,
+    });
+
+    const result = await response.json();
+    return result.imageUrl;
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
+
+      let uploadedImageUrl = existingData?.profileImage || "";
+
+      if (profileImage) {
+        uploadedImageUrl = await uploadImage(profileImage);
+      }
+
+      const submitData = { ...formData, profileImage: uploadedImageUrl };
+console.log(submitData)
+      if (existingData && isEditing) {
+        await PATCHDATA(`/v1/student-profile/${existingData._id}`, submitData);
+        console.log('iam called')
+        alert("প্রোফাইল আপডেট successfully!");
+      } else {
+        console.log(submitData)
+        const res = await POSTDATA("/v1/student-profile", submitData);
+        console.log(res)
+        alert("প্রোফাইল তৈরি successfully!");
+      }
+
+      router.refresh();
+      await fetchMyProfile();
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("একটি ত্রুটি ঘটেছে। দয়া করে আবার চেষ্টা করুন।");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    if (existingData) {
+      setFormData(existingData);
+      setProfileImagePreview(existingData.profileImage || "");
+    } else {
+      setFormData({
+        studentNameBn: "",
+        studentNameEn: "",
+        dateOfBirth: "",
+        nidOrBirthNo: "",
+        gender: "male",
+        bloodGroup: "",
+        isExpatriate: false,
+        country: "",
+        whatsappNumber: "",
+        previousInstitute: "",
+        fatherName: "",
+        fatherProfession: "",
+        fatherPhone: "",
+        motherName: "",
+        motherPhone: "",
+        guardianIsExpatriate: false,
+        guardianCountry: "",
+        guardianWhatsapp: "",
+        emergencyContactName: "",
+        emergencyPhone: "",
+        presentAddress: "",
+        permanentAddress: "",
+      });
+      setProfileImage(null);
+      setProfileImagePreview("");
+    }
+    setIsEditing(false);
+    setActiveTab(1);
+  };
+
+  const nextTab = () => {
+    if (activeTab < 3) setActiveTab(activeTab + 1);
+  };
+
+  const prevTab = () => {
+    if (activeTab > 1) setActiveTab(activeTab - 1);
+  };
+
+  if (loading && !existingData) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">লোড হচ্ছে...</p>
+        </div>
+      </div>
+    );
   }
 
-  /* ================== UI ================== */
-  return (
-    <div className="min-h-screen bg-linear-to-b   dark:from-white-950 dark:via-gray-950 dark:to-white-950/80">
-      <div className="mx-auto max-w-4xl">
-        {/* Tabs Card */}
-        <Card className="shadow-lg mt-10 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950 rounded-3xl overflow-hidden">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            {/* Tab List */}
-            <TabsList className="grid w-full grid-cols-3 bg-emerald-50/50 dark:bg-emerald-900/20 border-b border-emerald-100 dark:border-emerald-900 rounded-none">
-              <TabsTrigger
-                value="profile-picture"
-                className="rounded-none text-xs sm:text-sm font-medium data-[state=active]:bg-white dark:data-[state=active]:bg-emerald-950 data-[state=active]:text-emerald-700 dark:data-[state=active]:text-emerald-300 data-[state=active]:border-b-2 data-[state=active]:border-emerald-700"
+  if (existingData && !isEditing) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-linear-to-r from-blue-600 to-blue-700 p-6 text-white">
+            <div className="flex justify-between items-center">
+              <h1 className="text-2xl font-bold">আমার প্রোফাইল</h1>
+              <button
+                onClick={handleEdit}
+                className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition"
               >
-                প্রোফাইল ছবি
-              </TabsTrigger>
-              <TabsTrigger
-                value="student"
-                className="rounded-none text-xs sm:text-sm font-medium data-[state=active]:bg-white dark:data-[state=active]:bg-emerald-950 data-[state=active]:text-emerald-700 dark:data-[state=active]:text-emerald-300 data-[state=active]:border-b-2 data-[state=active]:border-emerald-700"
-              >
-                শিক্ষার্থীর তথ্য
-              </TabsTrigger>
-              <TabsTrigger
-                value="parent"
-                className="rounded-none text-xs sm:text-sm font-medium data-[state=active]:bg-white dark:data-[state=active]:bg-emerald-950 data-[state=active]:text-emerald-700 dark:data-[state=active]:text-emerald-300 data-[state=active]:border-b-2 data-[state=active]:border-emerald-700"
-              >
-                অভিভাবক ও যোগাযোগ
-              </TabsTrigger>
-            </TabsList>
+                সম্পাদনা করুন
+              </button>
+            </div>
+          </div>
 
-            {/* ==================== PROFILE PICTURE TAB ==================== */}
-            <TabsContent value="profile-picture" className="space-y-6 p-6 sm:p-8">
-              <div className="space-y-4">
-                <h3 className="font-bold text-lg text-emerald-950 dark:text-emerald-50 border-l-4 border-emerald-700 pl-3">
-                  প্রোফাইল ছবি আপলোড করুন
-                </h3>
-                <p className="text-emerald-900/70 dark:text-emerald-100/70 text-sm">
-                  সর্বোচ্চ ৫ এমবি আকারের ছবি আপলোড করুন (JPG, PNG, WEBP, GIF)
-                </p>
+          <div className="p-6">
+            {/* Profile Image */}
+            <div className="flex justify-center mb-6">
+              {profileImagePreview && (
+                <img
+                  src={profileImagePreview}
+                  alt="Profile"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
+                />
+              )}
+            </div>
 
-                <div
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={handleProfileImageDrop}
-                  className="relative flex h-64 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-emerald-200 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-900/10 transition-all hover:border-emerald-400 dark:hover:border-emerald-700 hover:bg-emerald-100/30 dark:hover:bg-emerald-900/20"
-                >
-                  <input
-                    type="file"
-                    accept=".jpg,.jpeg,.png,.webp,.gif"
-                    className="absolute inset-0 cursor-pointer opacity-0"
-                    onChange={(e) => e.target.files && handleProfileImageFile(e.target.files[0])}
-                  />
-
-                  {profilePreview ? (
-                    <>
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={profilePreview}
-                          alt="Profile preview"
-                          fill
-                          className="rounded-2xl object-cover"
-                        />
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            removeProfileImage()
-                          }}
-                          className="absolute top-3 right-3 p-2 bg-rose-600 hover:bg-rose-700 text-white rounded-full transition shadow-lg"
-                        >
-                          <X className="h-5 w-5" />
-                        </button>
-                        <div className="absolute bottom-3 left-3 bg-white/90 dark:bg-emerald-950/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                          <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">
-                            ছবি নির্বাচিত ✓
-                          </p>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <UploadCloud className="mb-3 h-12 w-12 text-emerald-700/60 dark:text-emerald-300/60" />
-                      <p className="text-sm text-emerald-900/70 dark:text-emerald-100/70 text-center px-4 font-medium">
-                        ছবি এখানে টেনে আনুন অথবা ক্লিক করুন
-                      </p>
-                      <p className="text-xs text-emerald-900/50 dark:text-emerald-100/50 mt-2">
-                        JPG, PNG, WEBP, GIF - সর্বোচ্চ ৫ এমবি
-                      </p>
-                    </>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h2 className="text-xl font-semibold text-blue-600 mb-4">
+                  শিক্ষার্থীর তথ্য
+                </h2>
+                <div className="space-y-3">
+                  <p>
+                    <span className="font-semibold">নাম (বাংলা):</span>{" "}
+                    {existingData.studentNameBn}
+                  </p>
+                  <p>
+                    <span className="font-semibold">নাম (ইংরেজি):</span>{" "}
+                    {existingData.studentNameEn}
+                  </p>
+                  <p>
+                    <span className="font-semibold">জন্ম তারিখ:</span>{" "}
+                    {existingData.dateOfBirth}
+                  </p>
+                  <p>
+                    <span className="font-semibold">এনআইডি/জন্ম নিবন্ধন:</span>{" "}
+                    {existingData.nidOrBirthNo}
+                  </p>
+                  <p>
+                    <span className="font-semibold">জেন্ডার:</span>{" "}
+                    {existingData.gender === "male" ? "ছাত্র" : "ছাত্রী"}
+                  </p>
+                  {existingData.bloodGroup && (
+                    <p>
+                      <span className="font-semibold">রক্তের গ্রুপ:</span>{" "}
+                      {existingData.bloodGroup}
+                    </p>
+                  )}
+                  <p>
+                    <span className="font-semibold">প্রবাসী:</span>{" "}
+                    {existingData.isExpatriate ? "হ্যাঁ" : "না"}
+                  </p>
+                  {existingData.country && (
+                    <p>
+                      <span className="font-semibold">দেশ:</span>{" "}
+                      {existingData.country}
+                    </p>
+                  )}
+                  {existingData.whatsappNumber && (
+                    <p>
+                      <span className="font-semibold">হোয়াটসঅ্যাপ:</span>{" "}
+                      {existingData.whatsappNumber}
+                    </p>
                   )}
                 </div>
-
-                {/* Image Info */}
-                {profileImage && (
-                  <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900 rounded-xl p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-700 dark:text-emerald-300" />
-                      <p className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                        ছবির তথ্য
-                      </p>
-                    </div>
-                    <p className="text-xs text-emerald-900/70 dark:text-emerald-100/70">
-                      <span className="font-medium">নাম:</span> {profileImage.name}
-                    </p>
-                    <p className="text-xs text-emerald-900/70 dark:text-emerald-100/70">
-                      <span className="font-medium">আকার:</span> {(profileImage.size / 1024).toFixed(2)} KB
-                    </p>
-                  </div>
-                )}
               </div>
-            </TabsContent>
 
-            {/* ==================== TAB 2: STUDENT INFORMATION ==================== */}
-            <TabsContent value="student" className="space-y-6 p-6 sm:p-8">
-              <div className="space-y-6">
-                {/* Row 1: Full Name (Bangla & English) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      শিক্ষার্থীর পূর্ণ নাম (বাংলায়)
-                    </Label>
-                    <Input
-                      type="text"
-                      placeholder="যেমন: আবদুল করিম"
-                      value={studentInfo.fullNameBn}
-                      onChange={(e) => handleStudentChange("fullNameBn", e.target.value)}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      Full Name (ENGLISH CAPITAL) <span className="text-rose-600">*</span>
-                    </Label>
-                    <Input
-                      type="text"
-                      placeholder="E.g: ABDUL KARIM"
-                      value={studentInfo.fullNameEn}
-                      onChange={(e) => handleStudentChange("fullNameEn", e.target.value.toUpperCase())}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl uppercase"
-                    />
-                  </div>
-                </div>
-
-                {/* Row 2: Date of Birth & Gender */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      জন্ম তারিখ (DD/MM/YYYY) <span className="text-rose-600">*</span>
-                    </Label>
-                    <Input
-                      type="date"
-                      value={studentInfo.dateOfBirth}
-                      onChange={(e) => handleStudentChange("dateOfBirth", e.target.value)}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      জেন্ডার (Gender) <span className="text-rose-600">*</span>
-                    </Label>
-                    <RadioGroup value={studentInfo.gender} onValueChange={(val) => handleStudentChange("gender", val)}>
-                      <div className="flex items-center space-x-6">
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="male" id="male" />
-                          <Label htmlFor="male" className="cursor-pointer text-emerald-950 dark:text-emerald-50">
-                            ছাত্র
-                          </Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="female" id="female" />
-                          <Label htmlFor="female" className="cursor-pointer text-emerald-950 dark:text-emerald-50">
-                            ছাত্রী
-                          </Label>
-                        </div>
-                      </div>
-                    </RadioGroup>
-                  </div>
-                </div>
-
-                {/* Row 3: NID & Blood Group */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      এনআইডি/পাসপোর্ট/জন্ম নিবন্ধন নম্বর
-                    </Label>
-                    <Input
-                      type="text"
-                      placeholder="যেমন: 1234567890123"
-                      value={studentInfo.nidNumber}
-                      onChange={(e) => handleStudentChange("nidNumber", e.target.value)}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      রক্তের গ্রুপ (Blood Group)
-                    </Label>
-                    <Select value={studentInfo.bloodGroup} onValueChange={(val) => handleStudentChange("bloodGroup", val)}>
-                      <SelectTrigger className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 rounded-xl">
-                        <SelectValue placeholder="নির্বাচন করুন" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {BLOOD_GROUPS.map(bg => (
-                          <SelectItem key={bg} value={bg}>{bg}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                {/* Row 4: Expatriate Status */}
-                <div className="space-y-2">
-                  <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                    আপনি কি প্রবাসী? (Are you an Expatriate?) <span className="text-rose-600">*</span>
-                  </Label>
-                  <RadioGroup value={studentInfo.isExpatriate} onValueChange={(val) => handleStudentChange("isExpatriate", val)}>
-                    <div className="flex items-center space-x-6">
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="yes" id="exp-yes" />
-                        <Label htmlFor="exp-yes" className="cursor-pointer text-emerald-950 dark:text-emerald-50">
-                          হ্যাঁ
-                        </Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="no" id="exp-no" />
-                        <Label htmlFor="exp-no" className="cursor-pointer text-emerald-950 dark:text-emerald-50">
-                          না
-                        </Label>
-                      </div>
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                {/* Conditional: Expatriate Country */}
-                {studentInfo.isExpatriate === "yes" && (
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      বর্তমান অবস্থানরত দেশ <span className="text-rose-600">*</span>
-                    </Label>
-                    <Select value={studentInfo.expatriateCountry} onValueChange={(val) => handleStudentChange("expatriateCountry", val)}>
-                      <SelectTrigger className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 rounded-xl">
-                        <SelectValue placeholder="দেশ নির্বাচন করুন" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {COUNTRIES.map(country => (
-                          <SelectItem key={country} value={country}>{country}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                )}
-
-                {/* Conditional: WhatsApp Number */}
-                {studentInfo.isExpatriate === "yes" && (
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      হোয়াটসঅ্যাপ নম্বর (Country Code সহ) <span className="text-rose-600">*</span>
-                    </Label>
-                    <Input
-                      type="text"
-                      placeholder="যেমন: +1234567890"
-                      value={studentInfo.whatsappNumber}
-                      onChange={(e) => handleStudentChange("whatsappNumber", e.target.value)}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                    />
-                  </div>
-                )}
-
-                {/* Email & Previous School */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      ইমেইল
-                    </Label>
-                    <Input
-                      type="email"
-                      placeholder="student@example.com"
-                      value={studentInfo.email}
-                      onChange={(e) => handleStudentChange("email", e.target.value)}
-                      disabled
-                      className="border-emerald-200 dark:border-emerald-900 bg-emerald-100/50 dark:bg-emerald-900/10 text-emerald-950 dark:text-emerald-50 rounded-xl opacity-60 cursor-not-allowed"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      পূর্ববর্তী শিক্ষাপ্রতিষ্ঠানের নাম
-                    </Label>
-                    <Input
-                      type="text"
-                      placeholder="যেমন: ঢাকা পাবলিক স্কুল"
-                      value={studentInfo.previousSchool}
-                      onChange={(e) => handleStudentChange("previousSchool", e.target.value)}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                    />
-                  </div>
+              <div>
+                <h2 className="text-xl font-semibold text-blue-600 mb-4">
+                  অভিভাবকের তথ্য
+                </h2>
+                <div className="space-y-3">
+                  <p>
+                    <span className="font-semibold">পিতার নাম:</span>{" "}
+                    {existingData.fatherName}
+                  </p>
+                  <p>
+                    <span className="font-semibold">পিতার মোবাইল:</span>{" "}
+                    {existingData.fatherPhone}
+                  </p>
+                  <p>
+                    <span className="font-semibold">মাতার নাম:</span>{" "}
+                    {existingData.motherName}
+                  </p>
+                  <p>
+                    <span className="font-semibold">জরুরি যোগাযোগ:</span>{" "}
+                    {existingData.emergencyContactName}
+                  </p>
+                  <p>
+                    <span className="font-semibold">জরুরি মোবাইল:</span>{" "}
+                    {existingData.emergencyPhone}
+                  </p>
                 </div>
               </div>
-            </TabsContent>
 
-            {/* ==================== TAB 3: PARENTS & CONTACT ==================== */}
-            <TabsContent value="parent" className="space-y-6 p-6 sm:p-8">
-              <div className="space-y-6">
-                {/* Section: Father's Information */}
-                <div className="bg-emerald-50/50 dark:bg-emerald-900/10 rounded-xl p-4 border border-emerald-100 dark:border-emerald-900">
-                  <h3 className="font-bold text-emerald-950 dark:text-emerald-50 mb-4 text-lg">পিতার তথ্য</h3>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                        পিতার নাম <span className="text-rose-600">*</span>
-                      </Label>
-                      <Input
-                        type="text"
-                        placeholder="যেমন: করিম আহমেদ"
-                        value={parentInfo.fatherName}
-                        onChange={(e) => handleParentChange("fatherName", e.target.value)}
-                        className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                        পিতার পেশা
-                      </Label>
-                      <Input
-                        type="text"
-                        placeholder="যেমন: ইঞ্জিনিয়ার"
-                        value={parentInfo.fatherOccupation}
-                        onChange={(e) => handleParentChange("fatherOccupation", e.target.value)}
-                        className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                        পিতার মোবাইল নম্বর
-                      </Label>
-                      <Input
-                        type="tel"
-                        placeholder="01XXXXXXXXX"
-                        value={parentInfo.fatherPhone}
-                        onChange={(e) => handleParentChange("fatherPhone", e.target.value)}
-                        className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Section: Mother's Information */}
-                <div className="bg-emerald-50/50 dark:bg-emerald-900/10 rounded-xl p-4 border border-emerald-100 dark:border-emerald-900">
-                  <h3 className="font-bold text-emerald-950 dark:text-emerald-50 mb-4 text-lg">মাতার তথ্য</h3>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                        মাতার নাম <span className="text-rose-600">*</span>
-                      </Label>
-                      <Input
-                        type="text"
-                        placeholder="যেমন: ফাতিমা বেগম"
-                        value={parentInfo.motherName}
-                        onChange={(e) => handleParentChange("motherName", e.target.value)}
-                        className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                        মাতার মোবাইল নম্বর
-                      </Label>
-                      <Input
-                        type="tel"
-                        placeholder="01XXXXXXXXX"
-                        value={parentInfo.motherPhone}
-                        onChange={(e) => handleParentChange("motherPhone", e.target.value)}
-                        className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Section: Parents Expatriate Status */}
-                <div className="space-y-2">
-                  <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                    অভিভাবক কি প্রবাসী? (Are you an Expatriate?) <span className="text-rose-600">*</span>
-                  </Label>
-                  <RadioGroup value={parentInfo.parentIsExpatriate} onValueChange={(val) => handleParentChange("parentIsExpatriate", val)}>
-                    <div className="flex items-center space-x-6">
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="yes" id="parent-exp-yes" />
-                        <Label htmlFor="parent-exp-yes" className="cursor-pointer text-emerald-950 dark:text-emerald-50">
-                          হ্যাঁ
-                        </Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="no" id="parent-exp-no" />
-                        <Label htmlFor="parent-exp-no" className="cursor-pointer text-emerald-950 dark:text-emerald-50">
-                          না
-                        </Label>
-                      </div>
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                {/* Conditional: Parents Expatriate Country */}
-                {parentInfo.parentIsExpatriate === "yes" && (
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      বর্তমান অবস্থানরত দেশ <span className="text-rose-600">*</span>
-                    </Label>
-                    <Select value={parentInfo.parentExpatriateCountry} onValueChange={(val) => handleParentChange("parentExpatriateCountry", val)}>
-                      <SelectTrigger className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 rounded-xl">
-                        <SelectValue placeholder="দেশ নির্বাচন করুন" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {COUNTRIES.map(country => (
-                          <SelectItem key={country} value={country}>{country}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                )}
-
-                {/* Conditional: Parents WhatsApp Number */}
-                {parentInfo.parentIsExpatriate === "yes" && (
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      হোয়াটসঅ্যাপ নম্বর (Country Code সহ) <span className="text-rose-600">*</span>
-                    </Label>
-                    <Input
-                      type="text"
-                      placeholder="যেমন: +1234567890"
-                      value={parentInfo.parentWhatsappNumber}
-                      onChange={(e) => handleParentChange("parentWhatsappNumber", e.target.value)}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl"
-                    />
-                  </div>
-                )}
-
-                {/* Section: Emergency Contact */}
-                <div className="bg-amber-50/50 dark:bg-amber-900/10 rounded-xl p-4 border border-amber-100 dark:border-amber-900">
-                  <h3 className="font-bold text-amber-950 dark:text-amber-50 mb-4 text-lg">জরুরি যোগাযোগ</h3>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-amber-950 dark:text-amber-50">
-                        নাম ও সম্পর্ক <span className="text-rose-600">*</span>
-                      </Label>
-                      <Input
-                        type="text"
-                        placeholder="যেমন: আলী (চাচা)"
-                        value={parentInfo.emergencyContactName}
-                        onChange={(e) => handleParentChange("emergencyContactName", e.target.value)}
-                        className="border-amber-200 dark:border-amber-900 bg-white dark:bg-amber-900/20 text-amber-950 dark:text-amber-50 focus:ring-2 focus:ring-amber-600 focus:border-transparent rounded-xl"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-amber-950 dark:text-amber-50">
-                        মোবাইল নম্বর <span className="text-rose-600">*</span>
-                      </Label>
-                      <Input
-                        type="tel"
-                        placeholder="01XXXXXXXXX"
-                        value={parentInfo.emergencyContactPhone}
-                        onChange={(e) => handleParentChange("emergencyContactPhone", e.target.value)}
-                        className="border-amber-200 dark:border-amber-900 bg-white dark:bg-amber-900/20 text-amber-950 dark:text-amber-50 focus:ring-2 focus:ring-amber-600 focus:border-transparent rounded-xl"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Section: Addresses */}
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      বর্তমান ঠিকানা <span className="text-rose-600">*</span>
-                    </Label>
-                    <Textarea
-                      placeholder="বাড়ি, রোড, এলাকা - যেমন: বাড়ি ৫, রোড ১০, বাদ্দা, ঢাকা"
-                      value={parentInfo.currentAddress}
-                      onChange={(e) => handleParentChange("currentAddress", e.target.value)}
-                      rows={3}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl resize-none"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-emerald-950 dark:text-emerald-50">
-                      স্থায়ী ঠিকানা <span className="text-rose-600">*</span>
-                    </Label>
-                    <Textarea
-                      placeholder="গ্রাম, পোস্ট অফিস, উপজেলা, জেলা - যেমন: ইউনিয়ন, নারসিংদী"
-                      value={parentInfo.permanentAddress}
-                      onChange={(e) => handleParentChange("permanentAddress", e.target.value)}
-                      rows={3}
-                      className="border-emerald-200 dark:border-emerald-900 bg-white dark:bg-emerald-900/20 text-emerald-950 dark:text-emerald-50 focus:ring-2 focus:ring-emerald-600 focus:border-transparent rounded-xl resize-none"
-                    />
-                  </div>
+              <div className="md:col-span-2">
+                <h2 className="text-xl font-semibold text-blue-600 mb-4">
+                  ঠিকানা
+                </h2>
+                <div className="space-y-3">
+                  <p>
+                    <span className="font-semibold">বর্তমান ঠিকানা:</span>{" "}
+                    {existingData.presentAddress}
+                  </p>
+                  <p>
+                    <span className="font-semibold">স্থায়ী ঠিকানা:</span>{" "}
+                    {existingData.permanentAddress}
+                  </p>
                 </div>
               </div>
-            </TabsContent>
-          </Tabs>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-          {/* Save Button */}
-          <div className="border-t border-emerald-100 dark:border-emerald-900 p-6 sm:p-8 flex justify-end gap-3">
-            <Button
-              onClick={handleSaveProfile}
-              disabled={isSaving}
-              className="bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl font-semibold transition-all px-8"
-              size="lg"
-            >
-              {isSaving ? (
+  // Form Component (Create or Edit)
+  return (
+    <div className="max-w-4xl mx-auto p-4 md:p-6">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-linear-to-r from-blue-600 to-blue-700 p-4 md:p-6 text-white">
+          <h1 className="text-xl md:text-2xl font-bold text-center">
+            {existingData ? "প্রোফাইল সম্পাদনা করুন" : "শিক্ষার্থী ফরম"}
+          </h1>
+          <p className="text-center text-sm mt-2">
+            ধাপ {activeTab} / ৩
+          </p>
+        </div>
+
+        {/* Tab Headers */}
+        <div className="flex border-b">
+          <button
+            onClick={() => setActiveTab(1)}
+            className={`flex-1 py-3 text-center font-semibold transition ${
+              activeTab === 1
+                ? "text-blue-600 border-b-2 border-blue-600 bg-blue-50"
+                : "text-gray-600 hover:text-blue-600"
+            }`}
+          >
+            ১. শিক্ষার্থীর তথ্য
+          </button>
+          <button
+            onClick={() => setActiveTab(2)}
+            className={`flex-1 py-3 text-center font-semibold transition ${
+              activeTab === 2
+                ? "text-blue-600 border-b-2 border-blue-600 bg-blue-50"
+                : "text-gray-600 hover:text-blue-600"
+            }`}
+          >
+            ২. অভিভাবকের তথ্য
+          </button>
+          <button
+            onClick={() => setActiveTab(3)}
+            className={`flex-1 py-3 text-center font-semibold transition ${
+              activeTab === 3
+                ? "text-blue-600 border-b-2 border-blue-600 bg-blue-50"
+                : "text-gray-600 hover:text-blue-600"
+            }`}
+          >
+            ৩. যোগাযোগের তথ্য
+          </button>
+        </div>
+
+        {/* Tab Content */}
+        <div className="p-4 md:p-6">
+          {/* Tab 1: Student Information */}
+          {activeTab === 1 && (
+            <div className="space-y-4">
+              {/* Profile Image Upload */}
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  {profileImagePreview ? (
+                    <div className="relative">
+                      <img
+                        src={profileImagePreview}
+                        alt="Profile Preview"
+                        className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
+                      />
+                      <button
+                        onClick={() => {
+                          setProfileImage(null);
+                          setProfileImagePreview("");
+                        }}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center border-4 border-blue-500">
+                      <svg
+                        className="w-12 h-12 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  শিক্ষার্থীর পূর্ণ নাম (বাংলায়) <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="studentNameBn"
+                  value={formData.studentNameBn}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  শিক্ষার্থীর নাম (English CAPITAL) <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="studentNameEn"
+                  value={formData.studentNameEn}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent uppercase"
+                  placeholder="MD RAKIB HASAN"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  জন্ম তারিখ <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="date"
+                  name="dateOfBirth"
+                  value={formData.dateOfBirth}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  এনআইডি/জন্ম নিবন্ধন নম্বর <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="nidOrBirthNo"
+                  value={formData.nidOrBirthNo}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  জেন্ডার <span className="text-red-500">*</span>
+                </label>
+                <div className="flex gap-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="male"
+                      checked={formData.gender === "male"}
+                      onChange={() => handleRadioChange("gender", "male")}
+                      className="mr-2"
+                    />
+                    ছাত্র
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="female"
+                      checked={formData.gender === "female"}
+                      onChange={() => handleRadioChange("gender", "female")}
+                      className="mr-2"
+                    />
+                    ছাত্রী
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  রক্তের গ্রুপ
+                </label>
+                <select
+                  name="bloodGroup"
+                  value={formData.bloodGroup}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">নির্বাচন করুন</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  আপনি কি প্রবাসী? <span className="text-red-500">*</span>
+                </label>
+                <div className="flex gap-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="isExpatriate"
+                      value="true"
+                      checked={formData.isExpatriate === true}
+                      onChange={() => handleRadioChange("isExpatriate", true)}
+                      className="mr-2"
+                    />
+                    হ্যাঁ
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="isExpatriate"
+                      value="false"
+                      checked={formData.isExpatriate === false}
+                      onChange={() => handleRadioChange("isExpatriate", false)}
+                      className="mr-2"
+                    />
+                    না
+                  </label>
+                </div>
+              </div>
+
+              {formData.isExpatriate && (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  সংরক্ষণ হচ্ছে...
-                </>
-              ) : (
-                <>
-                  <Save className="mr-2 h-4 w-4" />
-                  সংরক্ষণ করুন
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      বর্তমান অবস্থানরত দেশ <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      হোয়াটসঅ্যাপ নম্বর <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="whatsappNumber"
+                      value={formData.whatsappNumber}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="+8801234567890"
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
                 </>
               )}
-            </Button>
-          </div>
-        </Card>
 
-        {/* Info Message */}
-        <div className="mt-6 bg-blue-50 dark:bg-blue-900/15 border border-blue-200 dark:border-blue-900/40 rounded-2xl p-4 flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
-          <div>
-            <p className="text-sm font-semibold text-blue-900 dark:text-blue-200 mb-1">
-              গুরুত্বপূর্ণ তথ্য
-            </p>
-            <p className="text-sm text-blue-900/70 dark:text-blue-100/70">
-              আপনার তথ্য নিরাপদ এবং গোপনীয় থাকবে। শুধুমাত্র প্রয়োজনীয় যোগাযোগের জন্য ব্যবহার করা হবে।
-            </p>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  পূর্ববর্তী শিক্ষাপ্রতিষ্ঠানের নাম
+                </label>
+                <input
+                  type="text"
+                  name="previousInstitute"
+                  value={formData.previousInstitute}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Tab 2: Parents Information */}
+          {activeTab === 2 && (
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  পিতার নাম <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="fatherName"
+                  value={formData.fatherName}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  পিতার পেশা
+                </label>
+                <input
+                  type="text"
+                  name="fatherProfession"
+                  value={formData.fatherProfession}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  পিতার মোবাইল নম্বর <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="fatherPhone"
+                  value={formData.fatherPhone}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  মাতার নাম <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="motherName"
+                  value={formData.motherName}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  মাতার মোবাইল নম্বর
+                </label>
+                <input
+                  type="tel"
+                  name="motherPhone"
+                  value={formData.motherPhone}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  অভিভাবক কি প্রবাসী? <span className="text-red-500">*</span>
+                </label>
+                <div className="flex gap-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="guardianIsExpatriate"
+                      value="true"
+                      checked={formData.guardianIsExpatriate === true}
+                      onChange={() =>
+                        handleRadioChange("guardianIsExpatriate", true)
+                      }
+                      className="mr-2"
+                    />
+                    হ্যাঁ
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="guardianIsExpatriate"
+                      value="false"
+                      checked={formData.guardianIsExpatriate === false}
+                      onChange={() =>
+                        handleRadioChange("guardianIsExpatriate", false)
+                      }
+                      className="mr-2"
+                    />
+                    না
+                  </label>
+                </div>
+              </div>
+
+              {formData.guardianIsExpatriate && (
+                <>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      প্রবাসী হলে (বর্তমান অবস্থানরত দেশ){" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="guardianCountry"
+                      value={formData.guardianCountry}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      হোয়াটসঅ্যাপ নম্বর <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="guardianWhatsapp"
+                      value={formData.guardianWhatsapp}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="+8801234567890"
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Tab 3: Contact Information */}
+          {activeTab === 3 && (
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  জরুরি যোগাযোগের নাম ও সম্পর্ক{" "}
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="emergencyContactName"
+                  value={formData.emergencyContactName}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="যথা: জনাব রফিক (চাচা)"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  জরুরি মোবাইল নম্বর <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="emergencyPhone"
+                  value={formData.emergencyPhone}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  বর্তমান ঠিকানা <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  name="presentAddress"
+                  value={formData.presentAddress}
+                  onChange={handleInputChange}
+                  required
+                  rows={3}
+                  placeholder="বাড়ি, রোড, এলাকা - যেমন: বাড্ডা, ঢাকা"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  স্থায়ী ঠিকানা <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  name="permanentAddress"
+                  value={formData.permanentAddress}
+                  onChange={handleInputChange}
+                  required
+                  rows={3}
+                  placeholder="গ্রাম, পোস্ট অফিস, উপজেলা, জেলা"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Navigation Buttons */}
+          <div className="flex justify-between mt-8">
+            {activeTab > 1 && (
+              <button
+                onClick={prevTab}
+                className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
+              >
+                পেছনে
+              </button>
+            )}
+            {activeTab < 3 && (
+              <button
+                onClick={nextTab}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition ml-auto"
+              >
+                পরবর্তী
+              </button>
+            )}
+            {activeTab === 3 && (
+              <div className="flex gap-4 w-full">
+                <button
+                  onClick={handleCancel}
+                  className="flex-1 px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
+                >
+                  বাতিল করুন
+                </button>
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="flex-1 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50"
+                >
+                  {loading
+                    ? "সাবমিট হচ্ছে..."
+                    : existingData
+                    ? "আপডেট করুন"
+                    : "সাবমিট করুন"}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
