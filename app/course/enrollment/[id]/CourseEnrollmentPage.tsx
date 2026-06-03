@@ -73,7 +73,7 @@ export default function CourseEnrollmentPage() {
       toast.error('No course selected', {
         description: 'Please select a course first.',
       })
-      router.push('/courses')
+      router.push('/course')
       return
     }
 
@@ -82,7 +82,7 @@ export default function CourseEnrollmentPage() {
       setCourse(parsedCourse)
     } catch (error) {
       console.error('Error parsing course:', error)
-      router.push('/courses')
+      router.push('/course')
     }
 
 
@@ -298,9 +298,9 @@ export default function CourseEnrollmentPage() {
               </CardContent>
             </Card>
 
-            {/* Payment Method Card */}
+            {/* Payment Method Card   this card is now hidden */}
             {!course.isFree && getPrice() > 0 && (
-              <Card className="border-slate-200 dark:border-slate-800 shadow-sm">
+              <Card className="border-slate-200 hidden dark:border-slate-800 shadow-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-xl">
                     <CreditCard className="w-5 h-5 text-blue-600" />
@@ -442,7 +442,8 @@ export default function CourseEnrollmentPage() {
                       ) : (
                         <>
                           <CreditCard className="w-4 h-4 mr-2" />
-                          Proceed to Payment
+                          {/* Proceed to Payment */}
+                          Enroll Now
                         </>
                       )}
                     </>

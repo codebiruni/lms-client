@@ -220,7 +220,7 @@ export default function CourseSection({ data }: any) {
                     className="flex-1 gap-2 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white"
                     asChild
                   >
-                    <Link href={`/course/enroll/${course._id}`}>
+                    <Link href={`/course/enrollment/${course._id}`}>
                       <GraduationCap className="w-4 h-4" />
                       ভর্তি হন
                     </Link>

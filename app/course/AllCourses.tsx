@@ -65,7 +65,7 @@ export default function AllCourses() {
 
   const handleEnroll = (course: any) => {
     localStorage.setItem('selectedCourse', JSON.stringify(course))
-    router.push(`/course/enroll/${course._id}`)
+    router.push(`/course/enrollment/${course._id}`)
   }
 
   // Loading Skeleton

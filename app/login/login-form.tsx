@@ -58,6 +58,8 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<any>(null)
 
+
+
   const {
     register,
     handleSubmit,
@@ -68,6 +70,20 @@ export default function LoginForm() {
   } = useForm<LoginFormValues>()
 
   const identifier = watch('identifier')
+
+  useEffect(() => {
+  if (!UserData) return
+
+  if (callbackUrl) {
+    router.replace(callbackUrl)
+  } else {
+    router.replace(
+      UserData.role === 'student'
+        ? '/profile'
+        : '/dashboard'
+    )
+  }
+}, [UserData, callbackUrl, router])
 
   /* ---------------- Load saved credentials ---------------- */
   useEffect(() => {
@@ -115,10 +131,8 @@ export default function LoginForm() {
 
         if (callbackUrl) {
           router.push(callbackUrl)
-        } else if (user.role === 'student') {
+        } else if (!callbackUrl && user.role === 'student') {
           router.push('/profile')
-        } else {
-          router.push('/dashboard')
         }
       }
     } catch (err: any) {
@@ -130,10 +144,6 @@ export default function LoginForm() {
     }
   }
 
-  if (UserData) {
-    router.push(UserData?.role === 'student' ? '/profile' : '/dashboard')
-    return null
-  }
 
   return (
     <div className="relative w-full max-w-md my-10">

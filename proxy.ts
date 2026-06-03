@@ -6,34 +6,63 @@ import LogedUser from "./app/default/functions/LogedUser";
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // ✅ Get logged-in user data
   const userData: any = await LogedUser();
 
-  // 1️⃣ If no user or no role → Redirect to login with callback
+  // Not logged in
   if (!userData || !userData?.role) {
     const loginUrl = new URL("/login", request.url);
-    // Optional: Add the current page as a callback so they return here after login
-    loginUrl.searchParams.set("callbackUrl", pathname); 
+    loginUrl.searchParams.set("callbackUrl", pathname);
+
     return NextResponse.redirect(loginUrl);
   }
 
-  // 2️⃣ Role-based access logic
-  const isStudent = userData?.role === "student";
-  const isStaff = ["instructor", "admin", "staff"].includes(userData?.role);
+  const isStudent = userData.role === "student";
+  const isStaff = ["admin", "staff", "instructor"].includes(
+    userData.role
+  );
 
-  if (isStudent && pathname.startsWith("/profile")) {
-    return NextResponse.next();
-  } 
-  
-  if (isStaff && pathname.startsWith("/dashboard")) {
+  // Student Routes
+  if (
+    isStudent &&
+    (
+      pathname.startsWith("/profile") ||
+      pathname.startsWith("/course/enrollment")
+    )
+  ) {
     return NextResponse.next();
   }
 
-  // 3️⃣ If role doesn't match the path → Send back to login (or an unauthorized page)
-  const fallbackUrl = new URL("/login", request.url);
-  return NextResponse.redirect(fallbackUrl);
+  // Staff Routes
+  if (
+    isStaff &&
+    pathname.startsWith("/dashboard")
+  ) {
+    return NextResponse.next();
+  }
+
+  // Logged in user trying to access login page
+  if (pathname === "/login") {
+    return NextResponse.redirect(
+      new URL(
+        isStudent ? "/profile" : "/dashboard",
+        request.url
+      )
+    );
+  }
+
+  // Unauthorized
+  return NextResponse.redirect(
+    new URL(
+      isStudent ? "/profile" : "/dashboard",
+      request.url
+    )
+  );
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/profile/:path*" , "/course/enroll/:path*"],
+  matcher: [
+    "/dashboard/:path*",
+    "/profile/:path*",
+    "/course/enrollment/:path*",
+  ],
 };
