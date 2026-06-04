@@ -50,10 +50,10 @@ export default function CreateStudent() {
       return
     }
 
-    if (!isPasswordValid) {
-      toast.error("Please meet all password requirements")
-      return
-    }
+    // if (!isPasswordValid) {
+    //   toast.error("Please meet all password requirements")
+    //   return
+    // }
 
     // if (!agreeTerms) {
     //   toast.error("Please agree to the Terms of Service and Privacy Policy")
@@ -180,7 +180,7 @@ export default function CreateStudent() {
             {/* -------- SUBMIT BUTTON -------- */}
             <Button
               onClick={handleSubmit}
-              disabled={loading || !email || !isPasswordValid }
+              disabled={loading || !email || !password || !passwordsMatch}
               className="w-full bg-emerald-700 hover:bg-emerald-800 text-white transition-all duration-200 rounded-xl font-semibold"
               size="lg"
             >
