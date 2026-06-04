@@ -43,7 +43,7 @@ export default function StudentData() {
     null
   );
   const [isEditing, setIsEditing] = useState(false);
-  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
   const [profileImagePreview, setProfileImagePreview] = useState<string>("");
 
   const [formData, setFormData] = useState<StudentProfileData>({
@@ -118,51 +118,44 @@ export default function StudentData() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setProfileImage(file);
+      setProfileImageFile(file);
       const previewUrl = URL.createObjectURL(file);
       setProfileImagePreview(previewUrl);
     }
-  };
-
-  const uploadImage = async (file: File): Promise<string> => {
-    const uploadFormData = new FormData();
-    uploadFormData.append("image", file);
-
-    const response = await fetch("/api/upload-image", {
-      method: "POST",
-      body: uploadFormData,
-    });
-
-    const result = await response.json();
-    return result.imageUrl;
   };
 
   const handleSubmit = async () => {
     try {
       setLoading(true);
 
-      let uploadedImageUrl = existingData?.profileImage || "";
-
-      if (profileImage) {
-        uploadedImageUrl = await uploadImage(profileImage);
+      // Create FormData to handle file upload
+      const submitFormData = new FormData();
+      
+      // Append all form fields
+      Object.keys(formData).forEach((key) => {
+        const value = formData[key as keyof StudentProfileData];
+        if (value !== undefined && value !== null && value !== "") {
+          submitFormData.append(key, String(value));
+        }
+      });
+      
+      // Append image file if selected
+      if (profileImageFile) {
+        submitFormData.append("profileImage", profileImageFile);
       }
 
-      const submitData = { ...formData, profileImage: uploadedImageUrl };
-console.log(submitData)
       if (existingData && isEditing) {
-        await PATCHDATA(`/v1/student-profile/${existingData._id}`, submitData);
-        console.log('iam called')
+        await PATCHDATA(`/v1/student-profile/${existingData._id}`, submitFormData);
         alert("প্রোফাইল আপডেট successfully!");
       } else {
-        console.log(submitData)
-        const res = await POSTDATA("/v1/student-profile", submitData);
-        console.log(res)
+        await POSTDATA("/v1/student-profile", submitFormData);
         alert("প্রোফাইল তৈরি successfully!");
       }
 
       router.refresh();
       await fetchMyProfile();
       setIsEditing(false);
+      setProfileImageFile(null);
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("একটি ত্রুটি ঘটেছে। দয়া করে আবার চেষ্টা করুন।");
@@ -204,7 +197,7 @@ console.log(submitData)
         presentAddress: "",
         permanentAddress: "",
       });
-      setProfileImage(null);
+      setProfileImageFile(null);
       setProfileImagePreview("");
     }
     setIsEditing(false);
@@ -234,7 +227,7 @@ console.log(submitData)
     return (
       <div className="max-w-4xl mx-auto p-6">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="bg-linear-to-r from-blue-600 to-blue-700 p-6 text-white">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-bold">আমার প্রোফাইল</h1>
               <button
@@ -326,6 +319,12 @@ console.log(submitData)
                     <span className="font-semibold">মাতার নাম:</span>{" "}
                     {existingData.motherName}
                   </p>
+                  {existingData.motherPhone && (
+                    <p>
+                      <span className="font-semibold">মাতার মোবাইল:</span>{" "}
+                      {existingData.motherPhone}
+                    </p>
+                  )}
                   <p>
                     <span className="font-semibold">জরুরি যোগাযোগ:</span>{" "}
                     {existingData.emergencyContactName}
@@ -363,7 +362,7 @@ console.log(submitData)
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-6">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="bg-linear-to-r from-blue-600 to-blue-700 p-4 md:p-6 text-white">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 md:p-6 text-white">
           <h1 className="text-xl md:text-2xl font-bold text-center">
             {existingData ? "প্রোফাইল সম্পাদনা করুন" : "শিক্ষার্থী ফরম"}
           </h1>
@@ -423,10 +422,11 @@ console.log(submitData)
                       />
                       <button
                         onClick={() => {
-                          setProfileImage(null);
+                          setProfileImageFile(null);
                           setProfileImagePreview("");
                         }}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm"
+                        type="button"
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
                       >
                         ×
                       </button>
@@ -575,7 +575,6 @@ console.log(submitData)
                     <input
                       type="radio"
                       name="isExpatriate"
-                      value="true"
                       checked={formData.isExpatriate === true}
                       onChange={() => handleRadioChange("isExpatriate", true)}
                       className="mr-2"
@@ -586,7 +585,6 @@ console.log(submitData)
                     <input
                       type="radio"
                       name="isExpatriate"
-                      value="false"
                       checked={formData.isExpatriate === false}
                       onChange={() => handleRadioChange("isExpatriate", false)}
                       className="mr-2"
@@ -724,7 +722,6 @@ console.log(submitData)
                     <input
                       type="radio"
                       name="guardianIsExpatriate"
-                      value="true"
                       checked={formData.guardianIsExpatriate === true}
                       onChange={() =>
                         handleRadioChange("guardianIsExpatriate", true)
@@ -737,7 +734,6 @@ console.log(submitData)
                     <input
                       type="radio"
                       name="guardianIsExpatriate"
-                      value="false"
                       checked={formData.guardianIsExpatriate === false}
                       onChange={() =>
                         handleRadioChange("guardianIsExpatriate", false)
@@ -855,6 +851,7 @@ console.log(submitData)
             {activeTab > 1 && (
               <button
                 onClick={prevTab}
+                type="button"
                 className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
               >
                 পেছনে
@@ -863,6 +860,7 @@ console.log(submitData)
             {activeTab < 3 && (
               <button
                 onClick={nextTab}
+                type="button"
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition ml-auto"
               >
                 পরবর্তী
@@ -872,6 +870,7 @@ console.log(submitData)
               <div className="flex gap-4 w-full">
                 <button
                   onClick={handleCancel}
+                  type="button"
                   className="flex-1 px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
                 >
                   বাতিল করুন
@@ -879,6 +878,7 @@ console.log(submitData)
                 <button
                   onClick={handleSubmit}
                   disabled={loading}
+                  type="button"
                   className="flex-1 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50"
                 >
                   {loading

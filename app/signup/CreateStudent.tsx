@@ -75,10 +75,10 @@ export default function CreateStudent() {
 
   /* -------------------- SUBMIT -------------------- */
   const handleSubmit = async () => {
-    if (!name.trim()) {
-      toast.error("Please enter your full name")
-      return
-    }
+    // if (!name.trim()) {
+    //   toast.error("Please enter your full name")
+    //   return
+    // }
 
     if (!email.trim()) {
       toast.error("Please enter your email address")
@@ -100,10 +100,10 @@ export default function CreateStudent() {
       return
     }
 
-    if (!agreeTerms) {
-      toast.error("Please agree to the Terms of Service and Privacy Policy")
-      return
-    }
+    // if (!agreeTerms) {
+    //   toast.error("Please agree to the Terms of Service and Privacy Policy")
+    //   return
+    // }
 
     try {
       setLoading(true)
@@ -403,7 +403,7 @@ export default function CreateStudent() {
             {/* -------- SUBMIT BUTTON -------- */}
             <Button
               onClick={handleSubmit}
-              disabled={loading || !name || !email || !isPasswordValid || !agreeTerms}
+              disabled={loading || !email || !isPasswordValid }
               className="w-full bg-emerald-700 hover:bg-emerald-800 text-white transition-all duration-200 rounded-xl font-semibold"
               size="lg"
             >

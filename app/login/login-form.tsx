@@ -71,19 +71,19 @@ export default function LoginForm() {
 
   const identifier = watch('identifier')
 
-  useEffect(() => {
-  if (!UserData) return
+//   useEffect(() => {
+//   if (!UserData) return
 
-  if (callbackUrl) {
-    router.replace(callbackUrl)
-  } else {
-    router.replace(
-      UserData.role === 'student'
-        ? '/profile'
-        : '/dashboard'
-    )
-  }
-}, [UserData, callbackUrl, router])
+//   if (callbackUrl) {
+//     router.replace(callbackUrl)
+//   } else {
+//     router.replace(
+//       UserData.role === 'student'
+//         ? '/profile'
+//         : '/dashboard'
+//     )
+//   }
+// }, [UserData, callbackUrl, router])
 
   /* ---------------- Load saved credentials ---------------- */
   useEffect(() => {
@@ -131,7 +131,7 @@ export default function LoginForm() {
 
         if (callbackUrl) {
           router.push(callbackUrl)
-        } else if (!callbackUrl && user.role === 'student') {
+        } else if (user.role === 'student') {
           router.push('/profile')
         }
       }
@@ -350,7 +350,7 @@ export default function LoginForm() {
 
                 <Link
                   href="/forget-password"
-                  className="text-sm text-emerald-700 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-emerald-200 hover:underline transition-all duration-200"
+                  className="text-sm text-emerald-700 hidden dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-emerald-200 hover:underline transition-all duration-200"
                 >
                   Forgot password?
                 </Link>
