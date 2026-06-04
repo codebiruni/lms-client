@@ -1,5 +1,6 @@
 // app/default/functions/Put.ts
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function PUTDATA(endpoint: string, data: any) {
     try {
         const headers: Record<string, string> = {
@@ -38,6 +39,7 @@ async function PUTDATA(endpoint: string, data: any) {
             data: result.data || result,
             status: response.status,
         }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         return {
             success: false,
